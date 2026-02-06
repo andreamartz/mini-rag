@@ -287,7 +287,7 @@ Use the context above to answer the user's question. If the context doesn't cont
 
 ## 📝 Homework Assignment: Explain Re-Ranking with Examples
 
-**Assignment:** Create a video (5-8 minutes) or written guide explaining re-ranking.
+**Assignment:** Create a ~5 minute video explaining re-ranking.
 
 **Topic:** "Why and when to use re-ranking in RAG systems, with concrete examples"
 
@@ -338,8 +338,10 @@ After re-ranking:
 - Decision framework (when to use)
 
 **What to Submit:**
-- Video link (YouTube/Loom) OR
-- Written guide (1000-1500 words) with examples and diagrams
+- Video link (YouTube/Loom)
+- Around 5 minutes
+
+**Submit Link:** *[Submission form will be provided]*
 
 **Due:** Before Module 11
 

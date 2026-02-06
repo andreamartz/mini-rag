@@ -281,6 +281,45 @@ Understanding word math helps you understand RAG:
 
 ---
 
+## 📝 Homework Assignment: Explain the Dot Product
+
+**Assignment:** Record a ~5 minute video explaining the dot product to someone interested in learning about LLMs but without a math background.
+
+**Requirements:**
+
+1. **Explain what the dot product is:**
+   - What it calculates (sum of element-wise products)
+   - Simple visual or analogy (e.g., "measuring alignment")
+   - Quick example with small vectors
+
+2. **Why it matters for RAG:**
+   - How it's used in cosine similarity
+   - Why similarity matters for finding relevant documents
+   - Connection to embeddings
+
+3. **Use an analogy:**
+   - Make it relatable (e.g., "like comparing shopping lists")
+   - Avoid heavy math notation
+   - Focus on intuition
+
+**Tips:**
+- Use visuals if possible (diagrams, slides, whiteboard)
+- Test your explanation on someone non-technical
+- Keep it conversational and engaging
+- Assume your audience is smart but not math-trained
+
+**What to Submit:**
+- Video link (YouTube/Loom/Google Drive)
+- Around 5 minutes
+
+**Submit Link:** *[Submission form will be provided]*
+
+**Due:** Before Module 4
+
+**Why This Matters:** Being able to explain technical concepts simply is a critical skill. Understanding dot products deeply will help you debug and improve RAG systems.
+
+---
+
 ## What's Next
 
 You now understand the math! Time to build the actual Pinecone integration.

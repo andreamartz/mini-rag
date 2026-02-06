@@ -380,7 +380,7 @@ Watch the solution walkthrough for the chunking exercise:
 
 ## 📝 Homework Assignment: Research Chunking Strategies
 
-**Assignment:** Create a video (5-7 minutes) or written report comparing chunking strategies.
+**Assignment:** Create a ~5 minute video comparing chunking strategies.
 
 **Requirements:**
 
@@ -414,8 +414,10 @@ Watch the solution walkthrough for the chunking exercise:
 - Pinecone/Qdrant best practices
 
 **What to Submit:**
-- Video link (YouTube/Loom) OR
-- Written report (800-1200 words) with examples
+- Video link (YouTube/Loom)
+- Around 5 minutes
+
+**Submit Link:** *[Submission form will be provided]*
 
 **Due:** Before Module 5
 

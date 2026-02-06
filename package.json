@@ -18,7 +18,8 @@
 		"prepare": "husky",
 		"exercise:vectors": "npx ts-node app/scripts/exercises/vector-similarity.ts",
 		"exercise:vectors:test": "npx ts-node app/scripts/exercises/vector-similarity-test.ts",
-		"exercise:word-math": "npx ts-node app/scripts/exercises/vector-word-arithmetic.ts"
+		"exercise:word-math": "npx ts-node app/scripts/exercises/vector-word-arithmetic.ts",
+		"convert-curriculum": "node scripts/convert-md-to-kajabi-html.mjs"
 	},
 	"lint-staged": {
 		"*.{js,jsx,ts,tsx}": [
@@ -42,6 +43,7 @@
 		"husky": "^9.1.7",
 		"js-tiktoken": "^1.0.19",
 		"lucide-react": "^0.514.0",
+		"marked": "^17.0.1",
 		"next": "15.1.6",
 		"node-fetch": "^3.3.2",
 		"openai": "5.15.0",

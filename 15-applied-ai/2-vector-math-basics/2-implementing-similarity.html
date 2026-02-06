@@ -178,7 +178,7 @@
 <h3>Clone the Repository</h3>
 <pre><code class="language-bash">git clone https://github.com/projectshft/mini-rag.git
 cd mini_rag
-git checkout student-starter
+git checkout student-todo-exercises
 </code></pre>
 <h3>Install Dependencies</h3>
 <p>This project uses Yarn (as shown in the videos), but npm will work too:</p>
@@ -271,7 +271,7 @@ Large angle = low similarity
 	queryVector: number[],
 	documents: Document[],
 	minSimilarity: number = 0.7,
-	topK: number = 3,
+	topK: number = 3
 ): Array&lt;{ document: Document; similarity: number }&gt; {
 	// TODO: Implement!
 }
@@ -404,7 +404,7 @@ const results = findTopSimilarDocuments(queryVector, documents, 0.7, 2);
 	// Each result &gt;= next result
 	for (let i = 1; i &lt; results.length; i++) {
 		expect(results[i - 1].similarity).toBeGreaterThanOrEqual(
-			results[i].similarity,
+			results[i].similarity
 		);
 	}
 });
@@ -449,7 +449,7 @@ const relevantDocs = findTopSimilarDocuments(
 	queryEmbedding.data[0].embedding,
 	allDocuments,
 	0.7, // Only good matches
-	5, // Top 5 results
+	5 // Top 5 results
 );
 
 // 4. Build context
@@ -498,7 +498,7 @@ return topK.filter((r) =&gt; r.similarity &gt;= threshold);
 	queryVector: number[],
 	documents: Document[],
 	minSimilarity: number = 0.7,
-	topK: number = 3,
+	topK: number = 3
 ): Array&lt;{ document: Document; similarity: number }&gt; {
 	// 1. Calculate similarity for each document
 	const results = documents.map((doc) =&gt; ({
@@ -508,7 +508,7 @@ return topK.filter((r) =&gt; r.similarity &gt;= threshold);
 
 	// 2. Filter by minimum threshold
 	const filtered = results.filter(
-		(result) =&gt; result.similarity &gt;= minSimilarity,
+		(result) =&gt; result.similarity &gt;= minSimilarity
 	);
 
 	// 3. Sort by similarity (highest first)
