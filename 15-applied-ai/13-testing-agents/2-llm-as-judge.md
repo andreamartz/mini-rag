@@ -469,6 +469,41 @@ yarn test llm-as-judge
 
 ---
 
+## 📝 Homework Assignment: Build Your Eval Dataset
+
+**Assignment:** Create a comprehensive evaluation dataset for one of your agents.
+
+**Requirements:**
+
+1. **Create an eval dataset with 10-15 test cases**
+   - Each test case should have: input query, expected behavior, quality criteria
+   - Include edge cases and challenging scenarios
+   - Mix of positive and negative examples
+
+2. **Implement LLM as Judge tests**
+   - Write tests using the LLM as Judge pattern
+   - Define clear evaluation criteria (5-7 specific criteria)
+   - Set reasonable score thresholds
+
+3. **Document your findings:**
+   - What patterns emerged from failures?
+   - How did you adjust your prompts or logic?
+   - What scores did your agent achieve?
+
+**What to Submit:**
+- Video walkthrough (3-5 minutes) showing your eval dataset and results
+- Code with your test implementation
+
+**Submit Your Work:**
+- **[Video Submission - Week 4](https://tally.so/form/Z9JApCkF/create)**
+- **[Code Submission - Week 4](https://tally.so/form/DXPyafyJ/create)**
+
+**Due:** Before Module 14
+
+**Why This Matters:** Production RAG systems require rigorous testing. Building eval datasets and using LLM as Judge helps you iterate quickly and maintain quality as your system evolves.
+
+---
+
 ## What's Next?
 
 Now you know:

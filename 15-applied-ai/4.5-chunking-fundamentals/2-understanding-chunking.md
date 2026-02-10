@@ -408,16 +408,20 @@ Watch the solution walkthrough for the chunking exercise:
 | Token-based | LLM token limits | Precise control | Can break mid-sentence |
 
 **Resources to Explore:**
-- LangChain chunking documentation
-- LlamaIndex text splitting strategies
-- Research papers on document retrieval
-- Pinecone/Qdrant best practices
+- [LangChain Text Splitters Documentation](https://python.langchain.com/docs/modules/data_connection/document_transformers/)
+- [LlamaIndex Text Splitting Strategies](https://docs.llamaindex.ai/en/stable/module_guides/loading/node_parsers/modules/)
+- [Pinecone Chunking Best Practices](https://www.pinecone.io/learn/chunking-strategies/)
+- [Weaviate Text Chunking Guide](https://weaviate.io/blog/chunking-strategies)
+- [OpenAI Cookbook: Text Splitting Techniques](https://cookbook.openai.com/examples/how_to_count_tokens_with_tiktoken)
+- [Greg Kamradt's Chunking Video](https://www.youtube.com/watch?v=8OJC21T2SL4) (5 Levels of Text Splitting)
 
 **What to Submit:**
 - Video link (YouTube/Loom)
 - Around 5 minutes
 
-**Submit Link:** *[Submission form will be provided]*
+**Submit Your Work:**
+- **[Video Submission - Week 2](https://tally.so/form/VcNBEHNA/create)**
+- **[Code Submission - Week 2](https://tally.so/form/EWWcsorL/create)** (submit your chunking implementation)
 
 **Due:** Before Module 5
 

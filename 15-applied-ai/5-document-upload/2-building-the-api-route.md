@@ -6,18 +6,28 @@ Now that you have Pinecone configured, it's time to fill your vector database wi
 
 ## Video Walkthrough
 
-Watch this guide to building the API route:
+Watch the uploading documents process from the chat interface:
 
-<iframe src="https://share.descript.com/embed/tb6EgaRGjay" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://share.descript.com/embed/vXKQ7RBncMc" width="640" height="360" frameborder="0" allowfullscreen></iframe>
 
 ---
 
 ## What You'll Build
 
+This is the **"write" side** of your RAG system - getting knowledge INTO the database.
+
 By the end of this module, you'll have:
+
 - An API route that accepts URLs (`/api/upload-document`)
 - A pipeline that scrapes, chunks, and vectorizes content
 - Documents uploaded to Pinecone and ready for retrieval
+
+**The bigger picture:**
+
+- **This module**: Upload documents (the "write" side)
+- **Next module**: Query documents to answer questions (the "read" side)
+
+That's when RAG truly comes alive - you'll be able to ask "Tell me about Anthropic" or "How do I use the Pinecone TypeScript client?" and get answers grounded in your knowledge base!
 
 **Note**: The UI also supports a `/api/upload-text` route for uploading raw text (already implemented as a reference). This module focuses on the URL route, which is more complex because it requires web scraping.
 
@@ -42,6 +52,7 @@ Content Ready for RAG!
 ```
 
 **For the text upload route** (already implemented at `/api/upload-text`):
+
 ```
 Raw Text from User
     ↓
@@ -61,16 +72,19 @@ This is the "write" side of your RAG system. The "read" side (retrieval) comes l
 ## Why This Pipeline Exists
 
 **Why not just save the whole webpage?**
+
 - Too much context for the LLM (token limits!)
 - Harder to find relevant sections
 - Less precise retrieval
 
 **Why chunk the content?**
+
 - Smaller chunks = more focused context
 - Better retrieval (find exact relevant sections)
 - Fits within LLM context windows
 
 **Why batch upload?**
+
 - API rate limits
 - More efficient
 - Better error handling
@@ -84,6 +98,7 @@ This is the "write" side of your RAG system. The "read" side (retrieval) comes l
 Located at: `app/libs/dataProcessor.ts`
 
 This class handles:
+
 - **Scraping**: Fetching HTML and extracting clean text
 - **Chunking**: Breaking text into ~500 character pieces with overlap
 
@@ -94,18 +109,18 @@ const chunks = await processor.processUrls(['https://example.com']);
 
 // Returns array of chunks:
 [
-  {
-    id: "url-chunk-0",
-    content: "First 500 chars of text...",
-    metadata: {
-      url: "https://example.com",
-      title: "Page Title",
-      chunkIndex: 0,
-      totalChunks: 5
-    }
-  },
-  // ... more chunks
-]
+	{
+		id: 'url-chunk-0',
+		content: 'First 500 chars of text...',
+		metadata: {
+			url: 'https://example.com',
+			title: 'Page Title',
+			chunkIndex: 0,
+			totalChunks: 5,
+		},
+	},
+	// ... more chunks
+];
 ```
 
 **Key concept: Overlap**
@@ -130,6 +145,7 @@ const response = await openaiClient.embeddings.create({
 ```
 
 **Why 'text-embedding-3-small'?**
+
 - Fast and efficient (512 dimensions instead of 1536)
 - Good quality for most use cases
 - Lower cost than larger models
@@ -147,8 +163,8 @@ const batchSize = 100;
 // With batching: 5 API calls (much faster!)
 
 for (let i = 0; i < chunks.length; i += batchSize) {
-  const batch = chunks.slice(i, i + batchSize);
-  // Process batch...
+	const batch = chunks.slice(i, i + batchSize);
+	// Process batch...
 }
 ```
 
@@ -159,6 +175,7 @@ for (let i = 0; i < chunks.length; i += batchSize) {
 Your route lives at: `app/api/upload-document/route.ts`
 
 **What it needs to do:**
+
 1. Validate incoming URLs (Zod schema)
 2. Scrape and chunk content
 3. Generate embeddings for all chunks
@@ -167,6 +184,7 @@ Your route lives at: `app/api/upload-document/route.ts`
 6. Return success/failure
 
 **Why an API route?**
+
 - Can be called from the frontend UI
 - Can be triggered by scripts
 - Keeps business logic separate from UI
@@ -193,6 +211,7 @@ When you upload to Pinecone, each vector includes metadata:
 ```
 
 **Why metadata matters:**
+
 - `text`: What you show to the LLM as context
 - `url`: For attribution/sourcing
 - `title`: For display to users
@@ -209,6 +228,7 @@ Open `app/api/upload-document/route.ts` and you'll see 9 TODO steps.
 ### Implementation Steps
 
 **Step 1: Validate the Request**
+
 ```typescript
 // Parse the request body
 const body = await req.json();
@@ -219,128 +239,143 @@ const { urls } = parsed;
 ```
 
 **Step 2: Scrape and Chunk**
+
 ```typescript
 const processor = new DataProcessor();
 const chunks = await processor.processUrls(urls);
 ```
 
 **Step 3-5: Set Up for Upload**
+
 - Check if chunks exist
 - Get Pinecone index
 - Set up batch processing
 
 **Step 6-7: Generate Embeddings and Format**
 For each batch:
+
 - Generate embeddings for all chunk contents
 - Map chunks + embeddings to Pinecone vector format
 
 **Step 8-9: Upload and Respond**
+
 - Upload each batch to Pinecone
 - Track success count
 - Return results
 
 ### Hints
 
-**For embeddings:**
-```typescript
-const embeddingResponse = await openaiClient.embeddings.create({
-  model: 'text-embedding-3-small',
-  input: batch.map(chunk => chunk.content) // Array of strings
-});
+**For generating embeddings:**
 
-// Access embeddings:
-embeddingResponse.data[0].embedding // First embedding
-embeddingResponse.data[1].embedding // Second embedding
-```
+- Use openaiClient.embeddings.create with the model parameter
+- Pass in an array of strings (map the batch to extract content)
+- The response has a data array where each item has an embedding property
+- Access with: response.data[index].embedding
 
-**For Pinecone upload:**
-```typescript
-await index.upsert(vectors);
-```
+**For uploading to Pinecone:**
+
+- Call the upsert method on your index reference
+- Pass in the formatted vectors array
+- Pinecone handles the indexing automatically
 
 **For creating unique IDs:**
-```typescript
-// Combine URL and chunk index for uniqueness
-const id = `${chunk.metadata.url}-${chunk.metadata.chunkIndex}`;
-```
+
+- Combine the URL with the chunk index using template literals
+- Format: URL-chunkIndex
+- This ensures each chunk has a globally unique identifier
+
+**Need more guidance?**
+Check the inline TODO comments in the route file - they guide you through each step with specific method names and parameters.
 
 ---
 
 ## Testing Your Implementation
 
 ### Using the Frontend
+
 The UI (at `http://localhost:3000` after running `yarn dev`) has two upload modes:
 
 **URL Mode:**
+
 1. Select "URLs" tab
 2. Enter URLs (one per line)
 3. Click "Upload"
 4. Check the response for success message
 
 **Text Mode:**
+
 1. Select "Raw Text" tab
 2. Paste any text content
 3. Click "Upload"
 4. Check the response for success message
 
-### Using curl
+### Using Postman or Thunder Client
+
+You can test the API routes directly using Postman, Thunder Client (VS Code extension), or any HTTP client.
 
 **Test URL upload:**
-```bash
-curl -X POST http://localhost:3000/api/upload-document \
-  -H "Content-Type: application/json" \
-  -d '{
-    "urls": [
-      "https://react.dev/learn",
-      "https://nextjs.org/docs"
-    ]
-  }'
+
+- Method: POST
+- URL: `http://localhost:3000/api/upload-document`
+- Headers: `Content-Type: application/json`
+- Body (JSON):
+
+```json
+{
+	"urls": ["https://react.dev/learn", "https://nextjs.org/docs"]
+}
 ```
 
 **Test text upload:**
-```bash
-curl -X POST http://localhost:3000/api/upload-text \
-  -H "Content-Type: application/json" \
-  -d '{
-    "text": "This is sample text about React hooks. useState and useEffect are commonly used hooks."
-  }'
+
+- Method: POST
+- URL: `http://localhost:3000/api/upload-text`
+- Headers: `Content-Type: application/json`
+- Body (JSON):
+
+```json
+{
+	"text": "This is sample text about React hooks. useState and useEffect are commonly used hooks."
+}
 ```
 
 ### Verifying in Pinecone Console
+
 1. Go to your Pinecone index
 2. Check "Vectors" tab - should see new entries
 3. Try the "Query" feature - search for test content
 
 ---
 
-## Common Issues & Solutions
+## Troubleshooting Common Issues
 
-### "Dimension mismatch"
-```
-❌ Vector dimension (1536) doesn't match index (512)
-```
-**Fix**: Ensure you're using `text-embedding-3-small` with `dimensions: 512`
+### Issue: Dimension mismatch
 
-### "Rate limit exceeded"
-```
-❌ OpenAI rate limit error
-```
-**Fix**: Add delay between batches or reduce batch size
+**Symptom**: Vector dimension doesn't match index configuration
 
-### "No content scraped"
-```
-❌ chunks.length === 0
-```
-**Fix**:
+**Solution**: Ensure you're using `text-embedding-3-small` with `dimensions: 512`
+
+### Issue: Rate limit exceeded
+
+**Symptom**: OpenAI API rate limiting
+
+**Solution**: Add delay between batches or reduce batch size
+
+### Issue: No content scraped
+
+**Symptom**: Empty chunks array after processing
+
+**Solution**:
+
 - Check URL is accessible
 - Look at `dataProcessor.ts` - may need to adjust selectors
 - Some sites block scraping
 
-### "Metadata too large"
-```
-❌ Pinecone metadata size limit exceeded
-```
-**Fix**: Chunk text is too long. Reduce chunk size or trim metadata text field
+### Issue: Metadata too large
+
+**Symptom**: Pinecone metadata size limit exceeded
+
+**Solution**: Chunk text is too long. Reduce chunk size or trim metadata text field
 
 ---
 
@@ -349,41 +384,54 @@ curl -X POST http://localhost:3000/api/upload-text \
 Let's break down the flow:
 
 **Request → Validation**
+
 ```typescript
-uploadDocumentSchema.parse(body) // Zod validates structure
+uploadDocumentSchema.parse(body); // Zod validates structure
 ```
+
 This ensures you only process valid URLs (proper format, array structure).
 
 **Scraping → Chunking**
+
 ```typescript
-processor.processUrls(urls) // Returns structured chunks
+processor.processUrls(urls); // Returns structured chunks
 ```
+
 The processor fetches HTML, extracts text, and breaks it into manageable pieces with metadata.
 
 **Text → Vectors**
+
 ```typescript
-openaiClient.embeddings.create() // Converts meaning to numbers
+openaiClient.embeddings.create(); // Converts meaning to numbers
 ```
+
 OpenAI's model captures semantic meaning in a 512-dimensional space.
 
 **Vectors → Database**
-```typescript
+
 index.upsert(vectors) // Stores in Pinecone
-```
+
 Your knowledge is now searchable by semantic similarity!
 
 ---
 
 ## What's Next?
 
-Awesome! You now have a way to add knowledge to your RAG system. But RAG also needs a way to retrieve that knowledge intelligently.
+You've built the upload pipeline - documents are now in Pinecone as searchable vectors!
 
-That's where agents come in...
+**But here's the thing:** Right now you can only upload. You can't ask questions yet.
 
-**Coming up:**
-- Understanding agent architecture
-- Building an agent routing system
-- Creating specialized agents for different tasks
+In the next module, you'll build the query side - the part that lets you:
+
+- Ask "Tell me about Anthropic"
+- Ask "How do I use the Pinecone TypeScript client?"
+- Ask "What are common pitfalls?"
+
+And get answers based on YOUR knowledge base, not hallucinations!
+
+**Next up:** Module 5.3 - Querying Documents
+
+This is where the full request/response cycle comes alive and RAG starts to feel like magic.
 
 ---
 
@@ -393,85 +441,45 @@ Want to see a simpler version of the upload pipeline? Check out `/api/upload-tex
 
 1. **Direct chunking** - Uses `chunkText()` from `app/libs/chunking.ts`
 2. **Same embedding process** - Calls OpenAI with `text-embedding-3-small`
-3. **Same Pinecone upload** - Uses `index.upsert()`
+3. **Same Pinecone upload** - Uses index.upsert()
 
 The main difference: it skips the DataProcessor scraping step since it receives text directly from the user. This is useful when you want to upload documentation, articles, or any text content without needing a URL.
 
 ---
 
+## Video Solution Walkthrough
+
+Watch this guide to building the API route:
+
+<iframe src="https://share.descript.com/embed/tb6EgaRGjay" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+
+---
+
 ## Challenge Solution
 
-<details>
-<summary>Click to reveal the complete implementation</summary>
+**Reference Implementation:** Check `app/api/upload-text/route.ts` in your codebase.
 
-```typescript
-export async function POST(req: NextRequest) {
-  try {
-    // Step 1: Parse and validate
-    const body = await req.json();
-    const parsed = uploadDocumentSchema.parse(body);
-    const { urls } = parsed;
+The complete solution follows the same pattern as the upload-text route, with these key differences:
 
-    // Step 2: Scrape and chunk
-    const processor = new DataProcessor();
-    const chunks = await processor.processUrls(urls);
+- Uses `DataProcessor.processUrls()` instead of `chunkText()`
+- Processes URLs instead of raw text input
+- Same embedding generation and Pinecone upload logic
 
-    // Step 3: Check if we got content
-    if (chunks.length === 0) {
-      return NextResponse.json(
-        { error: 'No content found to process' },
-        { status: 400 }
-      );
-    }
+Study the upload-text route to see the complete implementation pattern for generating embeddings, formatting vectors, and uploading with proper error handling.
 
-    // Step 4: Get Pinecone index
-    const index = pineconeClient.Index(process.env.PINECONE_INDEX!);
+---
 
-    // Step 5: Process in batches
-    const batchSize = 100;
-    let successCount = 0;
+## What You Built
 
-    for (let i = 0; i < chunks.length; i += batchSize) {
-      const batch = chunks.slice(i, i + batchSize);
+You now have a complete document ingestion pipeline! This is the "write" side of your RAG system.
 
-      // Step 6: Generate embeddings
-      const embeddingResponse = await openaiClient.embeddings.create({
-        model: 'text-embedding-3-small',
-        input: batch.map((chunk) => chunk.content),
-      });
+**What's working:**
 
-      // Step 7: Prepare vectors
-      const vectors = batch.map((chunk, idx) => ({
-        id: `${chunk.metadata.url}-${chunk.metadata.chunkIndex}`,
-        values: embeddingResponse.data[idx].embedding,
-        metadata: {
-          text: chunk.content,
-          url: chunk.metadata.url || '',
-          title: chunk.metadata.title || '',
-          chunkIndex: chunk.metadata.chunkIndex || 0,
-          totalChunks: chunk.metadata.totalChunks || 0,
-        },
-      }));
+- ✅ URL validation and scraping
+- ✅ Intelligent text chunking with overlap
+- ✅ Embedding generation
+- ✅ Batch upload to Pinecone
+- ✅ Proper metadata tracking
 
-      // Step 8: Upload to Pinecone
-      await index.upsert(vectors);
-      successCount += batch.length;
-    }
-
-    // Step 9: Return success
-    return NextResponse.json({
-      success: true,
-      chunksProcessed: chunks.length,
-      vectorsUploaded: successCount,
-    });
-  } catch (error) {
-    console.error('Error uploading documents:', error);
-    return NextResponse.json(
-      { error: 'Failed to upload documents' },
-      { status: 500 }
-    );
-  }
-}
-```
-
-</details>
+**What's next:**
+In the next module, you'll build the "read" side - querying Pinecone to answer questions about your knowledge base. This is where RAG comes alive!

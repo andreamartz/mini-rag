@@ -1,209 +1,108 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Word Math: Vectors in Action</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      line-height: 1.6;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      color: #333;
-    }
+<h1 style="margin-top: 24px; margin-bottom: 12px; font-size: 32px; font-weight: bold;">Word Math: Vectors in Action</h1>
+<p style="margin: 12px 0; line-height: 1.6;">Let's have some fun and really drive home that words are just vectors!</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Video Walkthrough</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Watch this fun exploration of word arithmetic:</p>
+<iframe src="https://share.descript.com/embed/gz3NfK2kCMl" width="640" height="360" frameborder="0" allowfullscreen="" style="max-width: 100%; margin: 20px 0;"></iframe>
 
-    h1 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 32px;
-      font-weight: bold;
-    }
-
-    h2 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    h3 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    h4 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    h5 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    h6 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 16px;
-      font-weight: bold;
-    }
-
-    p {
-      margin: 12px 0;
-      line-height: 1.6;
-    }
-
-    a {
-      color: #0066cc;
-      text-decoration: underline;
-    }
-
-    strong {
-      font-weight: bold;
-    }
-
-    em {
-      font-style: italic;
-    }
-
-    code {
-      background-color: #f4f4f4;
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 0.9em;
-    }
-
-    pre {
-      background-color: #f4f4f4;
-      padding: 15px;
-      border-radius: 5px;
-      overflow-x: auto;
-      margin: 20px 0;
-    }
-
-    pre code {
-      background-color: transparent;
-      padding: 0;
-    }
-
-    blockquote {
-      border-left: 4px solid #ddd;
-      margin: 20px 0;
-      padding: 10px 20px;
-      background-color: #f9f9f9;
-    }
-
-    hr {
-      border: none;
-      border-top: 2px solid #eee;
-      margin: 30px 0;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 20px 0;
-    }
-
-    iframe {
-      max-width: 100%;
-      margin: 20px 0;
-    }
-
-    details {
-      margin: 20px 0;
-      padding: 15px;
-      background-color: #f9f9f9;
-      border-radius: 5px;
-    }
-
-    summary {
-      cursor: pointer;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    ol, ul {
-      margin: 10px 0;
-      padding-left: 30px;
-    }
-
-    li {
-      margin: 5px 0;
-    }
-
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin: 20px 0;
-      border: 1px solid #ddd;
-    }
-
-    th, td {
-      padding: 8px;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f4f4f4;
-      font-weight: bold;
-    }
-
-    input[type="checkbox"] {
-      margin-right: 5px;
-    }
-  </style>
-</head>
-<body>
-<h1>Word Math: Vectors in Action</h1>
-<p>Let&#39;s have some fun and really drive home that words are just vectors!</p>
-<hr>
-<h2>Video Walkthrough</h2>
-<p>Watch this fun exploration of word arithmetic:</p>
-<iframe src="https://share.descript.com/embed/gz3NfK2kCMl" width="640" height="360" frameborder="0" allowfullscreen></iframe>
-
-<hr>
-<h2>The Magic of Word Arithmetic</h2>
-<p>Remember: embeddings place similar words close together in vector space. This means we can do <strong>math with words</strong>!</p>
-<hr>
-<h2>The Classic Example</h2>
-<pre><code>king - man + woman ≈ queen
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">The Magic of Word Arithmetic</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Remember: embeddings place similar words close together in vector space. This means we can do <strong style="font-weight: bold;">math with words</strong>!</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">The Classic Example</h2>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">king - man + woman ≈ queen
 </code></pre>
-<p><strong>Why it works:</strong></p>
-<pre><code>&quot;king&quot; embedding contains:
-  - Royalty concept
-  - Male concept
-  - Power concept
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Important:</strong> The <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">≈</code> symbol means "approximately equals" because we don't get the exact "queen" vector. Instead, we get a new vector that's <em style="font-style: italic;">closest</em> to "queen" in vector space!</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">How it works:</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">"king" embedding contains:
+  - Royalty concept      (+5 in some dimension)
+  - Male concept         (+8 in another dimension)
+  - Power concept        (+6 in another dimension)
 
-Subtract &quot;man&quot;:
-  - Removes male concept
+Subtract "man":
+  - Removes male concept (-8 in that dimension)
 
-Add &quot;woman&quot;:
-  - Adds female concept
+Add "woman":
+  - Adds female concept  (+8 in the female dimension)
 
-Result:
-  - Royalty + Female ≈ &quot;queen&quot;!
+Result vector:
+  - Royalty + Female + Power
+  - This vector doesn't match ANY word exactly
+  - But it's CLOSEST to "queen" in 512-dimensional space!
 </code></pre>
-<hr>
-<h2>Exercise: Try Word Math</h2>
-<h3>Setup</h3>
-<p>The exercise is already set up for you at: <code>app/scripts/exercises/vector-word-arithmetic.ts</code></p>
-<pre><code class="language-typescript">import { openaiClient } from &#39;../libs/openai/openai&#39;;
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Visualizing it in 2D (simplified):</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">                queen •
+                     /
+                    / ← Our result lands near here
+                   /
+      king •      / • result
+           \     /
+            \   /
+             \ /
+         man • ----- • woman
+
+After math: result is closest to "queen"!
+</code></pre>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">What actually happens:</strong></p>
+<ol style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Do the math: <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">king - man + woman = [0.23, -0.41, 0.67, ...]</code></li>
+<li style="margin: 5px 0;">This gives us a <strong style="font-weight: bold;">new</strong> vector (doesn't match any real word exactly)</li>
+<li style="margin: 5px 0;">We compare this result to candidate words</li>
+<li style="margin: 5px 0;">"queen" has the highest similarity score → That's our answer!</li>
+</ol>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Think of it like GPS:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">You calculate a point in space</li>
+<li style="margin: 5px 0;">Then find which real city is closest to that point</li>
+<li style="margin: 5px 0;">The math doesn't create "queen" - it finds the nearest word to where we landed</li>
+</ul>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Exercise: Try Word Math</h2>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Understanding Vector Addition and Subtraction</h3>
+<p style="margin: 12px 0; line-height: 1.6;">Before jumping into the code, let's understand what adding and subtracting vectors means:</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Adding vectors</strong> = combining their directions and magnitudes:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">function addVectors(a: number[], b: number[]): number[] {
+	return a.map((val, i) =&gt; val + b[i]);
+}
+
+// Example:
+const v1 = [1, 2, 3];
+const v2 = [4, 5, 6];
+addVectors(v1, v2);  // [1+4, 2+5, 3+6] = [5, 7, 9]
+</code></pre>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Geometrically:</strong> Place vectors tip-to-tail:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">    v1      v1 + v2
+     \        ↗
+      \      /
+       \    /
+        v2
+</code></pre>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Subtracting vectors</strong> = removing one direction from another:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">function subtractVectors(a: number[], b: number[]): number[] {
+	return a.map((val, i) =&gt; val - b[i]);
+}
+
+// Example:
+const v1 = [5, 7, 9];
+const v2 = [1, 2, 3];
+subtractVectors(v1, v2);  // [5-1, 7-2, 9-3] = [4, 5, 6]
+</code></pre>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">With word embeddings:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Adding = "combine these concepts"</li>
+<li style="margin: 5px 0;">Subtracting = "remove this concept"</li>
+</ul>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">king [0.8, 0.3, 0.9, ...]  (royalty + male + power)
+ - man [0.2, 0.9, 0.1, ...]  (remove male concept)
+ = [0.6, -0.6, 0.8, ...]  (royalty + power, but less male)
+</code></pre>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Setup</h3>
+<p style="margin: 12px 0; line-height: 1.6;">The exercise is already set up for you at: <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">app/scripts/exercises/vector-word-arithmetic.ts</code></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">import { openaiClient } from '../libs/openai/openai';
 
 async function getEmbedding(text: string): Promise&lt;number[]&gt; {
 	const response = await openaiClient.embeddings.create({
-		model: &#39;text-embedding-3-small&#39;,
+		model: 'text-embedding-3-small',
 		input: text,
 	});
 	return response.data[0].embedding;
@@ -230,7 +129,7 @@ async function findClosestWord(
 	);
 
 	// Find most similar
-	let best = { word: &#39;&#39;, similarity: -1 };
+	let best = { word: '', similarity: -1 };
 	for (const candidate of candidateEmbeddings) {
 		const sim = cosineSimilarity(targetVector, candidate.embedding);
 		if (sim &gt; best.similarity) {
@@ -241,60 +140,60 @@ async function findClosestWord(
 	return best;
 }
 </code></pre>
-<h3>Try These Equations</h3>
-<pre><code class="language-typescript">async function wordMathExamples() {
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Try These Equations</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">async function wordMathExamples() {
 	// Example 1: king - man + woman ≈ queen
-	console.log(&#39;\n🔮 Example 1: king - man + woman&#39;);
-	const king = await getEmbedding(&#39;king&#39;);
-	const man = await getEmbedding(&#39;man&#39;);
-	const woman = await getEmbedding(&#39;woman&#39;);
+	console.log('\n🔮 Example 1: king - man + woman');
+	const king = await getEmbedding('king');
+	const man = await getEmbedding('man');
+	const woman = await getEmbedding('woman');
 
 	const result1 = addVectors(subtractVectors(king, man), woman);
 
 	const answer1 = await findClosestWord(result1, [
-		&#39;queen&#39;,
-		&#39;princess&#39;,
-		&#39;prince&#39;,
-		&#39;duke&#39;,
-		&#39;emperor&#39;,
+		'queen',
+		'princess',
+		'prince',
+		'duke',
+		'emperor',
 	]);
 
 	console.log(`Answer: ${answer1.word} (${answer1.similarity.toFixed(3)})`);
 	// Expected: queen
 
 	// Example 2: Paris - France + Italy ≈ Rome
-	console.log(&#39;\n🔮 Example 2: Paris - France + Italy&#39;);
-	const paris = await getEmbedding(&#39;Paris&#39;);
-	const france = await getEmbedding(&#39;France&#39;);
-	const italy = await getEmbedding(&#39;Italy&#39;);
+	console.log('\n🔮 Example 2: Paris - France + Italy');
+	const paris = await getEmbedding('Paris');
+	const france = await getEmbedding('France');
+	const italy = await getEmbedding('Italy');
 
 	const result2 = addVectors(subtractVectors(paris, france), italy);
 
 	const answer2 = await findClosestWord(result2, [
-		&#39;Rome&#39;,
-		&#39;Milan&#39;,
-		&#39;Venice&#39;,
-		&#39;Florence&#39;,
-		&#39;Naples&#39;,
+		'Rome',
+		'Milan',
+		'Venice',
+		'Florence',
+		'Naples',
 	]);
 
 	console.log(`Answer: ${answer2.word} (${answer2.similarity.toFixed(3)})`);
 	// Expected: Rome
 
 	// Example 3: walking - walk + swim ≈ swimming
-	console.log(&#39;\n🔮 Example 3: walking - walk + swim&#39;);
-	const walking = await getEmbedding(&#39;walking&#39;);
-	const walk = await getEmbedding(&#39;walk&#39;);
-	const swim = await getEmbedding(&#39;swim&#39;);
+	console.log('\n🔮 Example 3: walking - walk + swim');
+	const walking = await getEmbedding('walking');
+	const walk = await getEmbedding('walk');
+	const swim = await getEmbedding('swim');
 
 	const result3 = addVectors(subtractVectors(walking, walk), swim);
 
 	const answer3 = await findClosestWord(result3, [
-		&#39;swimming&#39;,
-		&#39;swam&#39;,
-		&#39;swimmer&#39;,
-		&#39;swims&#39;,
-		&#39;diving&#39;,
+		'swimming',
+		'swam',
+		'swimmer',
+		'swims',
+		'diving',
 	]);
 
 	console.log(`Answer: ${answer3.word} (${answer3.similarity.toFixed(3)})`);
@@ -304,12 +203,12 @@ async function findClosestWord(
 // Run it!
 wordMathExamples();
 </code></pre>
-<h3>Run the Exercise</h3>
-<pre><code class="language-bash">yarn exercise:word-math
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Run the Exercise</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-bash" style="background-color: transparent; padding: 0;">yarn exercise:word-math
 </code></pre>
-<p>This runs the complete script at <code>app/scripts/exercises/vector-word-arithmetic.ts</code></p>
-<p><strong>Expected output:</strong></p>
-<pre><code>🔮 Example 1: king - man + woman
+<p style="margin: 12px 0; line-height: 1.6;">This runs the complete script at <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">app/scripts/exercises/vector-word-arithmetic.ts</code></p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Expected output:</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">🔮 Example 1: king - man + woman
 Answer: queen (0.892)
 
 🔮 Example 2: Paris - France + Italy
@@ -318,46 +217,72 @@ Answer: Rome (0.847)
 🔮 Example 3: walking - walk + swim
 Answer: swimming (0.923)
 </code></pre>
-<hr>
-<h2>Create Your Own Equations</h2>
-<p>Try these patterns:</p>
-<h3>Country → Capital</h3>
-<pre><code class="language-typescript">// Tokyo - Japan + Germany ≈ ?
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Create Your Own Equations</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Try these patterns:</p>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Country → Capital</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">// Tokyo - Japan + Germany ≈ ?
 // Berlin!
 </code></pre>
-<h3>Adjective → Noun</h3>
-<pre><code class="language-typescript">// biggest - big + small ≈ ?
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Adjective → Noun</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">// biggest - big + small ≈ ?
 // smallest!
 </code></pre>
-<h3>Verb Tenses</h3>
-<pre><code class="language-typescript">// running - run + eat ≈ ?
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Verb Tenses</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">// running - run + eat ≈ ?
 // eating!
 </code></pre>
-<h3>Company → Product</h3>
-<pre><code class="language-typescript">// iPhone - Apple + Microsoft ≈ ?
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Company → Product</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">// iPhone - Apple + Microsoft ≈ ?
 // Windows? Surface?
 </code></pre>
-<hr>
-<h2>What This Proves</h2>
-<p><strong>Words are truly just vectors!</strong></p>
-<ul>
-<li>Semantics encoded as numbers</li>
-<li>Relationships preserved in space</li>
-<li>Math operations make sense</li>
-<li>Similar meanings = similar vectors</li>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">What This Proves</h2>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Words are truly just vectors!</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Semantics encoded as numbers</li>
+<li style="margin: 5px 0;">Relationships preserved in space</li>
+<li style="margin: 5px 0;">Math operations make sense</li>
+<li style="margin: 5px 0;">Similar meanings = similar vectors</li>
 </ul>
-<p>This is why RAG works:</p>
-<ol>
-<li>User query → vector</li>
-<li>Documents → vectors</li>
-<li>Find closest vectors</li>
-<li>Return matching documents</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">But remember:</strong> The results are <em style="font-style: italic;">approximate</em>, not exact!</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">king - man + woman = [0.23, -0.41, 0.67, 0.82, ...]
+                      ↑ This is a NEW vector
+
+// We then find which word is closest:
+cosineSimilarity(result, queenEmbedding)    // 0.89 ✅ Highest!
+cosineSimilarity(result, princessEmbedding) // 0.76
+cosineSimilarity(result, princeEmbedding)   // 0.62
+cosineSimilarity(result, kingEmbedding)     // 0.54
+
+// "queen" wins because it's nearest to our calculated vector
+</code></pre>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Why it's not perfect:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Language is complex and context-dependent</li>
+<li style="margin: 5px 0;">Embeddings capture <em style="font-style: italic;">general</em> semantic relationships</li>
+<li style="margin: 5px 0;">"king - man + woman" creates a vector in the <em style="font-style: italic;">general region</em> of "queen"</li>
+<li style="margin: 5px 0;">We're finding the <strong style="font-weight: bold;">nearest neighbor</strong>, not an exact match</li>
+</ul>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Real similarity scores you'll see:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;"><code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">0.85-0.95</code>: Great match (like king→queen)</li>
+<li style="margin: 5px 0;"><code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">0.75-0.84</code>: Good match</li>
+<li style="margin: 5px 0;"><code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">0.60-0.74</code>: Decent match</li>
+<li style="margin: 5px 0;"><code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">&lt; 0.60</code>: Weak match</li>
+</ul>
+<p style="margin: 12px 0; line-height: 1.6;">This is why RAG works:</p>
+<ol style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">User query → vector</li>
+<li style="margin: 5px 0;">Documents → vectors</li>
+<li style="margin: 5px 0;">Find closest vectors (using cosine similarity)</li>
+<li style="margin: 5px 0;">Return matching documents</li>
 </ol>
-<p>The math handles the &quot;understanding&quot;!</p>
-<hr>
-<h2>Challenge: Build Your Own</h2>
-<p>Create 3 word equations and test them:</p>
-<pre><code class="language-typescript">async function myEquations() {
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">The math handles the "understanding"!</strong> Even though matches aren't perfect, they're good enough to find relevant information.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Challenge: Build Your Own</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Create 3 word equations and test them:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">async function myEquations() {
 	// Your equation 1:
 	// ...
 	// Your equation 2:
@@ -366,77 +291,80 @@ Answer: swimming (0.923)
 	// ...
 }
 </code></pre>
-<p><strong>Ideas:</strong></p>
-<ul>
-<li>Plurals: dog - dogs + cat ≈ ?</li>
-<li>Opposites: hot - cold + loud ≈ ?</li>
-<li>Professions: doctor - hospital + school ≈ ?</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Ideas:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Plurals: dog - dogs + cat ≈ ?</li>
+<li style="margin: 5px 0;">Opposites: hot - cold + loud ≈ ?</li>
+<li style="margin: 5px 0;">Professions: doctor - hospital + school ≈ ?</li>
 </ul>
-<hr>
-<h2>Why This Matters for RAG</h2>
-<p>Understanding word math helps you understand RAG:</p>
-<p><strong>When user asks:</strong> &quot;How do I use React hooks?&quot;</p>
-<p><strong>The system:</strong></p>
-<ol>
-<li>Converts query to vector</li>
-<li>That vector is &quot;near&quot; vectors for:<ul>
-<li>&quot;React useState tutorial&quot;</li>
-<li>&quot;Understanding React hooks&quot;</li>
-<li>&quot;Hooks in React&quot;</li>
-</ul>
-</li>
-<li>But &quot;far&quot; from:<ul>
-<li>&quot;Python data science&quot;</li>
-<li>&quot;CSS styling tips&quot;</li>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Why This Matters for RAG</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Understanding word math helps you understand RAG:</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">When user asks:</strong> "How do I use React hooks?"</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">The system:</strong></p>
+<ol style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Converts query to vector</li>
+<li style="margin: 5px 0;">That vector is "near" vectors for:<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">"React useState tutorial"</li>
+<li style="margin: 5px 0;">"Understanding React hooks"</li>
+<li style="margin: 5px 0;">"Hooks in React"</li>
 </ul>
 </li>
-</ol>
-<p><strong>Result:</strong> Relevant documents retrieved!</p>
-<hr>
-<h2>📝 Homework Assignment: Explain the Dot Product</h2>
-<p><strong>Assignment:</strong> Record a ~5 minute video explaining the dot product to someone interested in learning about LLMs but without a math background.</p>
-<p><strong>Requirements:</strong></p>
-<ol>
-<li><p><strong>Explain what the dot product is:</strong></p>
-<ul>
-<li>What it calculates (sum of element-wise products)</li>
-<li>Simple visual or analogy (e.g., &quot;measuring alignment&quot;)</li>
-<li>Quick example with small vectors</li>
-</ul>
-</li>
-<li><p><strong>Why it matters for RAG:</strong></p>
-<ul>
-<li>How it&#39;s used in cosine similarity</li>
-<li>Why similarity matters for finding relevant documents</li>
-<li>Connection to embeddings</li>
-</ul>
-</li>
-<li><p><strong>Use an analogy:</strong></p>
-<ul>
-<li>Make it relatable (e.g., &quot;like comparing shopping lists&quot;)</li>
-<li>Avoid heavy math notation</li>
-<li>Focus on intuition</li>
+<li style="margin: 5px 0;">But "far" from:<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">"Python data science"</li>
+<li style="margin: 5px 0;">"CSS styling tips"</li>
 </ul>
 </li>
 </ol>
-<p><strong>Tips:</strong></p>
-<ul>
-<li>Use visuals if possible (diagrams, slides, whiteboard)</li>
-<li>Test your explanation on someone non-technical</li>
-<li>Keep it conversational and engaging</li>
-<li>Assume your audience is smart but not math-trained</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Result:</strong> Relevant documents retrieved!</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">📝 Homework Assignment: Explain the Dot Product</h2>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Assignment:</strong> Record a ~5 minute video explaining the dot product to someone interested in learning about LLMs but without a math background.</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Requirements:</strong></p>
+<ol style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;"><p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Explain what the dot product is:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">What it calculates (sum of element-wise products)</li>
+<li style="margin: 5px 0;">Simple visual or analogy (e.g., "measuring alignment")</li>
+<li style="margin: 5px 0;">Quick example with small vectors</li>
 </ul>
-<p><strong>What to Submit:</strong></p>
-<ul>
-<li>Video link (YouTube/Loom/Google Drive)</li>
-<li>Around 5 minutes</li>
+</li>
+<li style="margin: 5px 0;"><p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Why it matters for RAG:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">How it's used in cosine similarity</li>
+<li style="margin: 5px 0;">Why similarity matters for finding relevant documents</li>
+<li style="margin: 5px 0;">Connection to embeddings</li>
 </ul>
-<p><strong>Submit Link:</strong> <em>[Submission form will be provided]</em></p>
-<p><strong>Due:</strong> Before Module 4</p>
-<p><strong>Why This Matters:</strong> Being able to explain technical concepts simply is a critical skill. Understanding dot products deeply will help you debug and improve RAG systems.</p>
-<hr>
-<h2>What&#39;s Next</h2>
-<p>You now understand the math! Time to build the actual Pinecone integration.</p>
+</li>
+<li style="margin: 5px 0;"><p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Use an analogy:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Make it relatable (e.g., "like comparing shopping lists")</li>
+<li style="margin: 5px 0;">Avoid heavy math notation</li>
+<li style="margin: 5px 0;">Focus on intuition</li>
+</ul>
+</li>
+</ol>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Tips:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Use visuals if possible (diagrams, slides, whiteboard)</li>
+<li style="margin: 5px 0;">Test your explanation on someone non-technical</li>
+<li style="margin: 5px 0;">Keep it conversational and engaging</li>
+<li style="margin: 5px 0;">Assume your audience is smart but not math-trained</li>
+</ul>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">What to Submit:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Video link (YouTube/Loom/Google Drive)</li>
+<li style="margin: 5px 0;">Around 5 minutes</li>
+</ul>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Submit Your Work:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;"><strong style="font-weight: bold;"><a href="https://tally.so/form/NdVcsThQ/create" style="color: #0066cc; text-decoration: underline;" target="_blank" rel="noopener noreferrer">Video Submission - Week 1</a></strong></li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;"><a href="https://tally.so/form/A0pGKPqU/create" style="color: #0066cc; text-decoration: underline;" target="_blank" rel="noopener noreferrer">Code Submission - Week 1</a></strong> (submit your word math experiments)</li>
+</ul>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Due:</strong> Before Module 4</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Why This Matters:</strong> Being able to explain technical concepts simply is a critical skill. Understanding dot products deeply will help you debug and improve RAG systems.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">What's Next</h2>
+<p style="margin: 12px 0; line-height: 1.6;">You now understand the math! Time to build the actual Pinecone integration.</p>
 
-</body>
-</html>
+

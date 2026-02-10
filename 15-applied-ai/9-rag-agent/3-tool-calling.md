@@ -393,14 +393,18 @@ For general conversation, answer directly without using tools.`,
 
 ### Test Case 1: Should Use Tool
 
-```bash
-curl -X POST http://localhost:3000/api/chat \
-  -H "Content-Type: application/json" \
-  -d '{
-    "messages": [{"role": "user", "content": "How do I use React hooks?"}],
-    "agent": "rag",
-    "query": "React hooks documentation"
-  }'
+**Request:**
+- Method: POST
+- URL: `http://localhost:3000/api/chat`
+- Headers: `Content-Type: application/json`
+- Body:
+
+```json
+{
+  "messages": [{"role": "user", "content": "How do I use React hooks?"}],
+  "agent": "rag",
+  "query": "React hooks documentation"
+}
 ```
 
 **Expected:** AI calls `search_documentation` tool, retrieves context, generates answer.
@@ -409,13 +413,17 @@ curl -X POST http://localhost:3000/api/chat \
 
 ### Test Case 2: Should NOT Use Tool
 
-```bash
-curl -X POST http://localhost:3000/api/chat \
-  -H "Content-Type: application/json" \
-  -d '{
-    "messages": [{"role": "user", "content": "Thanks!"}],
-    "agent": "rag"
-  }'
+**Request:**
+- Method: POST
+- URL: `http://localhost:3000/api/chat`
+- Headers: `Content-Type: application/json`
+- Body:
+
+```json
+{
+  "messages": [{"role": "user", "content": "Thanks!"}],
+  "agent": "rag"
+}
 ```
 
 **Expected:** AI responds directly without calling any tools.

@@ -4,14 +4,6 @@ Let's get content into your RAG system! We'll start with a simple script approac
 
 ---
 
-## Video Walkthrough
-
-Watch how to upload vectors to Pinecone:
-
-<iframe src="https://share.descript.com/embed/Ypt5j0zCq3x" width="640" height="360" frameborder="0" allowfullscreen></iframe>
-
----
-
 ## What You'll Learn
 
 -   How to scrape URLs and create chunks
@@ -344,11 +336,11 @@ We'll explore automating this in the next section when we build the API route!
 
 ---
 
-## Additional Video: Uploading Documents
+## Video Walkthrough
 
-Watch this walkthrough of the document upload process:
+Watch how to upload vectors to Pinecone:
 
-<iframe src="https://share.descript.com/embed/vXKQ7RBncMc" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+<iframe src="https://share.descript.com/embed/Ypt5j0zCq3x" width="640" height="360" frameborder="0" allowfullscreen></iframe>
 
 ---
 

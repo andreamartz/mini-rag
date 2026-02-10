@@ -4,14 +4,6 @@ Production AI applications need visibility into API calls, costs, latency, and e
 
 ---
 
-## Video Walkthrough
-
-Watch this guide to implementing observability:
-
-<iframe src="https://share.descript.com/embed/UplDjm9F27o" width="640" height="360" frameborder="0" allowfullscreen></iframe>
-
----
-
 ## What You'll Learn
 
 -   Why observability matters for AI applications
@@ -311,6 +303,14 @@ Update your agent implementations to include custom properties:
 -   Extra hop adds latency
 -   Less important for rapid iteration
 -   Can enable when needed
+
+---
+
+## Video Implementation Walkthrough
+
+Watch this guide to implementing observability:
+
+<iframe src="https://share.descript.com/embed/UplDjm9F27o" width="640" height="360" frameborder="0" allowfullscreen></iframe>
 
 ---
 

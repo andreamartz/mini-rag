@@ -341,7 +341,9 @@ After re-ranking:
 - Video link (YouTube/Loom)
 - Around 5 minutes
 
-**Submit Link:** *[Submission form will be provided]*
+**Submit Your Work:**
+- **[Video Submission - Week 3](https://tally.so/form/pwjkAruL/create)**
+- **[Code Submission - Week 3](https://tally.so/form/q3mEuSmX/create)** (submit your reranking implementation)
 
 **Due:** Before Module 11
 

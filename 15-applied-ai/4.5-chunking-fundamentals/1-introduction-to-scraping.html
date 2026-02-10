@@ -1,354 +1,186 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Introduction to Web Scraping for RAG</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      line-height: 1.6;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      color: #333;
-    }
+<h1 style="margin-top: 24px; margin-bottom: 12px; font-size: 32px; font-weight: bold;">Introduction to Web Scraping for RAG</h1>
+<p style="margin: 12px 0; line-height: 1.6;">Before we can build our RAG system, we need data. Lots of it. This module covers how to ethically scrape web content to populate your vector database.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Video Walkthrough</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Watch this introduction to web scraping:</p>
+<iframe src="https://share.descript.com/embed/IKKjh70RIgn" width="640" height="360" frameborder="0" allowfullscreen="" style="max-width: 100%; margin: 20px 0;"></iframe>
 
-    h1 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 32px;
-      font-weight: bold;
-    }
-
-    h2 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    h3 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    h4 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    h5 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    h6 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 16px;
-      font-weight: bold;
-    }
-
-    p {
-      margin: 12px 0;
-      line-height: 1.6;
-    }
-
-    a {
-      color: #0066cc;
-      text-decoration: underline;
-    }
-
-    strong {
-      font-weight: bold;
-    }
-
-    em {
-      font-style: italic;
-    }
-
-    code {
-      background-color: #f4f4f4;
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 0.9em;
-    }
-
-    pre {
-      background-color: #f4f4f4;
-      padding: 15px;
-      border-radius: 5px;
-      overflow-x: auto;
-      margin: 20px 0;
-    }
-
-    pre code {
-      background-color: transparent;
-      padding: 0;
-    }
-
-    blockquote {
-      border-left: 4px solid #ddd;
-      margin: 20px 0;
-      padding: 10px 20px;
-      background-color: #f9f9f9;
-    }
-
-    hr {
-      border: none;
-      border-top: 2px solid #eee;
-      margin: 30px 0;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 20px 0;
-    }
-
-    iframe {
-      max-width: 100%;
-      margin: 20px 0;
-    }
-
-    details {
-      margin: 20px 0;
-      padding: 15px;
-      background-color: #f9f9f9;
-      border-radius: 5px;
-    }
-
-    summary {
-      cursor: pointer;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    ol, ul {
-      margin: 10px 0;
-      padding-left: 30px;
-    }
-
-    li {
-      margin: 5px 0;
-    }
-
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin: 20px 0;
-      border: 1px solid #ddd;
-    }
-
-    th, td {
-      padding: 8px;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f4f4f4;
-      font-weight: bold;
-    }
-
-    input[type="checkbox"] {
-      margin-right: 5px;
-    }
-  </style>
-</head>
-<body>
-<h1>Introduction to Web Scraping for RAG</h1>
-<p>Before we can build our RAG system, we need data. Lots of it. This module covers how to ethically scrape web content to populate your vector database.</p>
-<hr>
-<h2>Video Walkthrough</h2>
-<p>Watch this introduction to web scraping:</p>
-<iframe src="https://share.descript.com/embed/IKKjh70RIgn" width="640" height="360" frameborder="0" allowfullscreen></iframe>
-
-<hr>
-<h2>What You&#39;ll Learn</h2>
-<ul>
-<li>What web scraping is and why it&#39;s important for RAG</li>
-<li>Ethical scraping practices</li>
-<li>Common use cases for scraped data</li>
-<li>Why scraping is complex (and why we&#39;re keeping it simple)</li>
-<li>What makes good vs bad scraped content</li>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">What You'll Learn</h2>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">What web scraping is and why it's important for RAG</li>
+<li style="margin: 5px 0;">Ethical scraping practices</li>
+<li style="margin: 5px 0;">Common use cases for scraped data</li>
+<li style="margin: 5px 0;">Why scraping is complex (and why we're keeping it simple)</li>
+<li style="margin: 5px 0;">What makes good vs bad scraped content</li>
 </ul>
-<hr>
-<h2>The Problem: Empty Database</h2>
-<p>Right now, your Pinecone database is empty. We need to feed it information!</p>
-<pre><code>Empty Pinecone Index
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">The Problem: Empty Database</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Right now, your Pinecone database is empty. We need to feed it information!</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">Empty Pinecone Index
         ↓
       No Data
         ↓
-   Can&#39;t Answer Questions
+   Can't Answer Questions
         ↓
    Useless RAG System 😢
 </code></pre>
-<p><strong>The solution?</strong> Scrape publicly available documentation and content from the web.</p>
-<hr>
-<h2>What is Web Scraping?</h2>
-<p>At a high level, web scraping is:</p>
-<pre><code>Your Code (Robot) → Visits Website → Gets HTML → Extracts Text → Stores Data
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">The solution?</strong> Scrape publicly available documentation and content from the web.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">What is Web Scraping?</h2>
+<p style="margin: 12px 0; line-height: 1.6;">At a high level, web scraping is:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">Your Code (Robot) → Visits Website → Gets HTML → Extracts Text → Stores Data
 </code></pre>
-<p><strong>The Process:</strong></p>
-<ol>
-<li>Send HTTP request to a URL</li>
-<li>Receive HTML response</li>
-<li>Parse the HTML (extract relevant content)</li>
-<li>Clean and structure the data</li>
-<li>Store in your database (Pinecone)</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">The Process:</strong></p>
+<ol style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Send HTTP request to a URL</li>
+<li style="margin: 5px 0;">Receive HTML response</li>
+<li style="margin: 5px 0;">Parse the HTML (extract relevant content)</li>
+<li style="margin: 5px 0;">Clean and structure the data</li>
+<li style="margin: 5px 0;">Store in your database (Pinecone)</li>
 </ol>
-<h3>Simple Example</h3>
-<pre><code class="language-typescript">// Pseudo-code for scraping
-const html = await fetch(&#39;https://react.dev/docs&#39;);
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Simple Example</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">// Pseudo-code for scraping
+const html = await fetch('https://react.dev/docs');
 const parsed = parseHTML(html);
 const text = extractText(parsed);
 const cleaned = cleanText(text);
 
 // Now we can embed and store this text!
 </code></pre>
-<hr>
-<h2>Real-World Use Cases</h2>
-<p>Web scraping powers many AI and data applications:</p>
-<p><strong>1. Knowledge Base RAG Systems</strong></p>
-<ul>
-<li>Scrape React/TypeScript/Next.js documentation</li>
-<li>Build a coding assistant trained on latest docs</li>
-<li>Always up-to-date with official sources</li>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Real-World Use Cases</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Web scraping powers many AI and data applications:</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">1. Knowledge Base RAG Systems</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Scrape React/TypeScript/Next.js documentation</li>
+<li style="margin: 5px 0;">Build a coding assistant trained on latest docs</li>
+<li style="margin: 5px 0;">Always up-to-date with official sources</li>
 </ul>
-<p><strong>2. Legal Tech</strong></p>
-<ul>
-<li>Scrape court cases and outcomes</li>
-<li>Build legal precedent search tool</li>
-<li>Help lawyers research similar cases</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">2. Legal Tech</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Scrape court cases and outcomes</li>
+<li style="margin: 5px 0;">Build legal precedent search tool</li>
+<li style="margin: 5px 0;">Help lawyers research similar cases</li>
 </ul>
-<p><strong>3. Competitive Analysis</strong></p>
-<ul>
-<li>Scrape competitor websites</li>
-<li>Track pricing changes</li>
-<li>Monitor product features</li>
-<li>Analyze marketing strategies</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">3. Competitive Analysis</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Scrape competitor websites</li>
+<li style="margin: 5px 0;">Track pricing changes</li>
+<li style="margin: 5px 0;">Monitor product features</li>
+<li style="margin: 5px 0;">Analyze marketing strategies</li>
 </ul>
-<p><strong>4. Content Aggregation</strong></p>
-<ul>
-<li>News articles for summarization</li>
-<li>Product reviews for sentiment analysis</li>
-<li>Social media for trend detection</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">4. Content Aggregation</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">News articles for summarization</li>
+<li style="margin: 5px 0;">Product reviews for sentiment analysis</li>
+<li style="margin: 5px 0;">Social media for trend detection</li>
 </ul>
-<p><strong>5. Research &amp; Training</strong></p>
-<ul>
-<li>Academic papers</li>
-<li>Historical documents</li>
-<li>Domain-specific knowledge bases</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">5. Research &amp; Training</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Academic papers</li>
+<li style="margin: 5px 0;">Historical documents</li>
+<li style="margin: 5px 0;">Domain-specific knowledge bases</li>
 </ul>
-<hr>
-<h2>The Ethics of Scraping</h2>
-<h3>The Controversial Reality</h3>
-<p>Web scraping is... complicated. Here&#39;s the truth:</p>
-<p><strong>How OpenAI Got Its Knowledge:</strong></p>
-<ul>
-<li>Scraped the entire internet</li>
-<li>Billions of web pages</li>
-<li>Books, articles, code, forums, everything</li>
-<li>Led to lawsuits and ethical debates</li>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">The Ethics of Scraping</h2>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">The Controversial Reality</h3>
+<p style="margin: 12px 0; line-height: 1.6;">Web scraping is... complicated. Here's the truth:</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">How OpenAI Got Its Knowledge:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Scraped the entire internet</li>
+<li style="margin: 5px 0;">Billions of web pages</li>
+<li style="margin: 5px 0;">Books, articles, code, forums, everything</li>
+<li style="margin: 5px 0;">Led to lawsuits and ethical debates</li>
 </ul>
-<p><strong>The Problem:</strong></p>
-<ul>
-<li>Copyright concerns</li>
-<li>Terms of Service violations</li>
-<li>Privacy issues</li>
-<li>Server load and costs</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">The Problem:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Copyright concerns</li>
+<li style="margin: 5px 0;">Terms of Service violations</li>
+<li style="margin: 5px 0;">Privacy issues</li>
+<li style="margin: 5px 0;">Server load and costs</li>
 </ul>
-<h3>The Ethical Way to Scrape</h3>
-<p>As developers, we should be ethical. Here&#39;s how:</p>
-<p><strong>✅ DO:</strong></p>
-<ol>
-<li><p><strong>Check <code>robots.txt</code></strong> - Every site has one at <code>/robots.txt</code></p>
-<pre><code>Example: https://react.dev/robots.txt
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">The Ethical Way to Scrape</h3>
+<p style="margin: 12px 0; line-height: 1.6;">As developers, we should be ethical. Here's how:</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">✅ DO:</strong></p>
+<ol style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;"><p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Check <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">robots.txt</code></strong> - Every site has one at <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">/robots.txt</code></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">Example: https://react.dev/robots.txt
 </code></pre>
 </li>
-<li><p><strong>Respect the rules</strong></p>
-<pre><code>User-agent: *
-Disallow: /admin/        # Don&#39;t scrape this
+<li style="margin: 5px 0;"><p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Respect the rules</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">User-agent: *
+Disallow: /admin/        # Don't scrape this
 Allow: /docs/            # OK to scrape this
 </code></pre>
 </li>
-<li><p><strong>Rate limit your requests</strong></p>
-<pre><code class="language-typescript">// Don&#39;t hammer the server
+<li style="margin: 5px 0;"><p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Rate limit your requests</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">// Don't hammer the server
 await sleep(1000); // Wait 1 second between requests
 </code></pre>
 </li>
-<li><p><strong>Use public APIs when available</strong></p>
-<ul>
-<li>Better than scraping</li>
-<li>Designed for programmatic access</li>
-<li>Usually more reliable</li>
+<li style="margin: 5px 0;"><p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Use public APIs when available</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Better than scraping</li>
+<li style="margin: 5px 0;">Designed for programmatic access</li>
+<li style="margin: 5px 0;">Usually more reliable</li>
 </ul>
 </li>
-<li><p><strong>Only scrape public content</strong></p>
-<ul>
-<li>No login-protected pages</li>
-<li>No personal information</li>
-<li>No copyrighted content (without permission)</li>
+<li style="margin: 5px 0;"><p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Only scrape public content</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">No login-protected pages</li>
+<li style="margin: 5px 0;">No personal information</li>
+<li style="margin: 5px 0;">No copyrighted content (without permission)</li>
 </ul>
 </li>
 </ol>
-<p><strong>❌ DON&#39;T:</strong></p>
-<ul>
-<li>Ignore <code>robots.txt</code></li>
-<li>Scrape at high frequency (DDoS-like behavior)</li>
-<li>Bypass authentication</li>
-<li>Scrape copyrighted content at scale</li>
-<li>Violate Terms of Service</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">❌ DON'T:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Ignore <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">robots.txt</code></li>
+<li style="margin: 5px 0;">Scrape at high frequency (DDoS-like behavior)</li>
+<li style="margin: 5px 0;">Bypass authentication</li>
+<li style="margin: 5px 0;">Scrape copyrighted content at scale</li>
+<li style="margin: 5px 0;">Violate Terms of Service</li>
 </ul>
-<hr>
-<h2>Why This Course Uses Simple Scraping</h2>
-<p><strong>We&#39;re scraping:</strong></p>
-<ul>
-<li>Open source documentation (React, TypeScript, Next.js, Pinecone)</li>
-<li>Publicly available content</li>
-<li>Content that explicitly allows scraping</li>
-<li>Small amounts of data (not the entire internet!)</li>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Why This Course Uses Simple Scraping</h2>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">We're scraping:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Open source documentation (React, TypeScript, Next.js, Pinecone)</li>
+<li style="margin: 5px 0;">Publicly available content</li>
+<li style="margin: 5px 0;">Content that explicitly allows scraping</li>
+<li style="margin: 5px 0;">Small amounts of data (not the entire internet!)</li>
 </ul>
-<p><strong>Why keep it simple?</strong></p>
-<ul>
-<li>Scraping is a MASSIVE topic (entire businesses built on it)</li>
-<li>Not the focus of this course</li>
-<li>Easy access to quality training data</li>
-<li>Avoids legal/ethical gray areas</li>
-<li>You can extend it later</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Why keep it simple?</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Scraping is a MASSIVE topic (entire businesses built on it)</li>
+<li style="margin: 5px 0;">Not the focus of this course</li>
+<li style="margin: 5px 0;">Easy access to quality training data</li>
+<li style="margin: 5px 0;">Avoids legal/ethical gray areas</li>
+<li style="margin: 5px 0;">You can extend it later</li>
 </ul>
-<p><strong>The provided code:</strong></p>
-<ul>
-<li>Naive implementation (simple but works)</li>
-<li>Scrapes basic HTML content</li>
-<li>Respects <code>robots.txt</code></li>
-<li>Rate-limited requests</li>
-<li>You&#39;re encouraged to extend it!</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">The provided code:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Naive implementation (simple but works)</li>
+<li style="margin: 5px 0;">Scrapes basic HTML content</li>
+<li style="margin: 5px 0;">Respects <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">robots.txt</code></li>
+<li style="margin: 5px 0;">Rate-limited requests</li>
+<li style="margin: 5px 0;">You're encouraged to extend it!</li>
 </ul>
-<hr>
-<h2>Challenges with Scraping</h2>
-<h3>1. Complex HTML Structure</h3>
-<p>Real websites are messy:</p>
-<pre><code class="language-html">&lt;!-- What you want --&gt;
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Challenges with Scraping</h2>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">1. Complex HTML Structure</h3>
+<p style="margin: 12px 0; line-height: 1.6;">Real websites are messy:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-html" style="background-color: transparent; padding: 0;">&lt;!-- What you want --&gt;
 &lt;p&gt;React Hooks were introduced in React 16.8.&lt;/p&gt;
 
 &lt;!-- What you actually get --&gt;
-&lt;div class=&quot;container&quot;&gt;
-	&lt;div class=&quot;row&quot;&gt;
-		&lt;div class=&quot;col-md-8&quot;&gt;
+&lt;div class="container"&gt;
+	&lt;div class="row"&gt;
+		&lt;div class="col-md-8"&gt;
 			&lt;article&gt;
-				&lt;div class=&quot;content-wrapper&quot;&gt;
-					&lt;p class=&quot;paragraph-style-1&quot;&gt;
+				&lt;div class="content-wrapper"&gt;
+					&lt;p class="paragraph-style-1"&gt;
 						React Hooks were introduced in React 16.8.
 					&lt;/p&gt;
 				&lt;/div&gt;
@@ -358,45 +190,45 @@ await sleep(1000); // Wait 1 second between requests
 &lt;/div&gt;
 &lt;!-- Plus 500 more lines of navigation, ads, footers, etc. --&gt;
 </code></pre>
-<p><strong>Solution:</strong> Use tools like Cheerio or Puppeteer to parse HTML and extract just the content you need.</p>
-<h3>2. Dynamic Content</h3>
-<p>Modern websites use JavaScript to load content:</p>
-<pre><code>Initial HTML → Empty &lt;div id=&quot;root&quot;&gt;&lt;/div&gt;
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Solution:</strong> Use tools like Cheerio or Puppeteer to parse HTML and extract just the content you need.</p>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">2. Dynamic Content</h3>
+<p style="margin: 12px 0; line-height: 1.6;">Modern websites use JavaScript to load content:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">Initial HTML → Empty &lt;div id="root"&gt;&lt;/div&gt;
 JavaScript runs → Content appears
 Your scraper → Sees nothing!
 </code></pre>
-<p><strong>Solution:</strong> Use headless browsers (Puppeteer, Playwright) that execute JavaScript.</p>
-<h3>3. Anti-Scraping Measures</h3>
-<p>Websites don&#39;t always want to be scraped:</p>
-<ul>
-<li>CAPTCHA challenges</li>
-<li>Rate limiting</li>
-<li>IP blocking</li>
-<li>User-agent detection</li>
-<li>Dynamic page structure</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Solution:</strong> Use headless browsers (Puppeteer, Playwright) that execute JavaScript.</p>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">3. Anti-Scraping Measures</h3>
+<p style="margin: 12px 0; line-height: 1.6;">Websites don't always want to be scraped:</p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">CAPTCHA challenges</li>
+<li style="margin: 5px 0;">Rate limiting</li>
+<li style="margin: 5px 0;">IP blocking</li>
+<li style="margin: 5px 0;">User-agent detection</li>
+<li style="margin: 5px 0;">Dynamic page structure</li>
 </ul>
-<p><strong>Solution:</strong> Respect these measures. If a site doesn&#39;t want scraping, don&#39;t scrape it.</p>
-<h3>4. Data Quality</h3>
-<p>Not all scraped content is useful:</p>
-<pre><code class="language-html">&lt;!-- Useful --&gt;
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Solution:</strong> Respect these measures. If a site doesn't want scraping, don't scrape it.</p>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">4. Data Quality</h3>
+<p style="margin: 12px 0; line-height: 1.6;">Not all scraped content is useful:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-html" style="background-color: transparent; padding: 0;">&lt;!-- Useful --&gt;
 &lt;article&gt;React is a JavaScript library for building UIs.&lt;/article&gt;
 
 &lt;!-- Not useful --&gt;
 &lt;nav&gt;Home | About | Contact | Login&lt;/nav&gt;
 &lt;footer&gt;© 2024 Example Corp&lt;/footer&gt;
-&lt;div class=&quot;ad&quot;&gt;Buy Our Product!&lt;/div&gt;
+&lt;div class="ad"&gt;Buy Our Product!&lt;/div&gt;
 </code></pre>
-<p><strong>Solution:</strong> Be selective about what content you extract.</p>
-<hr>
-<h2>The Size Problem: Why Chunking Matters</h2>
-<p>Let&#39;s say you scraped a massive React documentation page:</p>
-<pre><code>Total content: 50,000 words
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Solution:</strong> Be selective about what content you extract.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">The Size Problem: Why Chunking Matters</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Let's say you scraped a massive React documentation page:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">Total content: 50,000 words
 Your embedding limit: 512 dimensions
 </code></pre>
-<p><strong>What happens if you try to embed the entire document?</strong></p>
-<p>❌ Too much information → diluted meaning<br>❌ May exceed token limits<br>❌ Won&#39;t fit in LLM context window<br>❌ Loses specificity</p>
-<p><strong>Example of the problem:</strong></p>
-<pre><code>User: &quot;How do I use useState?&quot;
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">What happens if you try to embed the entire document?</strong></p>
+<p style="margin: 12px 0; line-height: 1.6;">❌ Too much information → diluted meaning<br>❌ May exceed token limits<br>❌ Won't fit in LLM context window<br>❌ Loses specificity</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Example of the problem:</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">User: "How do I use useState?"
 
 Without chunking:
 - Retrieves entire 50,000-word doc
@@ -410,88 +242,87 @@ With chunking:
 - Clear, focused context
 - LLM generates perfect answer
 </code></pre>
-<p>This is why <strong>chunking</strong> is critical. We&#39;ll cover this in the next module.</p>
-<hr>
-<h2>Preview: The Chunking Problem</h2>
-<p>Consider this sentence:</p>
-<blockquote>
-<p>&quot;After years of research, scientists finally discovered that the secret to eternal youth lies in consistent...&quot;</p>
+<p style="margin: 12px 0; line-height: 1.6;">This is why <strong style="font-weight: bold;">chunking</strong> is critical. We'll cover this in the next module.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Preview: The Chunking Problem</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Consider this sentence:</p>
+<blockquote style="border-left: 4px solid #ddd; margin: 20px 0; padding: 10px 20px; background-color: #f9f9f9;">
+<p style="margin: 12px 0; line-height: 1.6;">"After years of research, scientists finally discovered that the secret to eternal youth lies in consistent..."</p>
 </blockquote>
-<p><strong>Bad chunking (cuts off mid-sentence):</strong></p>
-<pre><code>Chunk 1: &quot;After years of research, scientists finally discovered
-          that the secret to eternal youth lies in consistent&quot;
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Bad chunking (cuts off mid-sentence):</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">Chunk 1: "After years of research, scientists finally discovered
+          that the secret to eternal youth lies in consistent"
 </code></pre>
-<p><strong>Missing context!</strong> Consistent what? Exercise? Drug use? Diet? Sleep?</p>
-<p><strong>Good chunking (respects sentence boundaries):</strong></p>
-<pre><code>Chunk 1: &quot;After years of research, scientists finally discovered
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Missing context!</strong> Consistent what? Exercise? Drug use? Diet? Sleep?</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Good chunking (respects sentence boundaries):</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">Chunk 1: "After years of research, scientists finally discovered
           that the secret to eternal youth lies in consistent
-          exercise and healthy eating habits.&quot;
+          exercise and healthy eating habits."
 </code></pre>
-<p><strong>Complete context!</strong> Now the meaning is preserved.</p>
-<hr>
-<h2>What Makes Good Scraped Content?</h2>
-<p>For RAG systems, quality matters:</p>
-<h3>✅ Good Content Characteristics</h3>
-<ol>
-<li><strong>Authoritative</strong> - Official documentation, not random blog posts</li>
-<li><strong>Complete</strong> - Full thoughts, not fragments</li>
-<li><strong>Structured</strong> - Clear hierarchy (headings, paragraphs)</li>
-<li><strong>Current</strong> - Up-to-date information</li>
-<li><strong>Relevant</strong> - Matches your domain</li>
-<li><strong>Clean</strong> - No ads, navigation, footers</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Complete context!</strong> Now the meaning is preserved.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">What Makes Good Scraped Content?</h2>
+<p style="margin: 12px 0; line-height: 1.6;">For RAG systems, quality matters:</p>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">✅ Good Content Characteristics</h3>
+<ol style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Authoritative</strong> - Official documentation, not random blog posts</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Complete</strong> - Full thoughts, not fragments</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Structured</strong> - Clear hierarchy (headings, paragraphs)</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Current</strong> - Up-to-date information</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Relevant</strong> - Matches your domain</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Clean</strong> - No ads, navigation, footers</li>
 </ol>
-<h3>❌ Bad Content to Avoid</h3>
-<ol>
-<li><strong>Advertisements</strong> - &quot;Buy now! Limited time offer!&quot;</li>
-<li><strong>Navigation menus</strong> - &quot;Home | About | Contact&quot;</li>
-<li><strong>Boilerplate</strong> - Repeated headers/footers</li>
-<li><strong>Comments sections</strong> - Often low quality</li>
-<li><strong>Outdated content</strong> - Deprecated APIs</li>
-<li><strong>Duplicate content</strong> - Same info multiple times</li>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">❌ Bad Content to Avoid</h3>
+<ol style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Advertisements</strong> - "Buy now! Limited time offer!"</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Navigation menus</strong> - "Home | About | Contact"</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Boilerplate</strong> - Repeated headers/footers</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Comments sections</strong> - Often low quality</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Outdated content</strong> - Deprecated APIs</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Duplicate content</strong> - Same info multiple times</li>
 </ol>
-<hr>
-<h2>Your Task: Think About Chunking</h2>
-<p>Before moving to the next module, consider these questions:</p>
-<p><strong>Question 1:</strong> How would you chunk a large legal document (10,000+ words)?</p>
-<ul>
-<li>By sentence? Too granular?</li>
-<li>By paragraph? What if paragraphs are huge?</li>
-<li>By section? What if sections are small?</li>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Your Task: Think About Chunking</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Before moving to the next module, consider these questions:</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Question 1:</strong> How would you chunk a large legal document (10,000+ words)?</p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">By sentence? Too granular?</li>
+<li style="margin: 5px 0;">By paragraph? What if paragraphs are huge?</li>
+<li style="margin: 5px 0;">By section? What if sections are small?</li>
 </ul>
-<p><strong>Question 2:</strong> Would you even need to chunk a LinkedIn post?</p>
-<ul>
-<li>Most posts are 1-3 paragraphs</li>
-<li>Already concise</li>
-<li>Chunking might make it worse?</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Question 2:</strong> Would you even need to chunk a LinkedIn post?</p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Most posts are 1-3 paragraphs</li>
+<li style="margin: 5px 0;">Already concise</li>
+<li style="margin: 5px 0;">Chunking might make it worse?</li>
 </ul>
-<p><strong>Question 3:</strong> What about chunking code documentation?</p>
-<ul>
-<li>Function signatures</li>
-<li>Code examples</li>
-<li>Descriptions</li>
-<li>How do they relate?</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Question 3:</strong> What about chunking code documentation?</p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Function signatures</li>
+<li style="margin: 5px 0;">Code examples</li>
+<li style="margin: 5px 0;">Descriptions</li>
+<li style="margin: 5px 0;">How do they relate?</li>
 </ul>
-<p><strong>There&#39;s no perfect answer!</strong> Chunking is an art and a science. In the next module, we&#39;ll explore a naive chunking strategy and you&#39;ll implement your own improvements.</p>
-<hr>
-<h2>What Separates RAG Novices from Experts</h2>
-<p>According to experienced practitioners:</p>
-<blockquote>
-<p>&quot;In my opinion, this is what separates the RAG noobs from people that have deeper understanding.&quot;</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">There's no perfect answer!</strong> Chunking is an art and a science. In the next module, we'll explore a naive chunking strategy and you'll implement your own improvements.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">What Separates RAG Novices from Experts</h2>
+<p style="margin: 12px 0; line-height: 1.6;">According to experienced practitioners:</p>
+<blockquote style="border-left: 4px solid #ddd; margin: 20px 0; padding: 10px 20px; background-color: #f9f9f9;">
+<p style="margin: 12px 0; line-height: 1.6;">"In my opinion, this is what separates the RAG noobs from people that have deeper understanding."</p>
 </blockquote>
-<p><strong>Beginners think:</strong></p>
-<ul>
-<li>Just scrape everything</li>
-<li>Dump it in the database</li>
-<li>Let the AI figure it out</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Beginners think:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Just scrape everything</li>
+<li style="margin: 5px 0;">Dump it in the database</li>
+<li style="margin: 5px 0;">Let the AI figure it out</li>
 </ul>
-<p><strong>Experts know:</strong></p>
-<ul>
-<li>Scraping strategy matters</li>
-<li>Chunking strategy is critical</li>
-<li>Input quality determines output quality</li>
-<li>Context preservation is everything</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Experts know:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Scraping strategy matters</li>
+<li style="margin: 5px 0;">Chunking strategy is critical</li>
+<li style="margin: 5px 0;">Input quality determines output quality</li>
+<li style="margin: 5px 0;">Context preservation is everything</li>
 </ul>
-<p><strong>Your advantage:</strong> We&#39;re all learning this together. RAG is so new that even senior developers are still figuring it out. Form your own opinions, experiment, and document what works!</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Your advantage:</strong> We're all learning this together. RAG is so new that even senior developers are still figuring it out. Form your own opinions, experiment, and document what works!</p>
 
-</body>
-</html>
+

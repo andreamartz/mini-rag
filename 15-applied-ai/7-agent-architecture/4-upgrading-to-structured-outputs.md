@@ -4,14 +4,6 @@ In the previous module, you implemented the selector using text parsing. Now you
 
 ---
 
-## Video Walkthrough
-
-Watch this guide to structured outputs:
-
-<iframe src="https://share.descript.com/embed/V2JXix9ZTB0" width="640" height="360" frameborder="0" allowfullscreen></iframe>
-
----
-
 ## What You'll Learn
 
 By the end of this module, you'll have:
@@ -221,21 +213,25 @@ return NextResponse.json({
 
 ## Testing Your Refactored Implementation
 
-Run the same curl tests from the previous module. The responses should be identical!
+Run the same tests from the previous module using Postman or Thunder Client. The responses should be identical!
 
 ### Test 1: RAG Query
 
-```bash
-curl -X POST http://localhost:3000/api/select-agent \
-  -H "Content-Type: application/json" \
-  -d '{
-    "messages": [
-      {
-        "role": "user",
-        "content": "Explain React hooks"
-      }
-    ]
-  }'
+**Request:**
+- Method: POST
+- URL: `http://localhost:3000/api/select-agent`
+- Headers: `Content-Type: application/json`
+- Body:
+
+```json
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "Explain React hooks"
+    }
+  ]
+}
 ```
 
 **Expected response:**
@@ -248,17 +244,21 @@ curl -X POST http://localhost:3000/api/select-agent \
 
 ### Test 2: LinkedIn Query
 
-```bash
-curl -X POST http://localhost:3000/api/select-agent \
-  -H "Content-Type: application/json" \
-  -d '{
-    "messages": [
-      {
-        "role": "user",
-        "content": "Help me write a LinkedIn post about AI"
-      }
-    ]
-  }'
+**Request:**
+- Method: POST
+- URL: `http://localhost:3000/api/select-agent`
+- Headers: `Content-Type: application/json`
+- Body:
+
+```json
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "Help me write a LinkedIn post about AI"
+    }
+  ]
+}
 ```
 
 **Expected response:**
@@ -273,23 +273,35 @@ curl -X POST http://localhost:3000/api/select-agent \
 
 Try to trick it by mentioning multiple agents:
 
-```bash
-curl -X POST http://localhost:3000/api/select-agent \
-  -H "Content-Type: application/json" \
-  -d '{
-    "messages": [
-      {
-        "role": "user",
-        "content": "Can you tell me about React and also help with my LinkedIn?"
-      }
-    ]
-  }'
+**Request:**
+- Method: POST
+- URL: `http://localhost:3000/api/select-agent`
+- Headers: `Content-Type: application/json`
+- Body:
+
+```json
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "Can you tell me about React and also help with my LinkedIn?"
+    }
+  ]
+}
 ```
 
 **What happens:**
 - OpenAI's structured output will pick ONE valid agent (probably "rag" since React is mentioned first)
 - The schema enforces `z.enum(['linkedin', 'rag'])` - can't return both!
 - You get a valid response even for ambiguous queries
+
+---
+
+## Video Solution Walkthrough
+
+Watch this guide to structured outputs:
+
+<iframe src="https://share.descript.com/embed/V2JXix9ZTB0" width="640" height="360" frameborder="0" allowfullscreen></iframe>
 
 ---
 

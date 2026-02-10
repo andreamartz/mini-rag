@@ -148,9 +148,14 @@ Create a completely new RAG application with a unique use case:
 
 ## Submission
 
+**Submit Your Final Project:**
+- **[Video Submission - Week 5](https://tally.so/form/SF6b6edL/create)**
+- **[Code Submission - Week 5](https://tally.so/form/TXjlfrlr/create)**
+
+**What to Include:**
 -   Deployed URL
 -   GitHub repository
--   Video link
+-   Video link (3-5 minutes)
 -   (Optional) Bonus challenge description
 
 ---

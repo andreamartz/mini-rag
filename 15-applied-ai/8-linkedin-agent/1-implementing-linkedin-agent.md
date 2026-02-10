@@ -4,14 +4,6 @@ Now that we have your fine-tuned model from module 5, we'll implement an agent t
 
 ---
 
-## Video Walkthrough
-
-Watch this guide to implementing the LinkedIn agent:
-
-<iframe src="https://share.descript.com/embed/oSYwAxsn4AO" width="640" height="360" frameborder="0" allowfullscreen></iframe>
-
----
-
 ## What You'll Build
 
 An agent that:
@@ -69,6 +61,16 @@ Key points:
 -   The `prompt` includes both the original user request and the refined query from the selector agent
 -   The `system` parameter sets the agent's role and behavior
 -   The fine-tuned model is passed using `openai(process.env.OPENAI_FINETUNED_MODEL!)`
+
+---
+
+## Video Solution Walkthrough
+
+Watch this guide to implementing the LinkedIn agent:
+
+<iframe src="https://share.descript.com/embed/oSYwAxsn4AO" width="640" height="360" frameborder="0" allowfullscreen></iframe>
+
+---
 
 ## Resources
 

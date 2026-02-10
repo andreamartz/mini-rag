@@ -229,10 +229,16 @@ export async function POST(req: Request) {
 
 ### 1. Test the basic flow
 
-```bash
-curl -X POST http://localhost:3000/api/chat-graph \
-  -H "Content-Type: application/json" \
-  -d '{"query": "Write a LinkedIn post about TypeScript"}'
+**Request:**
+- Method: POST
+- URL: `http://localhost:3000/api/chat-graph`
+- Headers: `Content-Type: application/json`
+- Body:
+
+```json
+{
+  "query": "Write a LinkedIn post about TypeScript"
+}
 ```
 
 **Expected:**
@@ -241,10 +247,16 @@ curl -X POST http://localhost:3000/api/chat-graph \
 
 ### 2. Test RAG routing
 
-```bash
-curl -X POST http://localhost:3000/api/chat-graph \
-  -H "Content-Type: application/json" \
-  -d '{"query": "How do React hooks work?"}'
+**Request:**
+- Method: POST
+- URL: `http://localhost:3000/api/chat-graph`
+- Headers: `Content-Type: application/json`
+- Body:
+
+```json
+{
+  "query": "How do React hooks work?"
+}
 ```
 
 **Expected:**
@@ -254,10 +266,17 @@ curl -X POST http://localhost:3000/api/chat-graph \
 ### 3. Test your enhancement
 
 If you added query validation:
-```bash
-curl -X POST http://localhost:3000/api/chat-graph \
-  -H "Content-Type: application/json" \
-  -d '{"query": "hi"}'
+
+**Request:**
+- Method: POST
+- URL: `http://localhost:3000/api/chat-graph`
+- Headers: `Content-Type: application/json`
+- Body:
+
+```json
+{
+  "query": "hi"
+}
 ```
 
 **Expected:**

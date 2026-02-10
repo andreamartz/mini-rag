@@ -1,193 +1,20 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Running the Fine-Tuning Process</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      line-height: 1.6;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      color: #333;
-    }
-
-    h1 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 32px;
-      font-weight: bold;
-    }
-
-    h2 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    h3 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    h4 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    h5 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    h6 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 16px;
-      font-weight: bold;
-    }
-
-    p {
-      margin: 12px 0;
-      line-height: 1.6;
-    }
-
-    a {
-      color: #0066cc;
-      text-decoration: underline;
-    }
-
-    strong {
-      font-weight: bold;
-    }
-
-    em {
-      font-style: italic;
-    }
-
-    code {
-      background-color: #f4f4f4;
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 0.9em;
-    }
-
-    pre {
-      background-color: #f4f4f4;
-      padding: 15px;
-      border-radius: 5px;
-      overflow-x: auto;
-      margin: 20px 0;
-    }
-
-    pre code {
-      background-color: transparent;
-      padding: 0;
-    }
-
-    blockquote {
-      border-left: 4px solid #ddd;
-      margin: 20px 0;
-      padding: 10px 20px;
-      background-color: #f9f9f9;
-    }
-
-    hr {
-      border: none;
-      border-top: 2px solid #eee;
-      margin: 30px 0;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 20px 0;
-    }
-
-    iframe {
-      max-width: 100%;
-      margin: 20px 0;
-    }
-
-    details {
-      margin: 20px 0;
-      padding: 15px;
-      background-color: #f9f9f9;
-      border-radius: 5px;
-    }
-
-    summary {
-      cursor: pointer;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    ol, ul {
-      margin: 10px 0;
-      padding-left: 30px;
-    }
-
-    li {
-      margin: 5px 0;
-    }
-
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin: 20px 0;
-      border: 1px solid #ddd;
-    }
-
-    th, td {
-      padding: 8px;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f4f4f4;
-      font-weight: bold;
-    }
-
-    input[type="checkbox"] {
-      margin-right: 5px;
-    }
-  </style>
-</head>
-<body>
-<h1>Running the Fine-Tuning Process</h1>
-<p>Time to train your own model! This section walks you through creating a fine-tuned model that writes like you.</p>
-<hr>
-<h2>Video Walkthrough</h2>
-<p>Watch this guide to running the fine-tuning process:</p>
-<iframe src="https://share.descript.com/embed/nub6vmvmL3a" width="640" height="360" frameborder="0" allowfullscreen></iframe>
-
-<hr>
-<h2>What You&#39;ll Do</h2>
-<ol>
-<li>Examine the training data format</li>
-<li>Run the training script</li>
-<li>Monitor the fine-tuning job</li>
-<li>Get your model ID</li>
-<li>Configure your app</li>
+<h1 style="margin-top: 24px; margin-bottom: 12px; font-size: 32px; font-weight: bold;">Running the Fine-Tuning Process</h1>
+<p style="margin: 12px 0; line-height: 1.6;">Time to train your own model! This section walks you through creating a fine-tuned model that writes like you.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">What You'll Do</h2>
+<ol style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Examine the training data format</li>
+<li style="margin: 5px 0;">Run the training script</li>
+<li style="margin: 5px 0;">Monitor the fine-tuning job</li>
+<li style="margin: 5px 0;">Get your model ID</li>
+<li style="margin: 5px 0;">Configure your app</li>
 </ol>
-<hr>
-<h2>Understanding the Training Script</h2>
-<p>Located at: <code>app/scripts/upload-training-data.ts</code></p>
-<p>This script handles the entire fine-tuning workflow:</p>
-<h3>The Process</h3>
-<pre><code>Training Data (JSONL)
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Understanding the Training Script</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Located at: <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">app/scripts/upload-training-data.ts</code></p>
+<p style="margin: 12px 0; line-height: 1.6;">This script handles the entire fine-tuning workflow:</p>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">The Process</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">Training Data (JSONL)
     ↓
 1. Upload to OpenAI
     ↓
@@ -199,55 +26,55 @@
     ↓
 5. Use in your app
 </code></pre>
-<h3>What the Script Does</h3>
-<p><strong>Step 1: Upload File</strong></p>
-<pre><code class="language-typescript">const file = await openai.files.create({
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">What the Script Does</h3>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Step 1: Upload File</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">const file = await openai.files.create({
   file: fs.createReadStream(filePath),
-  purpose: &#39;fine-tune&#39;,
+  purpose: 'fine-tune',
 });
 </code></pre>
-<p>Uploads your JSONL file to OpenAI&#39;s servers.</p>
-<p><strong>Step 2: Start Training Job</strong></p>
-<pre><code class="language-typescript">const job = await openai.fineTuning.jobs.create({
+<p style="margin: 12px 0; line-height: 1.6;">Uploads your JSONL file to OpenAI's servers.</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Step 2: Start Training Job</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">const job = await openai.fineTuning.jobs.create({
   training_file: fileId,
-  model: &#39;gpt-4o-mini-2024-07-18&#39;,
+  model: 'gpt-4o-mini-2024-07-18',
 });
 </code></pre>
-<p>Kicks off the training process. OpenAI handles everything from here!</p>
-<hr>
-<h2>Examining the Training Data</h2>
-<p>Your training data lives at: <code>app/scripts/data/linkedin_training.jsonl</code></p>
-<h3>The Format</h3>
-<p>Each line is a complete training example:</p>
-<pre><code class="language-jsonl">{&quot;messages&quot;: [{&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;You are a professional LinkedIn advisor helping with networking and career advice&quot;}, {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;How do I write an effective LinkedIn headline?&quot;}, {&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: &quot;Your LinkedIn headline is prime real estate - you have 220 characters to make a strong first impression. Here&#39;s how to make it count:\n\n1. **Go beyond your job title**: Instead of just &#39;Software Engineer&#39;, try &#39;Software Engineer | Building scalable systems | React &amp; Node.js expert&#39;\n\n2. **Include keywords**: Think about what people search for when looking for someone like you\n\n3. **Show value**: What problems do you solve? What makes you different?\n\n4. **Use numbers when possible**: &#39;Helped 50+ startups scale&#39; is more concrete than &#39;Experienced with startups&#39;\n\nYour headline appears everywhere on LinkedIn - in search results, in comments, in connection requests. Make it work hard for you!&quot;}]}
+<p style="margin: 12px 0; line-height: 1.6;">Kicks off the training process. OpenAI handles everything from here!</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Examining the Training Data</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Your training data lives at: <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">app/scripts/data/linkedin_training.jsonl</code></p>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">The Format</h3>
+<p style="margin: 12px 0; line-height: 1.6;">Each line is a complete training example:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-jsonl" style="background-color: transparent; padding: 0;">{"messages": [{"role": "system", "content": "You are a professional LinkedIn advisor helping with networking and career advice"}, {"role": "user", "content": "How do I write an effective LinkedIn headline?"}, {"role": "assistant", "content": "Your LinkedIn headline is prime real estate - you have 220 characters to make a strong first impression. Here's how to make it count:\n\n1. **Go beyond your job title**: Instead of just 'Software Engineer', try 'Software Engineer | Building scalable systems | React &amp; Node.js expert'\n\n2. **Include keywords**: Think about what people search for when looking for someone like you\n\n3. **Show value**: What problems do you solve? What makes you different?\n\n4. **Use numbers when possible**: 'Helped 50+ startups scale' is more concrete than 'Experienced with startups'\n\nYour headline appears everywhere on LinkedIn - in search results, in comments, in connection requests. Make it work hard for you!"}]}
 </code></pre>
-<h3>Breaking It Down</h3>
-<p><strong>System Message (Consistent):</strong></p>
-<pre><code class="language-json">{&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: &quot;You are a professional LinkedIn advisor...&quot;}
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Breaking It Down</h3>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">System Message (Consistent):</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-json" style="background-color: transparent; padding: 0;">{"role": "system", "content": "You are a professional LinkedIn advisor..."}
 </code></pre>
-<p>This sets the context - appears in EVERY example with same text.</p>
-<p><strong>User Message (Varies):</strong></p>
-<pre><code class="language-json">{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;How do I write an effective LinkedIn headline?&quot;}
+<p style="margin: 12px 0; line-height: 1.6;">This sets the context - appears in EVERY example with same text.</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">User Message (Varies):</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-json" style="background-color: transparent; padding: 0;">{"role": "user", "content": "How do I write an effective LinkedIn headline?"}
 </code></pre>
-<p>The question/prompt - should cover wide variety of topics.</p>
-<p><strong>Assistant Message (Your Voice):</strong></p>
-<pre><code class="language-json">{&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: &quot;Your LinkedIn headline is prime real estate...&quot;}
+<p style="margin: 12px 0; line-height: 1.6;">The question/prompt - should cover wide variety of topics.</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Assistant Message (Your Voice):</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-json" style="background-color: transparent; padding: 0;">{"role": "assistant", "content": "Your LinkedIn headline is prime real estate..."}
 </code></pre>
-<p>This is what the model learns! Should be in YOUR style, tone, and approach.</p>
-<hr>
-<h2>Running the Training Script</h2>
-<h3>Prerequisites</h3>
-<p><strong>1. OpenAI API Key</strong></p>
-<pre><code class="language-bash"># In your .env.local
+<p style="margin: 12px 0; line-height: 1.6;">This is what the model learns! Should be in YOUR style, tone, and approach.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Running the Training Script</h2>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Prerequisites</h3>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">1. OpenAI API Key</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-bash" style="background-color: transparent; padding: 0;"># In your .env.local
 OPENAI_API_KEY=sk-your-key-here
 </code></pre>
-<p><strong>2. Training Data</strong><br>Make sure <code>app/scripts/data/linkedin_training.jsonl</code> exists and has content.</p>
-<h3>Run the Script</h3>
-<pre><code class="language-bash">yarn train
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">2. Training Data</strong><br>Make sure <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">app/scripts/data/linkedin_training.jsonl</code> exists and has content.</p>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Run the Script</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-bash" style="background-color: transparent; padding: 0;">yarn train
 </code></pre>
-<p>This runs: <code>npx ts-node app/scripts/upload-training-data.ts</code></p>
-<h3>Expected Output</h3>
-<pre><code class="language-bash">Uploading training file...
+<p style="margin: 12px 0; line-height: 1.6;">This runs: <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">npx ts-node app/scripts/upload-training-data.ts</code></p>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Expected Output</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-bash" style="background-color: transparent; padding: 0;">Uploading training file...
 File uploaded successfully: file-abc123xyz
 
 Creating fine-tuning job...
@@ -260,132 +87,133 @@ https://platform.openai.com/finetune/ftjob-abc123?filter=all
    a new fine-tuned model ID. Update the model ID in .env.local
    to use your new fine-tuned model.
 </code></pre>
-<p><strong>Key Information:</strong></p>
-<ul>
-<li><strong>File ID</strong>: Confirms upload succeeded</li>
-<li><strong>Job ID</strong>: Use this to track progress</li>
-<li><strong>Dashboard Link</strong>: Click to monitor in real-time</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Key Information:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">File ID</strong>: Confirms upload succeeded</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Job ID</strong>: Use this to track progress</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Dashboard Link</strong>: Click to monitor in real-time</li>
 </ul>
-<hr>
-<h2>Monitoring Your Fine-Tuning Job</h2>
-<h3>Via OpenAI Dashboard</h3>
-<ol>
-<li>Click the link from the script output</li>
-<li>Or go to: <a href="https://platform.openai.com/finetune">https://platform.openai.com/finetune</a></li>
-<li>Find your job in the list</li>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Monitoring Your Fine-Tuning Job</h2>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Via OpenAI Dashboard</h3>
+<ol style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Click the link from the script output</li>
+<li style="margin: 5px 0;">Or go to: <a href="https://platform.openai.com/finetune" style="color: #0066cc; text-decoration: underline;" target="_blank" rel="noopener noreferrer">https://platform.openai.com/finetune</a></li>
+<li style="margin: 5px 0;">Find your job in the list</li>
 </ol>
-<p><strong>What You&#39;ll See:</strong></p>
-<pre><code>Status: running
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">What You'll See:</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">Status: running
 Progress: 45/100 steps
 Time Remaining: ~8 minutes
 </code></pre>
-<h3>Via API (Optional)</h3>
-<pre><code class="language-bash">curl https://api.openai.com/v1/fine_tuning/jobs/ftjob-abc123 \
-  -H &quot;Authorization: Bearer $OPENAI_API_KEY&quot;
-</code></pre>
-<h3>Status Meanings</h3>
-<p><strong><code>running</code></strong>: Training in progress - be patient!<br><strong><code>succeeded</code></strong>: Complete! You have a model ready.<br><strong><code>failed</code></strong>: Something went wrong (check error message)<br><strong><code>cancelled</code></strong>: Job was stopped</p>
-<hr>
-<h2>When Training Completes</h2>
-<h3>Getting Your Model ID</h3>
-<p><strong>In the Dashboard:</strong></p>
-<pre><code>Status: succeeded
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Status Meanings</h3>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;"><code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">running</code></strong>: Training in progress - be patient!<br><strong style="font-weight: bold;"><code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">succeeded</code></strong>: Complete! You have a model ready.<br><strong style="font-weight: bold;"><code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">failed</code></strong>: Something went wrong (check error message)<br><strong style="font-weight: bold;"><code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">cancelled</code></strong>: Job was stopped</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">When Training Completes</h2>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Getting Your Model ID</h3>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">In the Dashboard:</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">Status: succeeded
 Fine-tuned model: ft:gpt-4o-mini-2024-07-18:org:model-name:abc123
 </code></pre>
-<p><strong>Copy that full model ID!</strong></p>
-<h3>Add to Your Environment</h3>
-<p>Update your <code>.env.local</code>:</p>
-<pre><code class="language-bash">OPENAI_API_KEY=sk-your-key-here
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Copy that full model ID!</strong></p>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Add to Your Environment</h3>
+<p style="margin: 12px 0; line-height: 1.6;">Update your <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">.env.local</code>:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-bash" style="background-color: transparent; padding: 0;">OPENAI_API_KEY=sk-your-key-here
 OPENAI_FINETUNED_MODEL=ft:gpt-4o-mini-2024-07-18:org:model-name:abc123
 </code></pre>
-<p><strong>Important:</strong></p>
-<ul>
-<li>Use the FULL model ID (starts with <code>ft:</code>)</li>
-<li>Include the entire string (organization, name, and hash)</li>
-<li>Restart your dev server after updating</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Important:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Use the FULL model ID (starts with <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">ft:</code>)</li>
+<li style="margin: 5px 0;">Include the entire string (organization, name, and hash)</li>
+<li style="margin: 5px 0;">Restart your dev server after updating</li>
 </ul>
-<hr>
-<h2>Understanding What Happened</h2>
-<h3>Before Training</h3>
-<pre><code>Your Question → Base Model → Generic Response
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Understanding What Happened</h2>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Before Training</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">Your Question → Base Model → Generic Response
 </code></pre>
-<p>The model uses general training, no knowledge of YOUR style.</p>
-<h3>After Training</h3>
-<pre><code>Your Question → Fine-Tuned Model → Response in YOUR Voice
+<p style="margin: 12px 0; line-height: 1.6;">The model uses general training, no knowledge of YOUR style.</p>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">After Training</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">Your Question → Fine-Tuned Model → Response in YOUR Voice
 </code></pre>
-<p>The model has learned YOUR patterns, tone, and approach from 100+ examples.</p>
-<h3>What Changed Internally</h3>
-<pre><code>Base Model Weights
+<p style="margin: 12px 0; line-height: 1.6;">The model has learned YOUR patterns, tone, and approach from 100+ examples.</p>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">What Changed Internally</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">Base Model Weights
     +
 Your Training Examples
     =
 Adjusted Weights (Fine-Tuned Model)
 </code></pre>
-<p>OpenAI adjusted millions of internal parameters to better match your data. This is a NEW model (yours specifically).</p>
-<hr>
-<h2>Testing Your Model</h2>
-<h3>Quick Test via OpenAI Playground</h3>
-<ol>
-<li>Go to: <a href="https://platform.openai.com/playground">https://platform.openai.com/playground</a></li>
-<li>Select your fine-tuned model from dropdown</li>
-<li>Try a test prompt</li>
-<li>Compare to base model</li>
+<p style="margin: 12px 0; line-height: 1.6;">OpenAI adjusted millions of internal parameters to better match your data. This is a NEW model (yours specifically).</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Video Walkthrough</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Watch this guide to running the fine-tuning process:</p>
+<iframe src="https://share.descript.com/embed/nub6vmvmL3a" width="640" height="360" frameborder="0" allowfullscreen="" style="max-width: 100%; margin: 20px 0;"></iframe>
+
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Testing Your Model</h2>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Quick Test via OpenAI Playground</h3>
+<ol style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Go to: <a href="https://platform.openai.com/playground" style="color: #0066cc; text-decoration: underline;" target="_blank" rel="noopener noreferrer">https://platform.openai.com/playground</a></li>
+<li style="margin: 5px 0;">Select your fine-tuned model from dropdown</li>
+<li style="margin: 5px 0;">Try a test prompt</li>
+<li style="margin: 5px 0;">Compare to base model</li>
 </ol>
-<h3>Test in Your App</h3>
-<p>We&#39;ll do this in the next section when implementing the agent!</p>
-<hr>
-<h2>Common Issues &amp; Solutions</h2>
-<h3>&quot;File format invalid&quot;</h3>
-<p><strong>Issue:</strong> JSONL file has formatting errors</p>
-<p><strong>Fix:</strong></p>
-<ul>
-<li>Each line must be valid JSON</li>
-<li>No blank lines</li>
-<li>No trailing commas</li>
-<li>Use a JSONL validator</li>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Test in Your App</h3>
+<p style="margin: 12px 0; line-height: 1.6;">We'll do this in the next section when implementing the agent!</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Common Issues &amp; Solutions</h2>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">"File format invalid"</h3>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Issue:</strong> JSONL file has formatting errors</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Fix:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Each line must be valid JSON</li>
+<li style="margin: 5px 0;">No blank lines</li>
+<li style="margin: 5px 0;">No trailing commas</li>
+<li style="margin: 5px 0;">Use a JSONL validator</li>
 </ul>
-<h3>&quot;Training data too small&quot;</h3>
-<p><strong>Issue:</strong> Need minimum 10 examples (recommended 100+)</p>
-<p><strong>Fix:</strong></p>
-<ul>
-<li>Add more training examples</li>
-<li>More data = better results</li>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">"Training data too small"</h3>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Issue:</strong> Need minimum 10 examples (recommended 100+)</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Fix:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Add more training examples</li>
+<li style="margin: 5px 0;">More data = better results</li>
 </ul>
-<h3>&quot;Job failed&quot;</h3>
-<p><strong>Issue:</strong> Training job encountered an error</p>
-<p><strong>Fix:</strong></p>
-<ul>
-<li>Check OpenAI dashboard for error message</li>
-<li>Common causes:<ul>
-<li>Malformed training data</li>
-<li>Invalid system messages</li>
-<li>Rate limits hit</li>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">"Job failed"</h3>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Issue:</strong> Training job encountered an error</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Fix:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Check OpenAI dashboard for error message</li>
+<li style="margin: 5px 0;">Common causes:<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Malformed training data</li>
+<li style="margin: 5px 0;">Invalid system messages</li>
+<li style="margin: 5px 0;">Rate limits hit</li>
 </ul>
 </li>
 </ul>
-<h3>&quot;Model not found in app&quot;</h3>
-<p><strong>Issue:</strong> Model ID not configured correctly</p>
-<p><strong>Fix:</strong></p>
-<ul>
-<li>Double-check <code>.env.local</code> has correct model ID</li>
-<li>Restart dev server: <code>yarn dev</code></li>
-<li>Verify no typos in model ID</li>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">"Model not found in app"</h3>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Issue:</strong> Model ID not configured correctly</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Fix:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Double-check <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">.env.local</code> has correct model ID</li>
+<li style="margin: 5px 0;">Restart dev server: <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">yarn dev</code></li>
+<li style="margin: 5px 0;">Verify no typos in model ID</li>
 </ul>
-<hr>
-<h2>Cost Breakdown</h2>
-<p><strong>Training Cost:</strong></p>
-<ul>
-<li>Based on tokens in training data</li>
-<li>~$0.10-1.00 for typical LinkedIn training set</li>
-<li>One-time cost</li>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Cost Breakdown</h2>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Training Cost:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Based on tokens in training data</li>
+<li style="margin: 5px 0;">~$0.10-1.00 for typical LinkedIn training set</li>
+<li style="margin: 5px 0;">One-time cost</li>
 </ul>
-<p><strong>Usage Cost:</strong></p>
-<ul>
-<li>Fine-tuned models cost ~2x base models</li>
-<li>But worth it for quality!</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Usage Cost:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Fine-tuned models cost ~2x base models</li>
+<li style="margin: 5px 0;">But worth it for quality!</li>
 </ul>
-<p><strong>Example:</strong></p>
-<pre><code>Base model: $0.150 per 1M input tokens
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Example:</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">Base model: $0.150 per 1M input tokens
 Fine-tuned:  $0.300 per 1M input tokens
 
 1000 user queries × 500 tokens each = 500k tokens
@@ -394,22 +222,22 @@ Fine-tuned cost: $0.150
 
 Extra $0.075 for significantly better quality!
 </code></pre>
-<hr>
-<h2>What You Learned</h2>
-<p>✅ How to prepare training data in JSONL format<br>✅ How to run the fine-tuning script<br>✅ How to monitor training progress<br>✅ How to get and configure your model ID<br>✅ What happens during the training process</p>
-<hr>
-<h2>What&#39;s Next</h2>
-<p>Now that you have a fine-tuned model, time to build the LinkedIn agent that uses it!</p>
-<p><strong>Coming up:</strong></p>
-<ul>
-<li>Implementing the LinkedIn agent</li>
-<li>Integrating your fine-tuned model</li>
-<li>Testing the agent in the full system</li>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">What You Learned</h2>
+<p style="margin: 12px 0; line-height: 1.6;">✅ How to prepare training data in JSONL format<br>✅ How to run the fine-tuning script<br>✅ How to monitor training progress<br>✅ How to get and configure your model ID<br>✅ What happens during the training process</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">What's Next</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Now that you have a fine-tuned model, time to build the LinkedIn agent that uses it!</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Coming up:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Implementing the LinkedIn agent</li>
+<li style="margin: 5px 0;">Integrating your fine-tuned model</li>
+<li style="margin: 5px 0;">Testing the agent in the full system</li>
 </ul>
-<hr>
-<h2>Quick Reference</h2>
-<h3>Commands</h3>
-<pre><code class="language-bash"># Run training script
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Quick Reference</h2>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Commands</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-bash" style="background-color: transparent; padding: 0;"># Run training script
 yarn train
 
 # Check environment
@@ -418,17 +246,16 @@ cat .env.local | grep OPENAI
 # Restart dev server (after adding model ID)
 yarn dev
 </code></pre>
-<h3>File Locations</h3>
-<pre><code>Training script: app/scripts/upload-training-data.ts
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">File Locations</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">Training script: app/scripts/upload-training-data.ts
 Training data: app/scripts/data/linkedin_training.jsonl
 Environment: .env.local
 </code></pre>
-<h3>Useful Links</h3>
-<ul>
-<li>OpenAI Fine-Tuning Dashboard: <a href="https://platform.openai.com/finetune">https://platform.openai.com/finetune</a></li>
-<li>OpenAI Playground: <a href="https://platform.openai.com/playground">https://platform.openai.com/playground</a></li>
-<li>Fine-Tuning Docs: <a href="https://platform.openai.com/docs/guides/fine-tuning">https://platform.openai.com/docs/guides/fine-tuning</a></li>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Useful Links</h3>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">OpenAI Fine-Tuning Dashboard: <a href="https://platform.openai.com/finetune" style="color: #0066cc; text-decoration: underline;" target="_blank" rel="noopener noreferrer">https://platform.openai.com/finetune</a></li>
+<li style="margin: 5px 0;">OpenAI Playground: <a href="https://platform.openai.com/playground" style="color: #0066cc; text-decoration: underline;" target="_blank" rel="noopener noreferrer">https://platform.openai.com/playground</a></li>
+<li style="margin: 5px 0;">Fine-Tuning Docs: <a href="https://platform.openai.com/docs/guides/fine-tuning" style="color: #0066cc; text-decoration: underline;" target="_blank" rel="noopener noreferrer">https://platform.openai.com/docs/guides/fine-tuning</a></li>
 </ul>
 
-</body>
-</html>
+

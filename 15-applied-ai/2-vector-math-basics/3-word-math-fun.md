@@ -24,27 +24,108 @@ Remember: embeddings place similar words close together in vector space. This me
 king - man + woman ≈ queen
 ```
 
-**Why it works:**
+**Important:** The `≈` symbol means "approximately equals" because we don't get the exact "queen" vector. Instead, we get a new vector that's *closest* to "queen" in vector space!
+
+**How it works:**
 
 ```
 "king" embedding contains:
-  - Royalty concept
-  - Male concept
-  - Power concept
+  - Royalty concept      (+5 in some dimension)
+  - Male concept         (+8 in another dimension)
+  - Power concept        (+6 in another dimension)
 
 Subtract "man":
-  - Removes male concept
+  - Removes male concept (-8 in that dimension)
 
 Add "woman":
-  - Adds female concept
+  - Adds female concept  (+8 in the female dimension)
 
-Result:
-  - Royalty + Female ≈ "queen"!
+Result vector:
+  - Royalty + Female + Power
+  - This vector doesn't match ANY word exactly
+  - But it's CLOSEST to "queen" in 512-dimensional space!
 ```
+
+**Visualizing it in 2D (simplified):**
+
+```
+                queen •
+                     /
+                    / ← Our result lands near here
+                   /
+      king •      / • result
+           \     /
+            \   /
+             \ /
+         man • ----- • woman
+
+After math: result is closest to "queen"!
+```
+
+**What actually happens:**
+
+1. Do the math: `king - man + woman = [0.23, -0.41, 0.67, ...]`
+2. This gives us a **new** vector (doesn't match any real word exactly)
+3. We compare this result to candidate words
+4. "queen" has the highest similarity score → That's our answer!
+
+**Think of it like GPS:**
+- You calculate a point in space
+- Then find which real city is closest to that point
+- The math doesn't create "queen" - it finds the nearest word to where we landed
 
 ---
 
 ## Exercise: Try Word Math
+
+### Understanding Vector Addition and Subtraction
+
+Before jumping into the code, let's understand what adding and subtracting vectors means:
+
+**Adding vectors** = combining their directions and magnitudes:
+
+```typescript
+function addVectors(a: number[], b: number[]): number[] {
+	return a.map((val, i) => val + b[i]);
+}
+
+// Example:
+const v1 = [1, 2, 3];
+const v2 = [4, 5, 6];
+addVectors(v1, v2);  // [1+4, 2+5, 3+6] = [5, 7, 9]
+```
+
+**Geometrically:** Place vectors tip-to-tail:
+```
+    v1      v1 + v2
+     \        ↗
+      \      /
+       \    /
+        v2
+```
+
+**Subtracting vectors** = removing one direction from another:
+
+```typescript
+function subtractVectors(a: number[], b: number[]): number[] {
+	return a.map((val, i) => val - b[i]);
+}
+
+// Example:
+const v1 = [5, 7, 9];
+const v2 = [1, 2, 3];
+subtractVectors(v1, v2);  // [5-1, 7-2, 9-3] = [4, 5, 6]
+```
+
+**With word embeddings:**
+- Adding = "combine these concepts"
+- Subtracting = "remove this concept"
+
+```
+king [0.8, 0.3, 0.9, ...]  (royalty + male + power)
+ - man [0.2, 0.9, 0.1, ...]  (remove male concept)
+ = [0.6, -0.6, 0.8, ...]  (royalty + power, but less male)
+```
 
 ### Setup
 
@@ -226,14 +307,41 @@ Try these patterns:
 -   Math operations make sense
 -   Similar meanings = similar vectors
 
+**But remember:** The results are *approximate*, not exact!
+
+```typescript
+king - man + woman = [0.23, -0.41, 0.67, 0.82, ...]
+                      ↑ This is a NEW vector
+
+// We then find which word is closest:
+cosineSimilarity(result, queenEmbedding)    // 0.89 ✅ Highest!
+cosineSimilarity(result, princessEmbedding) // 0.76
+cosineSimilarity(result, princeEmbedding)   // 0.62
+cosineSimilarity(result, kingEmbedding)     // 0.54
+
+// "queen" wins because it's nearest to our calculated vector
+```
+
+**Why it's not perfect:**
+- Language is complex and context-dependent
+- Embeddings capture *general* semantic relationships
+- "king - man + woman" creates a vector in the *general region* of "queen"
+- We're finding the **nearest neighbor**, not an exact match
+
+**Real similarity scores you'll see:**
+- `0.85-0.95`: Great match (like king→queen)
+- `0.75-0.84`: Good match
+- `0.60-0.74`: Decent match
+- `< 0.60`: Weak match
+
 This is why RAG works:
 
 1. User query → vector
 2. Documents → vectors
-3. Find closest vectors
+3. Find closest vectors (using cosine similarity)
 4. Return matching documents
 
-The math handles the "understanding"!
+**The math handles the "understanding"!** Even though matches aren't perfect, they're good enough to find relevant information.
 
 ---
 
@@ -312,7 +420,9 @@ Understanding word math helps you understand RAG:
 - Video link (YouTube/Loom/Google Drive)
 - Around 5 minutes
 
-**Submit Link:** *[Submission form will be provided]*
+**Submit Your Work:**
+- **[Video Submission - Week 1](https://tally.so/form/NdVcsThQ/create)**
+- **[Code Submission - Week 1](https://tally.so/form/A0pGKPqU/create)** (submit your word math experiments)
 
 **Due:** Before Module 4
 

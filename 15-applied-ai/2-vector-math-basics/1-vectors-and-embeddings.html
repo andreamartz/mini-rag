@@ -1,197 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Vectors and Embeddings: Words to Numbers</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      line-height: 1.6;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      color: #333;
-    }
+<h1 style="margin-top: 24px; margin-bottom: 12px; font-size: 32px; font-weight: bold;">Vectors and Embeddings: Words to Numbers</h1>
+<p style="margin: 12px 0; line-height: 1.6;">Understanding vectors is crucial for RAG systems. Don't worry - we'll keep it practical and visual!</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Video Walkthrough</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Watch these introductions to vectors and embeddings:</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Vectors and Embeddings Explained:</strong></p>
+<iframe src="https://share.descript.com/embed/zz3e0kMLiO6" width="640" height="360" frameborder="0" allowfullscreen="" style="max-width: 100%; margin: 20px 0;"></iframe>
 
-    h1 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 32px;
-      font-weight: bold;
-    }
-
-    h2 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    h3 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    h4 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    h5 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    h6 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 16px;
-      font-weight: bold;
-    }
-
-    p {
-      margin: 12px 0;
-      line-height: 1.6;
-    }
-
-    a {
-      color: #0066cc;
-      text-decoration: underline;
-    }
-
-    strong {
-      font-weight: bold;
-    }
-
-    em {
-      font-style: italic;
-    }
-
-    code {
-      background-color: #f4f4f4;
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 0.9em;
-    }
-
-    pre {
-      background-color: #f4f4f4;
-      padding: 15px;
-      border-radius: 5px;
-      overflow-x: auto;
-      margin: 20px 0;
-    }
-
-    pre code {
-      background-color: transparent;
-      padding: 0;
-    }
-
-    blockquote {
-      border-left: 4px solid #ddd;
-      margin: 20px 0;
-      padding: 10px 20px;
-      background-color: #f9f9f9;
-    }
-
-    hr {
-      border: none;
-      border-top: 2px solid #eee;
-      margin: 30px 0;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 20px 0;
-    }
-
-    iframe {
-      max-width: 100%;
-      margin: 20px 0;
-    }
-
-    details {
-      margin: 20px 0;
-      padding: 15px;
-      background-color: #f9f9f9;
-      border-radius: 5px;
-    }
-
-    summary {
-      cursor: pointer;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    ol, ul {
-      margin: 10px 0;
-      padding-left: 30px;
-    }
-
-    li {
-      margin: 5px 0;
-    }
-
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin: 20px 0;
-      border: 1px solid #ddd;
-    }
-
-    th, td {
-      padding: 8px;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f4f4f4;
-      font-weight: bold;
-    }
-
-    input[type="checkbox"] {
-      margin-right: 5px;
-    }
-  </style>
-</head>
-<body>
-<h1>Vectors and Embeddings: Words to Numbers</h1>
-<p>Understanding vectors is crucial for RAG systems. Don&#39;t worry - we&#39;ll keep it practical and visual!</p>
-<hr>
-<h2>Video Walkthrough</h2>
-<p>Watch these introductions to vectors and embeddings:</p>
-<p><strong>Vectors and Embeddings Explained:</strong></p>
-<iframe src="https://share.descript.com/embed/zz3e0kMLiO6" width="640" height="360" frameborder="0" allowfullscreen></iframe>
-
-<hr>
-<h2>What You&#39;ll Learn</h2>
-<ul>
-<li>What vectors are and why they matter</li>
-<li>How text becomes numbers (embeddings)</li>
-<li>Why cosine similarity works</li>
-<li>Basic vector operations</li>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">What You'll Learn</h2>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">What vectors are and why they matter</li>
+<li style="margin: 5px 0;">How text becomes numbers (embeddings)</li>
+<li style="margin: 5px 0;">Why cosine similarity works</li>
+<li style="margin: 5px 0;">Basic vector operations</li>
 </ul>
-<hr>
-<h2>Why Vector Math for RAG?</h2>
-<p>RAG systems need to find similar content. To do that:</p>
-<pre><code>Text → Vectors → Measure Similarity → Find Matches
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Why Vector Math for RAG?</h2>
+<p style="margin: 12px 0; line-height: 1.6;">RAG systems need to find similar content. To do that:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">Text → Vectors → Measure Similarity → Find Matches
 </code></pre>
-<p>The math makes similarity measurable!</p>
-<hr>
-<h2>What is a Vector?</h2>
-<p>A vector is just a list of numbers:</p>
-<pre><code class="language-typescript">// 2D vector (x, y coordinates)
+<p style="margin: 12px 0; line-height: 1.6;">The math makes similarity measurable!</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">What is a Vector?</h2>
+<p style="margin: 12px 0; line-height: 1.6;">A vector is just a list of numbers:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">// 2D vector (x, y coordinates)
 const vector2D = [3, 4];
 
 // 3D vector (x, y, z)
@@ -200,68 +32,165 @@ const vector3D = [1, 2, 3];
 // Text embedding (512 dimensions!)
 const embedding = [0.1, -0.3, 0.8, 0.2, ...];
 </code></pre>
-<p><strong>Think of it as:</strong> A point in space, or a direction from the origin.</p>
-<hr>
-<h2>From Text to Vectors</h2>
-<h3>How Embeddings Work</h3>
-<pre><code>&quot;artificial intelligence&quot;
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Think of it as:</strong> A point in space, or a direction from the origin.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">From Text to Vectors</h2>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">How Embeddings Work</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">"artificial intelligence"
         ↓
 Embedding Model
         ↓
 [0.1, -0.3, 0.8, ..., 0.2]  (512 numbers)
 </code></pre>
-<p><strong>The magic:</strong> Similar concepts → similar vectors</p>
-<pre><code class="language-typescript">&quot;dog&quot;   → [0.1, 0.5, -0.2, ...]
-&quot;puppy&quot; → [0.2, 0.4, -0.1, ...]  // Close to &quot;dog&quot;!
-&quot;car&quot;   → [-0.3, 0.1, 0.8, ...]  // Far from &quot;dog&quot;
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">The magic:</strong> Similar concepts → similar vectors</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">"dog"   → [0.1, 0.5, -0.2, ...]
+"puppy" → [0.2, 0.4, -0.1, ...]  // Close to "dog"!
+"car"   → [-0.3, 0.1, 0.8, ...]  // Far from "dog"
 </code></pre>
-<h3>Using OpenAI&#39;s Embedding API</h3>
-<pre><code class="language-typescript">const response = await openai.embeddings.create({
-	model: &#39;text-embedding-3-small&#39;,
-	input: &#39;artificial intelligence&#39;,
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Using OpenAI's Embedding API</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">const response = await openai.embeddings.create({
+	model: 'text-embedding-3-small',
+	input: 'artificial intelligence',
 });
 
 const embedding = response.data[0].embedding;
 // [0.1, -0.3, 0.8, ..., 0.2] (512 numbers)
 </code></pre>
-<hr>
-<h2>Measuring Similarity</h2>
-<h3>The Dot Product</h3>
-<p>Multiply corresponding numbers, add them up:</p>
-<pre><code class="language-typescript">function dotProduct(a: number[], b: number[]): number {
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Measuring Similarity</h2>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">The Dot Product</h3>
+<p style="margin: 12px 0; line-height: 1.6;">The dot product is our first tool for measuring similarity. Here's what it does:</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Take two vectors and multiply matching positions, then add everything up:</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">function dotProduct(a: number[], b: number[]): number {
 	return a.reduce((sum, val, i) =&gt; sum + val * b[i], 0);
 }
 
 const v1 = [1, 2, 3];
 const v2 = [4, 5, 6];
-dotProduct(v1, v2); // (1×4) + (2×5) + (3×6) = 32
+dotProduct(v1, v2); // (1×4) + (2×5) + (3×6) = 4 + 10 + 18 = 32
 </code></pre>
-<p><strong>Interpretation:</strong></p>
-<ul>
-<li>Higher value = more similar</li>
-<li>Zero = unrelated</li>
-<li>Negative = opposite</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Let's break down that calculation:</strong></p>
+<table style="border-collapse: collapse; width: 100%; margin: 20px 0; border: 1px solid #ddd;">
+<thead>
+<tr>
+<th style="padding: 8px; border: 1px solid #ddd; text-align: left; background-color: #f4f4f4; font-weight: bold;">Position</th>
+<th style="padding: 8px; border: 1px solid #ddd; text-align: left; background-color: #f4f4f4; font-weight: bold;">v1 value</th>
+<th style="padding: 8px; border: 1px solid #ddd; text-align: left; background-color: #f4f4f4; font-weight: bold;">v2 value</th>
+<th style="padding: 8px; border: 1px solid #ddd; text-align: left; background-color: #f4f4f4; font-weight: bold;">Multiply</th>
+</tr>
+</thead>
+<tbody><tr>
+<td style="padding: 8px; border: 1px solid #ddd; text-align: left;">0</td>
+<td style="padding: 8px; border: 1px solid #ddd; text-align: left;">1</td>
+<td style="padding: 8px; border: 1px solid #ddd; text-align: left;">4</td>
+<td style="padding: 8px; border: 1px solid #ddd; text-align: left;">1 × 4 = 4</td>
+</tr>
+<tr>
+<td style="padding: 8px; border: 1px solid #ddd; text-align: left;">1</td>
+<td style="padding: 8px; border: 1px solid #ddd; text-align: left;">2</td>
+<td style="padding: 8px; border: 1px solid #ddd; text-align: left;">5</td>
+<td style="padding: 8px; border: 1px solid #ddd; text-align: left;">2 × 5 = 10</td>
+</tr>
+<tr>
+<td style="padding: 8px; border: 1px solid #ddd; text-align: left;">2</td>
+<td style="padding: 8px; border: 1px solid #ddd; text-align: left;">3</td>
+<td style="padding: 8px; border: 1px solid #ddd; text-align: left;">6</td>
+<td style="padding: 8px; border: 1px solid #ddd; text-align: left;">3 × 6 = 18</td>
+</tr>
+<tr>
+<td style="padding: 8px; border: 1px solid #ddd; text-align: left;"><strong style="font-weight: bold;">Sum</strong></td>
+<td style="padding: 8px; border: 1px solid #ddd; text-align: left;"></td>
+<td style="padding: 8px; border: 1px solid #ddd; text-align: left;"></td>
+<td style="padding: 8px; border: 1px solid #ddd; text-align: left;"><strong style="font-weight: bold;">32</strong></td>
+</tr>
+</tbody></table>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Why does this measure similarity?</strong></p>
+<p style="margin: 12px 0; line-height: 1.6;">Think of it like comparing two opinions on a scale:</p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">If both vectors have big positive numbers in the same positions → big positive result (similar!)</li>
+<li style="margin: 5px 0;">If both have big negative numbers in the same positions → big positive result (also similar!)</li>
+<li style="margin: 5px 0;">If one has positive and one has negative → negative result (opposite!)</li>
+<li style="margin: 5px 0;">If the numbers don't line up → small result (unrelated)</li>
 </ul>
-<h3>Cosine Similarity (The Standard)</h3>
-<p>Normalize the dot product to get a score from -1 to 1:</p>
-<pre><code class="language-typescript">function magnitude(v: number[]): number {
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Example with meaning:</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">// Vector representing "technical programming content"
+const technical = [5, 1, 0];  // [technical, casual, food]
+
+// Similar document
+const coding = [4, 2, 0];     // Also technical!
+dotProduct(technical, coding) // 5×4 + 1×2 + 0×0 = 22 ✅ High!
+
+// Different document
+const recipes = [1, 3, 5];    // About food
+dotProduct(technical, recipes) // 5×1 + 1×3 + 0×5 = 8 ❌ Low
+</code></pre>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Interpretation:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Higher value = more similar (vectors point in same direction)</li>
+<li style="margin: 5px 0;">Zero = unrelated (vectors are perpendicular)</li>
+<li style="margin: 5px 0;">Negative = opposite (vectors point in opposite directions)</li>
+</ul>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Cosine Similarity (The Standard)</h3>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Problem with dot product alone:</strong> Vector length affects the result!</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">const short = [1, 2];    // Short vector
+const long = [10, 20];   // Long vector (same direction!)
+
+dotProduct(short, short); // 1×1 + 2×2 = 5
+dotProduct(long, long);   // 10×10 + 20×20 = 500
+
+// Same direction, but VERY different scores! 😕
+</code></pre>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Solution:</strong> Normalize by dividing by the vectors' lengths (magnitudes).</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">First, calculate magnitude (length):</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">function magnitude(v: number[]): number {
 	return Math.sqrt(v.reduce((sum, val) =&gt; sum + val * val, 0));
 }
 
-function cosineSimilarity(a: number[], b: number[]): number {
+// Example: What's the length of [3, 4]?
+magnitude([3, 4]);
+// √(3² + 4²) = √(9 + 16) = √25 = 5
+</code></pre>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">This is the Pythagorean theorem!</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">    |
+  4 |    /
+    |   / length = 5
+    |  /
+    |_/___
+      3
+</code></pre>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Now, cosine similarity:</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">function cosineSimilarity(a: number[], b: number[]): number {
 	const dot = dotProduct(a, b);
-	return dot / (magnitude(a) * magnitude(b));
+	const magA = magnitude(a);
+	const magB = magnitude(b);
+
+	return dot / (magA * magB);
 }
 </code></pre>
-<p><strong>Scale:</strong></p>
-<ul>
-<li><code>1.0</code> = Identical direction</li>
-<li><code>0.0</code> = Unrelated (perpendicular)</li>
-<li><code>-1.0</code> = Opposite direction</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">What does this do?</strong></p>
+<p style="margin: 12px 0; line-height: 1.6;">Dividing by the magnitudes "normalizes" the result to always be between -1 and 1, regardless of vector length.</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Example with our short/long vectors:</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">const short = [1, 2];
+const long = [10, 20];  // 10× bigger, same direction
+
+cosineSimilarity(short, long);
+// dot = 1×10 + 2×20 = 50
+// magnitude(short) = √5 ≈ 2.236
+// magnitude(long) = √500 ≈ 22.361
+// 50 / (2.236 × 22.361) = 1.0 ✅ Perfect match!
+</code></pre>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Now the result focuses on DIRECTION, not length!</strong></p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Scale:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;"><code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">1.0</code> = Identical direction (perfectly similar)</li>
+<li style="margin: 5px 0;"><code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">0.0</code> = Unrelated (perpendicular - 90° angle)</li>
+<li style="margin: 5px 0;"><code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">-1.0</code> = Opposite direction (completely opposite)</li>
+<li style="margin: 5px 0;"><code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">0.8-0.99</code> = Very similar (small angle)</li>
+<li style="margin: 5px 0;"><code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">0.5-0.79</code> = Somewhat similar (medium angle)</li>
 </ul>
-<hr>
-<h2>Visual Intuition</h2>
-<pre><code>     Vector A
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Visual Intuition</h2>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">     Vector A
         /
        /
       /_____ Vector B
@@ -269,45 +198,79 @@ function cosineSimilarity(a: number[], b: number[]): number {
 Small angle = High similarity
 Large angle = Low similarity
 </code></pre>
-<p>Cosine similarity measures the angle between vectors:</p>
-<ul>
-<li>Same direction → angle 0° → similarity = 1</li>
-<li>Perpendicular → angle 90° → similarity = 0</li>
-<li>Opposite → angle 180° → similarity = -1</li>
+<p style="margin: 12px 0; line-height: 1.6;">Cosine similarity measures the angle between vectors:</p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Same direction → angle 0° → similarity = 1</li>
+<li style="margin: 5px 0;">Perpendicular → angle 90° → similarity = 0</li>
+<li style="margin: 5px 0;">Opposite → angle 180° → similarity = -1</li>
 </ul>
-<hr>
-<h2>Why 512 Dimensions?</h2>
-<p>Embeddings have many dimensions (512, 1536, 3072):</p>
-<ul>
-<li><strong>More dimensions = richer meaning</strong></li>
-<li><strong>Each dimension captures a concept:</strong><ul>
-<li>Dim 1: &quot;How technical?&quot;</li>
-<li>Dim 2: &quot;How positive?&quot;</li>
-<li>Dim 50: &quot;Related to animals?&quot;</li>
-<li>...</li>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Why 512 Dimensions?</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Embeddings have many dimensions (512, 1536, 3072). Why so many?</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Think of dimensions as "features" or "traits":</strong></p>
+<p style="margin: 12px 0; line-height: 1.6;">Imagine describing a person with just 3 numbers:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">const person = [height, age, weight];  // 3 dimensions - not much info!
+</code></pre>
+<p style="margin: 12px 0; line-height: 1.6;">Now imagine 512 numbers describing them:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">const person = [
+  height, weight, age, hairColor, eyeColor,
+  likesMusic, lovesPizza, speaksSpanish,
+  enjoysHiking, hasChildren, worksInTech,
+  ... 501 more traits
+];  // 512 dimensions - MUCH richer picture!
+</code></pre>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Same with text embeddings:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Dim 0:</strong> "How technical is this?"</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Dim 1:</strong> "How positive/negative?"</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Dim 2:</strong> "Related to technology?"</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Dim 3:</strong> "Is this about people?"</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Dim 4:</strong> "Past tense or future tense?"</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Dim 5:</strong> "Formal or casual tone?"</li>
+<li style="margin: 5px 0;">... <strong style="font-weight: bold;">507 more semantic features!</strong></li>
 </ul>
-</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Example:</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">// "The cat sat on the mat"
+[0.1, 0.8, 0.0, 0.9, 0.1, ...]
+// ↑    ↑    ↑    ↑    ↑
+// not  very not  about casual
+// tech happy tech living tone
+//            beings
+
+// "Machine learning algorithms optimize neural networks"
+[0.9, 0.3, 0.9, 0.1, 0.6, ...]
+// ↑    ↑    ↑    ↑    ↑
+// very neutral tech not  formal
+// tech         about tone
+//              living
+//              beings
+</code></pre>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">The tradeoff:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">512 dimensions:</strong> Fast, good quality ← Most common</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">1536 dimensions:</strong> Better quality, slower, more expensive</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">3072 dimensions:</strong> Best quality, slowest, priciest</li>
 </ul>
-<p>It&#39;s a balance:</p>
-<ul>
-<li>More = better quality</li>
-<li>Fewer = faster computation</li>
+<p style="margin: 12px 0; line-height: 1.6;">It's a balance:</p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">More dimensions = richer meaning, better matching</li>
+<li style="margin: 5px 0;">Fewer dimensions = faster computation, lower cost</li>
 </ul>
-<hr>
-<h2>Finding Similar Documents</h2>
-<pre><code class="language-typescript">// Documents
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Finding Similar Documents</h2>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">// Documents
 const docs = [
-	&#39;Python is a programming language&#39;,
-	&#39;JavaScript is for web development&#39;,
-	&#39;Machine learning uses algorithms&#39;,
-	&#39;Dogs are loyal pets&#39;,
+	'Python is a programming language',
+	'JavaScript is for web development',
+	'Machine learning uses algorithms',
+	'Dogs are loyal pets',
 ];
 
 // Get embeddings for all
 const docEmbeddings = await Promise.all(docs.map((doc) =&gt; getEmbedding(doc)));
 
 // Query
-const query = &#39;What programming languages exist?&#39;;
+const query = 'What programming languages exist?';
 const queryEmbedding = await getEmbedding(query);
 
 // Calculate similarities
@@ -316,67 +279,71 @@ const similarities = docEmbeddings.map((docEmbed) =&gt;
 );
 
 // Results: [0.8, 0.7, 0.3, 0.1]
-// &quot;Python is a programming language&quot; wins!
+// "Python is a programming language" wins!
 </code></pre>
-<hr>
-<h2>Essential Watching</h2>
-<p>For beautiful visual explanations:</p>
-<p><strong>3Blue1Brown&#39;s Linear Algebra Series:</strong></p>
-<ol>
-<li><a href="https://www.youtube.com/watch?v=fNk_zzaMoSs">Vectors, what even are they?</a></li>
-<li><a href="https://www.youtube.com/watch?v=LyGKycYT2v0">Dot products and duality</a></li>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Essential Watching</h2>
+<p style="margin: 12px 0; line-height: 1.6;">For beautiful visual explanations:</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">3Blue1Brown's Linear Algebra Series:</strong></p>
+<ol style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;"><a href="https://www.youtube.com/watch?v=fNk_zzaMoSs" style="color: #0066cc; text-decoration: underline;" target="_blank" rel="noopener noreferrer">Vectors, what even are they?</a></li>
+<li style="margin: 5px 0;"><a href="https://www.youtube.com/watch?v=LyGKycYT2v0" style="color: #0066cc; text-decoration: underline;" target="_blank" rel="noopener noreferrer">Dot products and duality</a></li>
 </ol>
-<p>These videos make the concepts crystal clear!</p>
-<hr>
-<h2>Quick Quiz</h2>
-<p>Which pairs would have high cosine similarity?</p>
-<ol>
-<li>&quot;I love pizza&quot; vs &quot;Pizza is delicious&quot;</li>
-<li>&quot;Machine learning algorithms&quot; vs &quot;AI and neural networks&quot;</li>
-<li>&quot;The weather is sunny&quot; vs &quot;Database optimization&quot;</li>
+<p style="margin: 12px 0; line-height: 1.6;">These videos make the concepts crystal clear!</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Quick Quiz</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Which pairs would have high cosine similarity?</p>
+<ol style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">"I love pizza" vs "Pizza is delicious"</li>
+<li style="margin: 5px 0;">"Machine learning algorithms" vs "AI and neural networks"</li>
+<li style="margin: 5px 0;">"The weather is sunny" vs "Database optimization"</li>
 </ol>
-<details>
-<summary>Answers</summary>
+<details style="margin: 20px 0; padding: 15px; background-color: #f9f9f9; border-radius: 5px;">
+<summary style="cursor: pointer; font-weight: bold; margin-bottom: 10px;">Answers</summary>
 
-<ol>
-<li>✅ <strong>High</strong> - Both about pizza, positive sentiment</li>
-<li>✅ <strong>High</strong> - Both about AI/ML concepts</li>
-<li>❌ <strong>Low</strong> - Completely different topics</li>
+<ol style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">✅ <strong style="font-weight: bold;">High</strong> - Both about pizza, positive sentiment</li>
+<li style="margin: 5px 0;">✅ <strong style="font-weight: bold;">High</strong> - Both about AI/ML concepts</li>
+<li style="margin: 5px 0;">❌ <strong style="font-weight: bold;">Low</strong> - Completely different topics</li>
 </ol>
 </details>
 
-<hr>
-<h2>What You Learned</h2>
-<p>✅ Vectors are lists of numbers<br>✅ Embeddings convert text to vectors<br>✅ Similar text → similar vectors<br>✅ Cosine similarity measures angle between vectors<br>✅ This is how RAG finds relevant documents</p>
-<hr>
-<h2>📝 Homework Assignment: Explain Dot Products for LLMs</h2>
-<p><strong>Assignment:</strong> Create a short video (3-5 minutes) or written explanation answering:</p>
-<p><strong>&quot;Explain the dot product to a non-math person who is interested in LLMs and why the dot product matters to LLMs.&quot;</strong></p>
-<p><strong>Requirements:</strong></p>
-<ul>
-<li>Avoid heavy mathematical notation</li>
-<li>Use analogies and visual examples</li>
-<li>Explain why dot products are foundational to embeddings</li>
-<li>Connect it to how LLMs understand similarity</li>
-<li>Include at least one concrete example</li>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">What You Learned</h2>
+<p style="margin: 12px 0; line-height: 1.6;">✅ Vectors are lists of numbers<br>✅ Embeddings convert text to vectors<br>✅ Similar text → similar vectors<br>✅ Cosine similarity measures angle between vectors<br>✅ This is how RAG finds relevant documents</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">📝 Homework Assignment: Explain Dot Products for LLMs</h2>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Assignment:</strong> Create a short video (3-5 minutes) or written explanation answering:</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">"Explain the dot product to a non-math person who is interested in LLMs and why the dot product matters to LLMs."</strong></p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Requirements:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Avoid heavy mathematical notation</li>
+<li style="margin: 5px 0;">Use analogies and visual examples</li>
+<li style="margin: 5px 0;">Explain why dot products are foundational to embeddings</li>
+<li style="margin: 5px 0;">Connect it to how LLMs understand similarity</li>
+<li style="margin: 5px 0;">Include at least one concrete example</li>
 </ul>
-<p><strong>Tips:</strong></p>
-<ul>
-<li>Think about the 3Blue1Brown video you watched (dot products as projection)</li>
-<li>Use real-world analogies (shopping preferences, recipe similarity, etc.)</li>
-<li>Show how higher dot product = more similar meanings</li>
-<li>Explain why we use cosine similarity (normalized dot product)</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Tips:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Think about the 3Blue1Brown video you watched (dot products as projection)</li>
+<li style="margin: 5px 0;">Use real-world analogies (shopping preferences, recipe similarity, etc.)</li>
+<li style="margin: 5px 0;">Show how higher dot product = more similar meanings</li>
+<li style="margin: 5px 0;">Explain why we use cosine similarity (normalized dot product)</li>
 </ul>
-<p><strong>What to Submit:</strong></p>
-<ul>
-<li>Video link (YouTube/Loom) OR</li>
-<li>Written explanation (500-800 words) with diagrams/examples</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">What to Submit:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Video link (YouTube/Loom) OR</li>
+<li style="margin: 5px 0;">Written explanation (500-800 words) with diagrams/examples</li>
 </ul>
-<p><strong>Due:</strong> Before starting Module 4</p>
-<p><strong>Why This Matters:</strong> Teaching is the best way to learn. If you can explain dot products simply, you deeply understand the foundation of RAG.</p>
-<hr>
-<h2>What&#39;s Next</h2>
-<p>Now let&#39;s implement similarity calculations and do some word math!</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Submit Your Work:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;"><strong style="font-weight: bold;"><a href="https://tally.so/form/NdVcsThQ/create" style="color: #0066cc; text-decoration: underline;" target="_blank" rel="noopener noreferrer">Video Submission - Week 1</a></strong></li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;"><a href="https://tally.so/form/A0pGKPqU/create" style="color: #0066cc; text-decoration: underline;" target="_blank" rel="noopener noreferrer">Code Submission - Week 1</a></strong> (if you wrote any code examples)</li>
+</ul>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Due:</strong> Before starting Module 4</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Why This Matters:</strong> Teaching is the best way to learn. If you can explain dot products simply, you deeply understand the foundation of RAG.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">What's Next</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Now let's implement similarity calculations and do some word math!</p>
 
-</body>
-</html>
+

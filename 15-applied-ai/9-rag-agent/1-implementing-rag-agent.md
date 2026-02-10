@@ -4,14 +4,6 @@ Now let's implement the RAG agent that retrieves context from your documents and
 
 ---
 
-## Video Walkthrough
-
-Watch this guide to implementing the RAG agent:
-
-<iframe src="https://share.descript.com/embed/9skzqf8Bpwv" width="640" height="360" frameborder="0" allowfullscreen></iframe>
-
----
-
 ## What You'll Build
 
 A working RAG agent that:
@@ -123,16 +115,22 @@ return streamText({
 
 ### Through the API
 
-```bash
-curl -X POST http://localhost:3000/api/chat \
-  -H "Content-Type: application/json" \
-  -d '{
-    "messages": [
-      {"role": "user", "content": "How do I use useState?"}
-    ],
-    "agent": "rag",
-    "query": "How to use useState hook in React"
-  }'
+Use Postman or Thunder Client to test:
+
+**Request:**
+- Method: POST
+- URL: `http://localhost:3000/api/chat`
+- Headers: `Content-Type: application/json`
+- Body:
+
+```json
+{
+  "messages": [
+    {"role": "user", "content": "How do I use useState?"}
+  ],
+  "agent": "rag",
+  "query": "How to use useState hook in React"
+}
 ```
 
 ### Check Retrieved Context
@@ -143,6 +141,14 @@ Add a console.log to see what was retrieved:
 console.log('Retrieved context:', retrievedContext);
 console.log('Number of matches:', queryResponse.matches.length);
 ```
+
+---
+
+## Video Solution Walkthrough
+
+Watch this guide to implementing the RAG agent:
+
+<iframe src="https://share.descript.com/embed/9skzqf8Bpwv" width="640" height="360" frameborder="0" allowfullscreen></iframe>
 
 ---
 

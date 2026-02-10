@@ -1,191 +1,30 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Building the Document Upload Pipeline</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      line-height: 1.6;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      color: #333;
-    }
+<h1 style="margin-top: 24px; margin-bottom: 12px; font-size: 32px; font-weight: bold;">Building the Document Upload Pipeline</h1>
+<p style="margin: 12px 0; line-height: 1.6;">Now that you have Pinecone configured, it's time to fill your vector database with actual content! This is where your RAG system gets its knowledge.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Video Walkthrough</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Watch the uploading documents process from the chat interface:</p>
+<iframe src="https://share.descript.com/embed/vXKQ7RBncMc" width="640" height="360" frameborder="0" allowfullscreen="" style="max-width: 100%; margin: 20px 0;"></iframe>
 
-    h1 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 32px;
-      font-weight: bold;
-    }
-
-    h2 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    h3 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    h4 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    h5 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    h6 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 16px;
-      font-weight: bold;
-    }
-
-    p {
-      margin: 12px 0;
-      line-height: 1.6;
-    }
-
-    a {
-      color: #0066cc;
-      text-decoration: underline;
-    }
-
-    strong {
-      font-weight: bold;
-    }
-
-    em {
-      font-style: italic;
-    }
-
-    code {
-      background-color: #f4f4f4;
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 0.9em;
-    }
-
-    pre {
-      background-color: #f4f4f4;
-      padding: 15px;
-      border-radius: 5px;
-      overflow-x: auto;
-      margin: 20px 0;
-    }
-
-    pre code {
-      background-color: transparent;
-      padding: 0;
-    }
-
-    blockquote {
-      border-left: 4px solid #ddd;
-      margin: 20px 0;
-      padding: 10px 20px;
-      background-color: #f9f9f9;
-    }
-
-    hr {
-      border: none;
-      border-top: 2px solid #eee;
-      margin: 30px 0;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 20px 0;
-    }
-
-    iframe {
-      max-width: 100%;
-      margin: 20px 0;
-    }
-
-    details {
-      margin: 20px 0;
-      padding: 15px;
-      background-color: #f9f9f9;
-      border-radius: 5px;
-    }
-
-    summary {
-      cursor: pointer;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    ol, ul {
-      margin: 10px 0;
-      padding-left: 30px;
-    }
-
-    li {
-      margin: 5px 0;
-    }
-
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin: 20px 0;
-      border: 1px solid #ddd;
-    }
-
-    th, td {
-      padding: 8px;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f4f4f4;
-      font-weight: bold;
-    }
-
-    input[type="checkbox"] {
-      margin-right: 5px;
-    }
-  </style>
-</head>
-<body>
-<h1>Building the Document Upload Pipeline</h1>
-<p>Now that you have Pinecone configured, it&#39;s time to fill your vector database with actual content! This is where your RAG system gets its knowledge.</p>
-<hr>
-<h2>Video Walkthrough</h2>
-<p>Watch this guide to building the API route:</p>
-<iframe src="https://share.descript.com/embed/tb6EgaRGjay" width="640" height="360" frameborder="0" allowfullscreen></iframe>
-
-<hr>
-<h2>What You&#39;ll Build</h2>
-<p>By the end of this module, you&#39;ll have:</p>
-<ul>
-<li>An API route that accepts URLs (<code>/api/upload-document</code>)</li>
-<li>A pipeline that scrapes, chunks, and vectorizes content</li>
-<li>Documents uploaded to Pinecone and ready for retrieval</li>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">What You'll Build</h2>
+<p style="margin: 12px 0; line-height: 1.6;">This is the <strong style="font-weight: bold;">"write" side</strong> of your RAG system - getting knowledge INTO the database.</p>
+<p style="margin: 12px 0; line-height: 1.6;">By the end of this module, you'll have:</p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">An API route that accepts URLs (<code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">/api/upload-document</code>)</li>
+<li style="margin: 5px 0;">A pipeline that scrapes, chunks, and vectorizes content</li>
+<li style="margin: 5px 0;">Documents uploaded to Pinecone and ready for retrieval</li>
 </ul>
-<p><strong>Note</strong>: The UI also supports a <code>/api/upload-text</code> route for uploading raw text (already implemented as a reference). This module focuses on the URL route, which is more complex because it requires web scraping.</p>
-<hr>
-<h2>The Big Picture: The Upload Pipeline</h2>
-<p>Let&#39;s understand the complete flow for the <strong>URL upload route</strong>:</p>
-<pre><code>URLs from User
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">The bigger picture:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">This module</strong>: Upload documents (the "write" side)</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Next module</strong>: Query documents to answer questions (the "read" side)</li>
+</ul>
+<p style="margin: 12px 0; line-height: 1.6;">That's when RAG truly comes alive - you'll be able to ask "Tell me about Anthropic" or "How do I use the Pinecone TypeScript client?" and get answers grounded in your knowledge base!</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Note</strong>: The UI also supports a <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">/api/upload-text</code> route for uploading raw text (already implemented as a reference). This module focuses on the URL route, which is more complex because it requires web scraping.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">The Big Picture: The Upload Pipeline</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Let's understand the complete flow for the <strong style="font-weight: bold;">URL upload route</strong>:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">URLs from User
     ↓
 1. Scrape web content (HTML → text)
     ↓
@@ -197,8 +36,8 @@
     ↓
 Content Ready for RAG!
 </code></pre>
-<p><strong>For the text upload route</strong> (already implemented at <code>/api/upload-text</code>):</p>
-<pre><code>Raw Text from User
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">For the text upload route</strong> (already implemented at <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">/api/upload-text</code>):</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">Raw Text from User
     ↓
 1. Chunk text into smaller pieces
     ↓
@@ -208,79 +47,79 @@ Content Ready for RAG!
     ↓
 Content Ready for RAG!
 </code></pre>
-<p>This is the &quot;write&quot; side of your RAG system. The &quot;read&quot; side (retrieval) comes later.</p>
-<hr>
-<h2>Why This Pipeline Exists</h2>
-<p><strong>Why not just save the whole webpage?</strong></p>
-<ul>
-<li>Too much context for the LLM (token limits!)</li>
-<li>Harder to find relevant sections</li>
-<li>Less precise retrieval</li>
+<p style="margin: 12px 0; line-height: 1.6;">This is the "write" side of your RAG system. The "read" side (retrieval) comes later.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Why This Pipeline Exists</h2>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Why not just save the whole webpage?</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Too much context for the LLM (token limits!)</li>
+<li style="margin: 5px 0;">Harder to find relevant sections</li>
+<li style="margin: 5px 0;">Less precise retrieval</li>
 </ul>
-<p><strong>Why chunk the content?</strong></p>
-<ul>
-<li>Smaller chunks = more focused context</li>
-<li>Better retrieval (find exact relevant sections)</li>
-<li>Fits within LLM context windows</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Why chunk the content?</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Smaller chunks = more focused context</li>
+<li style="margin: 5px 0;">Better retrieval (find exact relevant sections)</li>
+<li style="margin: 5px 0;">Fits within LLM context windows</li>
 </ul>
-<p><strong>Why batch upload?</strong></p>
-<ul>
-<li>API rate limits</li>
-<li>More efficient</li>
-<li>Better error handling</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Why batch upload?</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">API rate limits</li>
+<li style="margin: 5px 0;">More efficient</li>
+<li style="margin: 5px 0;">Better error handling</li>
 </ul>
-<hr>
-<h2>Understanding the Pieces</h2>
-<h3>1. The DataProcessor</h3>
-<p>Located at: <code>app/libs/dataProcessor.ts</code></p>
-<p>This class handles:</p>
-<ul>
-<li><strong>Scraping</strong>: Fetching HTML and extracting clean text</li>
-<li><strong>Chunking</strong>: Breaking text into ~500 character pieces with overlap</li>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Understanding the Pieces</h2>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">1. The DataProcessor</h3>
+<p style="margin: 12px 0; line-height: 1.6;">Located at: <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">app/libs/dataProcessor.ts</code></p>
+<p style="margin: 12px 0; line-height: 1.6;">This class handles:</p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Scraping</strong>: Fetching HTML and extracting clean text</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Chunking</strong>: Breaking text into ~500 character pieces with overlap</li>
 </ul>
-<pre><code class="language-typescript">// How it works (simplified)
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">// How it works (simplified)
 const processor = new DataProcessor();
-const chunks = await processor.processUrls([&#39;https://example.com&#39;]);
+const chunks = await processor.processUrls(['https://example.com']);
 
 // Returns array of chunks:
 [
-  {
-    id: &quot;url-chunk-0&quot;,
-    content: &quot;First 500 chars of text...&quot;,
-    metadata: {
-      url: &quot;https://example.com&quot;,
-      title: &quot;Page Title&quot;,
-      chunkIndex: 0,
-      totalChunks: 5
-    }
-  },
-  // ... more chunks
-]
+	{
+		id: 'url-chunk-0',
+		content: 'First 500 chars of text...',
+		metadata: {
+			url: 'https://example.com',
+			title: 'Page Title',
+			chunkIndex: 0,
+			totalChunks: 5,
+		},
+	},
+	// ... more chunks
+];
 </code></pre>
-<p><strong>Key concept: Overlap</strong><br>Chunks overlap by ~50 characters to maintain context at boundaries. This ensures important information isn&#39;t split awkwardly.</p>
-<h3>2. OpenAI Embeddings</h3>
-<p>Embeddings convert text to vectors (arrays of numbers that capture meaning).</p>
-<pre><code class="language-typescript">// What happens under the hood
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Key concept: Overlap</strong><br>Chunks overlap by ~50 characters to maintain context at boundaries. This ensures important information isn't split awkwardly.</p>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">2. OpenAI Embeddings</h3>
+<p style="margin: 12px 0; line-height: 1.6;">Embeddings convert text to vectors (arrays of numbers that capture meaning).</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">// What happens under the hood
 const response = await openaiClient.embeddings.create({
-  model: &#39;text-embedding-3-small&#39;,
-  input: [&#39;Hello world&#39;, &#39;Machine learning basics&#39;]
+  model: 'text-embedding-3-small',
+  input: ['Hello world', 'Machine learning basics']
 });
 
 // Returns:
 [
-  { embedding: [0.1, -0.3, 0.8, ...] }, // 1536 numbers for &quot;Hello world&quot;
-  { embedding: [0.2, 0.1, -0.5, ...] }  // 1536 numbers for &quot;Machine learning&quot;
+  { embedding: [0.1, -0.3, 0.8, ...] }, // 1536 numbers for "Hello world"
+  { embedding: [0.2, 0.1, -0.5, ...] }  // 1536 numbers for "Machine learning"
 ]
 </code></pre>
-<p><strong>Why &#39;text-embedding-3-small&#39;?</strong></p>
-<ul>
-<li>Fast and efficient (512 dimensions instead of 1536)</li>
-<li>Good quality for most use cases</li>
-<li>Lower cost than larger models</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Why 'text-embedding-3-small'?</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Fast and efficient (512 dimensions instead of 1536)</li>
+<li style="margin: 5px 0;">Good quality for most use cases</li>
+<li style="margin: 5px 0;">Lower cost than larger models</li>
 </ul>
-<h3>3. Batching Strategy</h3>
-<p>Pinecone recommends uploading in batches of 100:</p>
-<pre><code class="language-typescript">// Why batch?
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">3. Batching Strategy</h3>
+<p style="margin: 12px 0; line-height: 1.6;">Pinecone recommends uploading in batches of 100:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">// Why batch?
 const allChunks = 500; // chunks to upload
 const batchSize = 100;
 
@@ -288,280 +127,239 @@ const batchSize = 100;
 // With batching: 5 API calls (much faster!)
 
 for (let i = 0; i &lt; chunks.length; i += batchSize) {
-  const batch = chunks.slice(i, i + batchSize);
-  // Process batch...
+	const batch = chunks.slice(i, i + batchSize);
+	// Process batch...
 }
 </code></pre>
-<hr>
-<h2>The API Route Structure</h2>
-<p>Your route lives at: <code>app/api/upload-document/route.ts</code></p>
-<p><strong>What it needs to do:</strong></p>
-<ol>
-<li>Validate incoming URLs (Zod schema)</li>
-<li>Scrape and chunk content</li>
-<li>Generate embeddings for all chunks</li>
-<li>Format vectors for Pinecone</li>
-<li>Upload in batches</li>
-<li>Return success/failure</li>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">The API Route Structure</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Your route lives at: <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">app/api/upload-document/route.ts</code></p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">What it needs to do:</strong></p>
+<ol style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Validate incoming URLs (Zod schema)</li>
+<li style="margin: 5px 0;">Scrape and chunk content</li>
+<li style="margin: 5px 0;">Generate embeddings for all chunks</li>
+<li style="margin: 5px 0;">Format vectors for Pinecone</li>
+<li style="margin: 5px 0;">Upload in batches</li>
+<li style="margin: 5px 0;">Return success/failure</li>
 </ol>
-<p><strong>Why an API route?</strong></p>
-<ul>
-<li>Can be called from the frontend UI</li>
-<li>Can be triggered by scripts</li>
-<li>Keeps business logic separate from UI</li>
-<li>Easy to test independently</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Why an API route?</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Can be called from the frontend UI</li>
+<li style="margin: 5px 0;">Can be triggered by scripts</li>
+<li style="margin: 5px 0;">Keeps business logic separate from UI</li>
+<li style="margin: 5px 0;">Easy to test independently</li>
 </ul>
-<hr>
-<h2>Understanding Vector Metadata</h2>
-<p>When you upload to Pinecone, each vector includes metadata:</p>
-<pre><code class="language-typescript">{
-  id: &quot;unique-identifier&quot;,
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Understanding Vector Metadata</h2>
+<p style="margin: 12px 0; line-height: 1.6;">When you upload to Pinecone, each vector includes metadata:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">{
+  id: "unique-identifier",
   values: [0.1, -0.3, ...], // The embedding
   metadata: {
-    text: &quot;The actual chunk content&quot;,
-    url: &quot;https://source-url.com&quot;,
-    title: &quot;Document Title&quot;,
+    text: "The actual chunk content",
+    url: "https://source-url.com",
+    title: "Document Title",
     chunkIndex: 0,
     totalChunks: 10
   }
 }
 </code></pre>
-<p><strong>Why metadata matters:</strong></p>
-<ul>
-<li><code>text</code>: What you show to the LLM as context</li>
-<li><code>url</code>: For attribution/sourcing</li>
-<li><code>title</code>: For display to users</li>
-<li><code>chunkIndex</code>: To reconstruct full documents if needed</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Why metadata matters:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;"><code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">text</code>: What you show to the LLM as context</li>
+<li style="margin: 5px 0;"><code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">url</code>: For attribution/sourcing</li>
+<li style="margin: 5px 0;"><code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">title</code>: For display to users</li>
+<li style="margin: 5px 0;"><code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">chunkIndex</code>: To reconstruct full documents if needed</li>
 </ul>
-<p>Pinecone indexes the vector but returns the metadata when querying!</p>
-<hr>
-<h2>Your Challenge</h2>
-<p>Open <code>app/api/upload-document/route.ts</code> and you&#39;ll see 9 TODO steps.</p>
-<h3>Implementation Steps</h3>
-<p><strong>Step 1: Validate the Request</strong></p>
-<pre><code class="language-typescript">// Parse the request body
+<p style="margin: 12px 0; line-height: 1.6;">Pinecone indexes the vector but returns the metadata when querying!</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Your Challenge</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Open <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">app/api/upload-document/route.ts</code> and you'll see 9 TODO steps.</p>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Implementation Steps</h3>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Step 1: Validate the Request</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">// Parse the request body
 const body = await req.json();
 
 // Validate with Zod
 const parsed = uploadDocumentSchema.parse(body);
 const { urls } = parsed;
 </code></pre>
-<p><strong>Step 2: Scrape and Chunk</strong></p>
-<pre><code class="language-typescript">const processor = new DataProcessor();
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Step 2: Scrape and Chunk</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">const processor = new DataProcessor();
 const chunks = await processor.processUrls(urls);
 </code></pre>
-<p><strong>Step 3-5: Set Up for Upload</strong></p>
-<ul>
-<li>Check if chunks exist</li>
-<li>Get Pinecone index</li>
-<li>Set up batch processing</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Step 3-5: Set Up for Upload</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Check if chunks exist</li>
+<li style="margin: 5px 0;">Get Pinecone index</li>
+<li style="margin: 5px 0;">Set up batch processing</li>
 </ul>
-<p><strong>Step 6-7: Generate Embeddings and Format</strong><br>For each batch:</p>
-<ul>
-<li>Generate embeddings for all chunk contents</li>
-<li>Map chunks + embeddings to Pinecone vector format</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Step 6-7: Generate Embeddings and Format</strong><br>For each batch:</p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Generate embeddings for all chunk contents</li>
+<li style="margin: 5px 0;">Map chunks + embeddings to Pinecone vector format</li>
 </ul>
-<p><strong>Step 8-9: Upload and Respond</strong></p>
-<ul>
-<li>Upload each batch to Pinecone</li>
-<li>Track success count</li>
-<li>Return results</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Step 8-9: Upload and Respond</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Upload each batch to Pinecone</li>
+<li style="margin: 5px 0;">Track success count</li>
+<li style="margin: 5px 0;">Return results</li>
 </ul>
-<h3>Hints</h3>
-<p><strong>For embeddings:</strong></p>
-<pre><code class="language-typescript">const embeddingResponse = await openaiClient.embeddings.create({
-  model: &#39;text-embedding-3-small&#39;,
-  input: batch.map(chunk =&gt; chunk.content) // Array of strings
-});
-
-// Access embeddings:
-embeddingResponse.data[0].embedding // First embedding
-embeddingResponse.data[1].embedding // Second embedding
-</code></pre>
-<p><strong>For Pinecone upload:</strong></p>
-<pre><code class="language-typescript">await index.upsert(vectors);
-</code></pre>
-<p><strong>For creating unique IDs:</strong></p>
-<pre><code class="language-typescript">// Combine URL and chunk index for uniqueness
-const id = `${chunk.metadata.url}-${chunk.metadata.chunkIndex}`;
-</code></pre>
-<hr>
-<h2>Testing Your Implementation</h2>
-<h3>Using the Frontend</h3>
-<p>The UI (at <code>http://localhost:3000</code> after running <code>yarn dev</code>) has two upload modes:</p>
-<p><strong>URL Mode:</strong></p>
-<ol>
-<li>Select &quot;URLs&quot; tab</li>
-<li>Enter URLs (one per line)</li>
-<li>Click &quot;Upload&quot;</li>
-<li>Check the response for success message</li>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Hints</h3>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">For generating embeddings:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Use openaiClient.embeddings.create with the model parameter</li>
+<li style="margin: 5px 0;">Pass in an array of strings (map the batch to extract content)</li>
+<li style="margin: 5px 0;">The response has a data array where each item has an embedding property</li>
+<li style="margin: 5px 0;">Access with: response.data[index].embedding</li>
+</ul>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">For uploading to Pinecone:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Call the upsert method on your index reference</li>
+<li style="margin: 5px 0;">Pass in the formatted vectors array</li>
+<li style="margin: 5px 0;">Pinecone handles the indexing automatically</li>
+</ul>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">For creating unique IDs:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Combine the URL with the chunk index using template literals</li>
+<li style="margin: 5px 0;">Format: URL-chunkIndex</li>
+<li style="margin: 5px 0;">This ensures each chunk has a globally unique identifier</li>
+</ul>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Need more guidance?</strong><br>Check the inline TODO comments in the route file - they guide you through each step with specific method names and parameters.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Testing Your Implementation</h2>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Using the Frontend</h3>
+<p style="margin: 12px 0; line-height: 1.6;">The UI (at <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">http://localhost:3000</code> after running <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">yarn dev</code>) has two upload modes:</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">URL Mode:</strong></p>
+<ol style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Select "URLs" tab</li>
+<li style="margin: 5px 0;">Enter URLs (one per line)</li>
+<li style="margin: 5px 0;">Click "Upload"</li>
+<li style="margin: 5px 0;">Check the response for success message</li>
 </ol>
-<p><strong>Text Mode:</strong></p>
-<ol>
-<li>Select &quot;Raw Text&quot; tab</li>
-<li>Paste any text content</li>
-<li>Click &quot;Upload&quot;</li>
-<li>Check the response for success message</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Text Mode:</strong></p>
+<ol style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Select "Raw Text" tab</li>
+<li style="margin: 5px 0;">Paste any text content</li>
+<li style="margin: 5px 0;">Click "Upload"</li>
+<li style="margin: 5px 0;">Check the response for success message</li>
 </ol>
-<h3>Using curl</h3>
-<p><strong>Test URL upload:</strong></p>
-<pre><code class="language-bash">curl -X POST http://localhost:3000/api/upload-document \
-  -H &quot;Content-Type: application/json&quot; \
-  -d &#39;{
-    &quot;urls&quot;: [
-      &quot;https://react.dev/learn&quot;,
-      &quot;https://nextjs.org/docs&quot;
-    ]
-  }&#39;
-</code></pre>
-<p><strong>Test text upload:</strong></p>
-<pre><code class="language-bash">curl -X POST http://localhost:3000/api/upload-text \
-  -H &quot;Content-Type: application/json&quot; \
-  -d &#39;{
-    &quot;text&quot;: &quot;This is sample text about React hooks. useState and useEffect are commonly used hooks.&quot;
-  }&#39;
-</code></pre>
-<h3>Verifying in Pinecone Console</h3>
-<ol>
-<li>Go to your Pinecone index</li>
-<li>Check &quot;Vectors&quot; tab - should see new entries</li>
-<li>Try the &quot;Query&quot; feature - search for test content</li>
-</ol>
-<hr>
-<h2>Common Issues &amp; Solutions</h2>
-<h3>&quot;Dimension mismatch&quot;</h3>
-<pre><code>❌ Vector dimension (1536) doesn&#39;t match index (512)
-</code></pre>
-<p><strong>Fix</strong>: Ensure you&#39;re using <code>text-embedding-3-small</code> with <code>dimensions: 512</code></p>
-<h3>&quot;Rate limit exceeded&quot;</h3>
-<pre><code>❌ OpenAI rate limit error
-</code></pre>
-<p><strong>Fix</strong>: Add delay between batches or reduce batch size</p>
-<h3>&quot;No content scraped&quot;</h3>
-<pre><code>❌ chunks.length === 0
-</code></pre>
-<p><strong>Fix</strong>:</p>
-<ul>
-<li>Check URL is accessible</li>
-<li>Look at <code>dataProcessor.ts</code> - may need to adjust selectors</li>
-<li>Some sites block scraping</li>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Using Postman or Thunder Client</h3>
+<p style="margin: 12px 0; line-height: 1.6;">You can test the API routes directly using Postman, Thunder Client (VS Code extension), or any HTTP client.</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Test URL upload:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Method: POST</li>
+<li style="margin: 5px 0;">URL: <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">http://localhost:3000/api/upload-document</code></li>
+<li style="margin: 5px 0;">Headers: <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">Content-Type: application/json</code></li>
+<li style="margin: 5px 0;">Body (JSON):</li>
 </ul>
-<h3>&quot;Metadata too large&quot;</h3>
-<pre><code>❌ Pinecone metadata size limit exceeded
-</code></pre>
-<p><strong>Fix</strong>: Chunk text is too long. Reduce chunk size or trim metadata text field</p>
-<hr>
-<h2>Understanding What You Built</h2>
-<p>Let&#39;s break down the flow:</p>
-<p><strong>Request → Validation</strong></p>
-<pre><code class="language-typescript">uploadDocumentSchema.parse(body) // Zod validates structure
-</code></pre>
-<p>This ensures you only process valid URLs (proper format, array structure).</p>
-<p><strong>Scraping → Chunking</strong></p>
-<pre><code class="language-typescript">processor.processUrls(urls) // Returns structured chunks
-</code></pre>
-<p>The processor fetches HTML, extracts text, and breaks it into manageable pieces with metadata.</p>
-<p><strong>Text → Vectors</strong></p>
-<pre><code class="language-typescript">openaiClient.embeddings.create() // Converts meaning to numbers
-</code></pre>
-<p>OpenAI&#39;s model captures semantic meaning in a 512-dimensional space.</p>
-<p><strong>Vectors → Database</strong></p>
-<pre><code class="language-typescript">index.upsert(vectors) // Stores in Pinecone
-</code></pre>
-<p>Your knowledge is now searchable by semantic similarity!</p>
-<hr>
-<h2>What&#39;s Next?</h2>
-<p>Awesome! You now have a way to add knowledge to your RAG system. But RAG also needs a way to retrieve that knowledge intelligently.</p>
-<p>That&#39;s where agents come in...</p>
-<p><strong>Coming up:</strong></p>
-<ul>
-<li>Understanding agent architecture</li>
-<li>Building an agent routing system</li>
-<li>Creating specialized agents for different tasks</li>
-</ul>
-<hr>
-<h2>Bonus: Understanding the Text Upload Route</h2>
-<p>Want to see a simpler version of the upload pipeline? Check out <code>/api/upload-text/route.ts</code> - it&#39;s already implemented and shows the same flow without the web scraping complexity:</p>
-<ol>
-<li><strong>Direct chunking</strong> - Uses <code>chunkText()</code> from <code>app/libs/chunking.ts</code></li>
-<li><strong>Same embedding process</strong> - Calls OpenAI with <code>text-embedding-3-small</code></li>
-<li><strong>Same Pinecone upload</strong> - Uses <code>index.upsert()</code></li>
-</ol>
-<p>The main difference: it skips the DataProcessor scraping step since it receives text directly from the user. This is useful when you want to upload documentation, articles, or any text content without needing a URL.</p>
-<hr>
-<h2>Challenge Solution</h2>
-<details>
-<summary>Click to reveal the complete implementation</summary>
-
-<pre><code class="language-typescript">export async function POST(req: NextRequest) {
-  try {
-    // Step 1: Parse and validate
-    const body = await req.json();
-    const parsed = uploadDocumentSchema.parse(body);
-    const { urls } = parsed;
-
-    // Step 2: Scrape and chunk
-    const processor = new DataProcessor();
-    const chunks = await processor.processUrls(urls);
-
-    // Step 3: Check if we got content
-    if (chunks.length === 0) {
-      return NextResponse.json(
-        { error: &#39;No content found to process&#39; },
-        { status: 400 }
-      );
-    }
-
-    // Step 4: Get Pinecone index
-    const index = pineconeClient.Index(process.env.PINECONE_INDEX!);
-
-    // Step 5: Process in batches
-    const batchSize = 100;
-    let successCount = 0;
-
-    for (let i = 0; i &lt; chunks.length; i += batchSize) {
-      const batch = chunks.slice(i, i + batchSize);
-
-      // Step 6: Generate embeddings
-      const embeddingResponse = await openaiClient.embeddings.create({
-        model: &#39;text-embedding-3-small&#39;,
-        input: batch.map((chunk) =&gt; chunk.content),
-      });
-
-      // Step 7: Prepare vectors
-      const vectors = batch.map((chunk, idx) =&gt; ({
-        id: `${chunk.metadata.url}-${chunk.metadata.chunkIndex}`,
-        values: embeddingResponse.data[idx].embedding,
-        metadata: {
-          text: chunk.content,
-          url: chunk.metadata.url || &#39;&#39;,
-          title: chunk.metadata.title || &#39;&#39;,
-          chunkIndex: chunk.metadata.chunkIndex || 0,
-          totalChunks: chunk.metadata.totalChunks || 0,
-        },
-      }));
-
-      // Step 8: Upload to Pinecone
-      await index.upsert(vectors);
-      successCount += batch.length;
-    }
-
-    // Step 9: Return success
-    return NextResponse.json({
-      success: true,
-      chunksProcessed: chunks.length,
-      vectorsUploaded: successCount,
-    });
-  } catch (error) {
-    console.error(&#39;Error uploading documents:&#39;, error);
-    return NextResponse.json(
-      { error: &#39;Failed to upload documents&#39; },
-      { status: 500 }
-    );
-  }
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-json" style="background-color: transparent; padding: 0;">{
+	"urls": ["https://react.dev/learn", "https://nextjs.org/docs"]
 }
 </code></pre>
-</details>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Test text upload:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Method: POST</li>
+<li style="margin: 5px 0;">URL: <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">http://localhost:3000/api/upload-text</code></li>
+<li style="margin: 5px 0;">Headers: <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">Content-Type: application/json</code></li>
+<li style="margin: 5px 0;">Body (JSON):</li>
+</ul>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-json" style="background-color: transparent; padding: 0;">{
+	"text": "This is sample text about React hooks. useState and useEffect are commonly used hooks."
+}
+</code></pre>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Verifying in Pinecone Console</h3>
+<ol style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Go to your Pinecone index</li>
+<li style="margin: 5px 0;">Check "Vectors" tab - should see new entries</li>
+<li style="margin: 5px 0;">Try the "Query" feature - search for test content</li>
+</ol>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Troubleshooting Common Issues</h2>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Issue: Dimension mismatch</h3>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Symptom</strong>: Vector dimension doesn't match index configuration</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Solution</strong>: Ensure you're using <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">text-embedding-3-small</code> with <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">dimensions: 512</code></p>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Issue: Rate limit exceeded</h3>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Symptom</strong>: OpenAI API rate limiting</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Solution</strong>: Add delay between batches or reduce batch size</p>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Issue: No content scraped</h3>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Symptom</strong>: Empty chunks array after processing</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Solution</strong>:</p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Check URL is accessible</li>
+<li style="margin: 5px 0;">Look at <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">dataProcessor.ts</code> - may need to adjust selectors</li>
+<li style="margin: 5px 0;">Some sites block scraping</li>
+</ul>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Issue: Metadata too large</h3>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Symptom</strong>: Pinecone metadata size limit exceeded</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Solution</strong>: Chunk text is too long. Reduce chunk size or trim metadata text field</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Understanding What You Built</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Let's break down the flow:</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Request → Validation</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">uploadDocumentSchema.parse(body); // Zod validates structure
+</code></pre>
+<p style="margin: 12px 0; line-height: 1.6;">This ensures you only process valid URLs (proper format, array structure).</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Scraping → Chunking</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">processor.processUrls(urls); // Returns structured chunks
+</code></pre>
+<p style="margin: 12px 0; line-height: 1.6;">The processor fetches HTML, extracts text, and breaks it into manageable pieces with metadata.</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Text → Vectors</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">openaiClient.embeddings.create(); // Converts meaning to numbers
+</code></pre>
+<p style="margin: 12px 0; line-height: 1.6;">OpenAI's model captures semantic meaning in a 512-dimensional space.</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Vectors → Database</strong></p>
+<p style="margin: 12px 0; line-height: 1.6;">index.upsert(vectors) // Stores in Pinecone</p>
+<p style="margin: 12px 0; line-height: 1.6;">Your knowledge is now searchable by semantic similarity!</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">What's Next?</h2>
+<p style="margin: 12px 0; line-height: 1.6;">You've built the upload pipeline - documents are now in Pinecone as searchable vectors!</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">But here's the thing:</strong> Right now you can only upload. You can't ask questions yet.</p>
+<p style="margin: 12px 0; line-height: 1.6;">In the next module, you'll build the query side - the part that lets you:</p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Ask "Tell me about Anthropic"</li>
+<li style="margin: 5px 0;">Ask "How do I use the Pinecone TypeScript client?"</li>
+<li style="margin: 5px 0;">Ask "What are common pitfalls?"</li>
+</ul>
+<p style="margin: 12px 0; line-height: 1.6;">And get answers based on YOUR knowledge base, not hallucinations!</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Next up:</strong> Module 5.3 - Querying Documents</p>
+<p style="margin: 12px 0; line-height: 1.6;">This is where the full request/response cycle comes alive and RAG starts to feel like magic.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Bonus: Understanding the Text Upload Route</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Want to see a simpler version of the upload pipeline? Check out <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">/api/upload-text/route.ts</code> - it's already implemented and shows the same flow without the web scraping complexity:</p>
+<ol style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Direct chunking</strong> - Uses <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">chunkText()</code> from <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">app/libs/chunking.ts</code></li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Same embedding process</strong> - Calls OpenAI with <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">text-embedding-3-small</code></li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Same Pinecone upload</strong> - Uses index.upsert()</li>
+</ol>
+<p style="margin: 12px 0; line-height: 1.6;">The main difference: it skips the DataProcessor scraping step since it receives text directly from the user. This is useful when you want to upload documentation, articles, or any text content without needing a URL.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Video Solution Walkthrough</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Watch this guide to building the API route:</p>
+<iframe src="https://share.descript.com/embed/tb6EgaRGjay" width="640" height="360" frameborder="0" allowfullscreen="" style="max-width: 100%; margin: 20px 0;"></iframe>
 
-</body>
-</html>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Challenge Solution</h2>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Reference Implementation:</strong> Check <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">app/api/upload-text/route.ts</code> in your codebase.</p>
+<p style="margin: 12px 0; line-height: 1.6;">The complete solution follows the same pattern as the upload-text route, with these key differences:</p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Uses <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">DataProcessor.processUrls()</code> instead of <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">chunkText()</code></li>
+<li style="margin: 5px 0;">Processes URLs instead of raw text input</li>
+<li style="margin: 5px 0;">Same embedding generation and Pinecone upload logic</li>
+</ul>
+<p style="margin: 12px 0; line-height: 1.6;">Study the upload-text route to see the complete implementation pattern for generating embeddings, formatting vectors, and uploading with proper error handling.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">What You Built</h2>
+<p style="margin: 12px 0; line-height: 1.6;">You now have a complete document ingestion pipeline! This is the "write" side of your RAG system.</p>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">What's working:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">✅ URL validation and scraping</li>
+<li style="margin: 5px 0;">✅ Intelligent text chunking with overlap</li>
+<li style="margin: 5px 0;">✅ Embedding generation</li>
+<li style="margin: 5px 0;">✅ Batch upload to Pinecone</li>
+<li style="margin: 5px 0;">✅ Proper metadata tracking</li>
+</ul>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">What's next:</strong><br>In the next module, you'll build the "read" side - querying Pinecone to answer questions about your knowledge base. This is where RAG comes alive!</p>
+
+

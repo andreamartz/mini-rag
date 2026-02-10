@@ -4,14 +4,6 @@ Time to train your own model! This section walks you through creating a fine-tun
 
 ---
 
-## Video Walkthrough
-
-Watch this guide to running the fine-tuning process:
-
-<iframe src="https://share.descript.com/embed/nub6vmvmL3a" width="640" height="360" frameborder="0" allowfullscreen></iframe>
-
----
-
 ## What You'll Do
 
 1. Examine the training data format
@@ -162,13 +154,6 @@ Progress: 45/100 steps
 Time Remaining: ~8 minutes
 ```
 
-### Via API (Optional)
-
-```bash
-curl https://api.openai.com/v1/fine_tuning/jobs/ftjob-abc123 \
-  -H "Authorization: Bearer $OPENAI_API_KEY"
-```
-
 ### Status Meanings
 
 **`running`**: Training in progress - be patient!
@@ -235,6 +220,14 @@ Adjusted Weights (Fine-Tuned Model)
 ```
 
 OpenAI adjusted millions of internal parameters to better match your data. This is a NEW model (yours specifically).
+
+---
+
+## Video Walkthrough
+
+Watch this guide to running the fine-tuning process:
+
+<iframe src="https://share.descript.com/embed/nub6vmvmL3a" width="640" height="360" frameborder="0" allowfullscreen></iframe>
 
 ---
 

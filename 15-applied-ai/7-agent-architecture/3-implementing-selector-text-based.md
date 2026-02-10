@@ -4,14 +4,6 @@ The selector is the brain of your agent system. It reads conversation history an
 
 ---
 
-## Video Walkthrough
-
-Watch this guide to implementing the selector:
-
-<iframe src="https://share.descript.com/embed/ipwcGMBuApw" width="640" height="360" frameborder="0" allowfullscreen></iframe>
-
----
-
 ## What You'll Build
 
 By the end of this module, you'll have:
@@ -194,17 +186,21 @@ yarn dev
 
 ### Test 2: Simple RAG Query
 
-```bash
-curl -X POST http://localhost:3000/api/select-agent \
-  -H "Content-Type: application/json" \
-  -d '{
-    "messages": [
-      {
-        "role": "user",
-        "content": "How do I use useState in React?"
-      }
-    ]
-  }'
+**Request:**
+- Method: POST
+- URL: `http://localhost:3000/api/select-agent`
+- Headers: `Content-Type: application/json`
+- Body:
+
+```json
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "How do I use useState in React?"
+    }
+  ]
+}
 ```
 
 **Expected response:**
@@ -223,17 +219,21 @@ curl -X POST http://localhost:3000/api/select-agent \
 
 ### Test 3: LinkedIn Query
 
-```bash
-curl -X POST http://localhost:3000/api/select-agent \
-  -H "Content-Type: application/json" \
-  -d '{
-    "messages": [
-      {
-        "role": "user",
-        "content": "What should I write about on my LinkedIn profile?"
-      }
-    ]
-  }'
+**Request:**
+- Method: POST
+- URL: `http://localhost:3000/api/select-agent`
+- Headers: `Content-Type: application/json`
+- Body:
+
+```json
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "What should I write about on my LinkedIn profile?"
+    }
+  ]
+}
 ```
 
 **Expected response:**
@@ -247,25 +247,29 @@ curl -X POST http://localhost:3000/api/select-agent \
 
 ### Test 4: Context Understanding
 
-```bash
-curl -X POST http://localhost:3000/api/select-agent \
-  -H "Content-Type: application/json" \
-  -d '{
-    "messages": [
-      {
-        "role": "user",
-        "content": "Tell me about React hooks"
-      },
-      {
-        "role": "assistant",
-        "content": "React hooks are functions that let you use state and lifecycle features..."
-      },
-      {
-        "role": "user",
-        "content": "How about the state one?"
-      }
-    ]
-  }'
+**Request:**
+- Method: POST
+- URL: `http://localhost:3000/api/select-agent`
+- Headers: `Content-Type: application/json`
+- Body:
+
+```json
+{
+  "messages": [
+    {
+      "role": "user",
+      "content": "Tell me about React hooks"
+    },
+    {
+      "role": "assistant",
+      "content": "React hooks are functions that let you use state and lifecycle features..."
+    },
+    {
+      "role": "user",
+      "content": "How about the state one?"
+    }
+  ]
+}
 ```
 
 **The selector should:**
@@ -393,6 +397,14 @@ const query =
 	messages[messages.length - 1]?.content ||
 	'';
 ```
+
+---
+
+## Video Solution Walkthrough
+
+Watch this guide to implementing the selector:
+
+<iframe src="https://share.descript.com/embed/ipwcGMBuApw" width="640" height="360" frameborder="0" allowfullscreen></iframe>
 
 ---
 

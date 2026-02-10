@@ -1,197 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Tool-Calling in AI Agents</title>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-      line-height: 1.6;
-      max-width: 800px;
-      margin: 0 auto;
-      padding: 20px;
-      color: #333;
-    }
-
-    h1 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 32px;
-      font-weight: bold;
-    }
-
-    h2 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    h3 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 24px;
-      font-weight: bold;
-    }
-
-    h4 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-
-    h5 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 18px;
-      font-weight: bold;
-    }
-
-    h6 {
-      margin-top: 24px;
-      margin-bottom: 12px;
-      font-size: 16px;
-      font-weight: bold;
-    }
-
-    p {
-      margin: 12px 0;
-      line-height: 1.6;
-    }
-
-    a {
-      color: #0066cc;
-      text-decoration: underline;
-    }
-
-    strong {
-      font-weight: bold;
-    }
-
-    em {
-      font-style: italic;
-    }
-
-    code {
-      background-color: #f4f4f4;
-      padding: 2px 6px;
-      border-radius: 3px;
-      font-family: 'Courier New', Courier, monospace;
-      font-size: 0.9em;
-    }
-
-    pre {
-      background-color: #f4f4f4;
-      padding: 15px;
-      border-radius: 5px;
-      overflow-x: auto;
-      margin: 20px 0;
-    }
-
-    pre code {
-      background-color: transparent;
-      padding: 0;
-    }
-
-    blockquote {
-      border-left: 4px solid #ddd;
-      margin: 20px 0;
-      padding: 10px 20px;
-      background-color: #f9f9f9;
-    }
-
-    hr {
-      border: none;
-      border-top: 2px solid #eee;
-      margin: 30px 0;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      display: block;
-      margin: 20px 0;
-    }
-
-    iframe {
-      max-width: 100%;
-      margin: 20px 0;
-    }
-
-    details {
-      margin: 20px 0;
-      padding: 15px;
-      background-color: #f9f9f9;
-      border-radius: 5px;
-    }
-
-    summary {
-      cursor: pointer;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    ol, ul {
-      margin: 10px 0;
-      padding-left: 30px;
-    }
-
-    li {
-      margin: 5px 0;
-    }
-
-    table {
-      border-collapse: collapse;
-      width: 100%;
-      margin: 20px 0;
-      border: 1px solid #ddd;
-    }
-
-    th, td {
-      padding: 8px;
-      border: 1px solid #ddd;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f4f4f4;
-      font-weight: bold;
-    }
-
-    input[type="checkbox"] {
-      margin-right: 5px;
-    }
-  </style>
-</head>
-<body>
-<h1>Tool-Calling in AI Agents</h1>
-<p>Now that you have a working RAG agent with re-ranking, let&#39;s explore a powerful pattern: giving your AI agent <strong>tools</strong> to decide when and how to retrieve context.</p>
-<hr>
-<h2>What You&#39;ll Learn</h2>
-<p>This module covers:</p>
-<ul>
-<li>The difference between tools and workflows</li>
-<li>When to use tool-calling vs direct workflows</li>
-<li>How to implement tools with the AI SDK</li>
-<li>Building an agent that decides when to search for context</li>
+<h1 style="margin-top: 24px; margin-bottom: 12px; font-size: 32px; font-weight: bold;">Tool-Calling in AI Agents</h1>
+<p style="margin: 12px 0; line-height: 1.6;">Now that you have a working RAG agent with re-ranking, let's explore a powerful pattern: giving your AI agent <strong style="font-weight: bold;">tools</strong> to decide when and how to retrieve context.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">What You'll Learn</h2>
+<p style="margin: 12px 0; line-height: 1.6;">This module covers:</p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">The difference between tools and workflows</li>
+<li style="margin: 5px 0;">When to use tool-calling vs direct workflows</li>
+<li style="margin: 5px 0;">How to implement tools with the AI SDK</li>
+<li style="margin: 5px 0;">Building an agent that decides when to search for context</li>
 </ul>
-<hr>
-<h2>Tools vs Workflows</h2>
-<h3>Workflow Approach (What You&#39;ve Built)</h3>
-<p>Your current RAG agent uses a <strong>workflow</strong> - a fixed sequence of steps that always executes:</p>
-<pre><code>User Query → Embedding → Vector Search → Re-rank → Generate Response
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Tools vs Workflows</h2>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Workflow Approach (What You've Built)</h3>
+<p style="margin: 12px 0; line-height: 1.6;">Your current RAG agent uses a <strong style="font-weight: bold;">workflow</strong> - a fixed sequence of steps that always executes:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">User Query → Embedding → Vector Search → Re-rank → Generate Response
 </code></pre>
-<p><strong>Characteristics:</strong></p>
-<ul>
-<li>Predictable and deterministic</li>
-<li>Always retrieves context, even if not needed</li>
-<li>No decision-making by the AI</li>
-<li>Lower cost per request</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Characteristics:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Predictable and deterministic</li>
+<li style="margin: 5px 0;">Always retrieves context, even if not needed</li>
+<li style="margin: 5px 0;">No decision-making by the AI</li>
+<li style="margin: 5px 0;">Lower cost per request</li>
 </ul>
-<p><strong>Example:</strong></p>
-<pre><code class="language-typescript">export async function ragAgent(request: AgentRequest) {
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Example:</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">export async function ragAgent(request: AgentRequest) {
   // Always runs these steps
   const embedding = await generateEmbedding(request.query);
   const results = await searchVectorDB(embedding);
@@ -199,24 +31,24 @@
   return streamText({ context: reranked });
 }
 </code></pre>
-<hr>
-<h3>Tool-Calling Approach</h3>
-<p>With <strong>tool-calling</strong>, the AI agent decides whether to use tools based on the query:</p>
-<pre><code>User Query → AI Decides → [Use Tool] OR [Answer Directly]
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Tool-Calling Approach</h3>
+<p style="margin: 12px 0; line-height: 1.6;">With <strong style="font-weight: bold;">tool-calling</strong>, the AI agent decides whether to use tools based on the query:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">User Query → AI Decides → [Use Tool] OR [Answer Directly]
                 ↓
          Embedding → Search → Re-rank → Generate
 </code></pre>
-<p><strong>Characteristics:</strong></p>
-<ul>
-<li>AI decides when to retrieve context</li>
-<li>Can skip retrieval for simple queries</li>
-<li>More flexible and intelligent</li>
-<li>Higher cost per request (extra AI decision step)</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Characteristics:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">AI decides when to retrieve context</li>
+<li style="margin: 5px 0;">Can skip retrieval for simple queries</li>
+<li style="margin: 5px 0;">More flexible and intelligent</li>
+<li style="margin: 5px 0;">Higher cost per request (extra AI decision step)</li>
 </ul>
-<p><strong>Example:</strong></p>
-<pre><code class="language-typescript">export async function ragAgent(request: AgentRequest) {
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Example:</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">export async function ragAgent(request: AgentRequest) {
   return streamText({
-    model: openai(&#39;gpt-4o&#39;),
+    model: openai('gpt-4o'),
     tools: {
       generate_linkedin_post: tool({
         // AI calls this ONLY when needed
@@ -230,71 +62,71 @@
   });
 }
 </code></pre>
-<hr>
-<h2>When to Use Each Approach</h2>
-<h3>✅ Use Workflows When:</h3>
-<ul>
-<li><strong>Simple, predictable use case</strong>: Every query needs the same process</li>
-<li><strong>Cost-sensitive applications</strong>: Avoid extra LLM calls to decide</li>
-<li><strong>Deterministic behavior required</strong>: Regulatory or compliance needs</li>
-<li><strong>Single-purpose agents</strong>: E.g., &quot;Always search docs and answer&quot;</li>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">When to Use Each Approach</h2>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">✅ Use Workflows When:</h3>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Simple, predictable use case</strong>: Every query needs the same process</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Cost-sensitive applications</strong>: Avoid extra LLM calls to decide</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Deterministic behavior required</strong>: Regulatory or compliance needs</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Single-purpose agents</strong>: E.g., "Always search docs and answer"</li>
 </ul>
-<p><strong>Example Use Cases:</strong></p>
-<ul>
-<li>Customer support bot (always search knowledge base)</li>
-<li>Documentation Q&amp;A (always retrieve relevant docs)</li>
-<li>FAQ chatbot (always match against FAQ database)</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Example Use Cases:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Customer support bot (always search knowledge base)</li>
+<li style="margin: 5px 0;">Documentation Q&amp;A (always retrieve relevant docs)</li>
+<li style="margin: 5px 0;">FAQ chatbot (always match against FAQ database)</li>
 </ul>
-<hr>
-<h3>✅ Use Tool-Calling When:</h3>
-<ul>
-<li><strong>Multi-capability agents</strong>: Agent can do multiple things</li>
-<li><strong>Query-dependent logic</strong>: Some queries need context, others don&#39;t</li>
-<li><strong>Interactive tasks</strong>: Agent might need multiple tool calls</li>
-<li><strong>Complex decision-making</strong>: When to search, what to search, how to combine results</li>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">✅ Use Tool-Calling When:</h3>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Multi-capability agents</strong>: Agent can do multiple things</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Query-dependent logic</strong>: Some queries need context, others don't</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Interactive tasks</strong>: Agent might need multiple tool calls</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Complex decision-making</strong>: When to search, what to search, how to combine results</li>
 </ul>
-<p><strong>Example Use Cases:</strong></p>
-<ul>
-<li>Content creation agent (might search examples, or create from scratch)</li>
-<li>Research assistant (decides which databases to query)</li>
-<li>Code assistant (might search docs, or answer from training)</li>
-<li>Multi-step tasks (search → analyze → search again → synthesize)</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Example Use Cases:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Content creation agent (might search examples, or create from scratch)</li>
+<li style="margin: 5px 0;">Research assistant (decides which databases to query)</li>
+<li style="margin: 5px 0;">Code assistant (might search docs, or answer from training)</li>
+<li style="margin: 5px 0;">Multi-step tasks (search → analyze → search again → synthesize)</li>
 </ul>
-<hr>
-<h2>Implementation Example</h2>
-<p>Here&#39;s a LinkedIn content creator that uses tool-calling to decide when to retrieve context:</p>
-<pre><code class="language-typescript">import { AgentRequest, AgentResponse } from &#39;./types&#39;;
-import { openaiClient } from &#39;@/app/libs/openai/openai&#39;;
-import { openai } from &#39;@ai-sdk/openai&#39;;
-import { stepCountIs, streamText, tool } from &#39;ai&#39;;
-import { qdrantClient } from &#39;../libs/qdrant&#39;;
-import { cohereClient } from &#39;../libs/cohere&#39;;
-import { z } from &#39;zod&#39;;
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Implementation Example</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Here's a LinkedIn content creator that uses tool-calling to decide when to retrieve context:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">import { AgentRequest, AgentResponse } from './types';
+import { openaiClient } from '@/app/libs/openai/openai';
+import { openai } from '@ai-sdk/openai';
+import { stepCountIs, streamText, tool } from 'ai';
+import { qdrantClient } from '../libs/qdrant';
+import { cohereClient } from '../libs/cohere';
+import { z } from 'zod';
 
 export async function ragAgent(request: AgentRequest): Promise&lt;AgentResponse&gt; {
     const { query } = request;
 
     return streamText({
-        model: openai(&#39;gpt-4o&#39;),
-        toolChoice: &#39;auto&#39;, // Let AI decide when to use tools
+        model: openai('gpt-4o'),
+        toolChoice: 'auto', // Let AI decide when to use tools
         stopWhen: stepCountIs(15), // Prevent infinite loops
         tools: {
             generate_linkedin_post: tool({
-                description: &#39;Generate a LinkedIn post based on a user query&#39;,
+                description: 'Generate a LinkedIn post based on a user query',
                 inputSchema: z.object({
                     query: z.string(),
                 }),
                 execute: async ({ query }) =&gt; {
                     // Step 1: Generate embedding
                     const embedding = await openaiClient.embeddings.create({
-                        model: &#39;text-embedding-3-small&#39;,
+                        model: 'text-embedding-3-small',
                         dimensions: 512,
                         input: query,
                     });
 
                     // Step 2: Search multiple collections
                     const linkedInPosts = await qdrantClient.search(
-                        &#39;linkedin&#39;,
+                        'linkedin',
                         {
                             vector: embedding.data[0].embedding,
                             limit: 10,
@@ -302,7 +134,7 @@ export async function ragAgent(request: AgentRequest): Promise&lt;AgentResponse&
                         },
                     );
 
-                    const articles = await qdrantClient.search(&#39;articles&#39;, {
+                    const articles = await qdrantClient.search('articles', {
                         vector: embedding.data[0].embedding,
                         limit: 10,
                         with_payload: true,
@@ -310,7 +142,7 @@ export async function ragAgent(request: AgentRequest): Promise&lt;AgentResponse&
 
                     // Step 3: Re-rank all results together
                     const rerankedDocuments = await cohereClient.rerank({
-                        model: &#39;rerank-english-v3.0&#39;,
+                        model: 'rerank-english-v3.0',
                         query: query,
                         documents: [
                             ...linkedInPosts.map(
@@ -333,7 +165,7 @@ export async function ragAgent(request: AgentRequest): Promise&lt;AgentResponse&
         },
         messages: [
             {
-                role: &#39;system&#39;,
+                role: 'system',
                 content: `You are a LinkedIn content creator. Your task is to generate an engaging LinkedIn post based on user queries.
 
 ## Content Creation Process
@@ -351,7 +183,7 @@ After receiving the context, write a compelling LinkedIn post that:
 Never use emojis or hashtags in the post.`,
             },
             {
-                role: &#39;user&#39;,
+                role: 'user',
                 content: query,
             },
         ],
@@ -359,12 +191,12 @@ Never use emojis or hashtags in the post.`,
     });
 }
 </code></pre>
-<hr>
-<h2>Breaking Down the Tool Definition</h2>
-<h3>1. Tool Configuration</h3>
-<pre><code class="language-typescript">tools: {
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Breaking Down the Tool Definition</h2>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">1. Tool Configuration</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">tools: {
     generate_linkedin_post: tool({
-        description: &#39;Generate a LinkedIn post based on a user query&#39;,
+        description: 'Generate a LinkedIn post based on a user query',
         inputSchema: z.object({
             query: z.string(),
         }),
@@ -374,35 +206,35 @@ Never use emojis or hashtags in the post.`,
     })
 }
 </code></pre>
-<p><strong>Key Components:</strong></p>
-<ul>
-<li><code>description</code>: Tells the AI when to use this tool</li>
-<li><code>inputSchema</code>: Validates tool inputs using Zod</li>
-<li><code>execute</code>: The function that runs when AI calls the tool</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Key Components:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;"><code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">description</code>: Tells the AI when to use this tool</li>
+<li style="margin: 5px 0;"><code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">inputSchema</code>: Validates tool inputs using Zod</li>
+<li style="margin: 5px 0;"><code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">execute</code>: The function that runs when AI calls the tool</li>
 </ul>
-<hr>
-<h3>2. Tool Choice Strategies</h3>
-<pre><code class="language-typescript">toolChoice: &#39;auto&#39;  // AI decides when to use tools
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">2. Tool Choice Strategies</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">toolChoice: 'auto'  // AI decides when to use tools
 // vs
-toolChoice: &#39;required&#39;  // AI must use a tool
+toolChoice: 'required'  // AI must use a tool
 // vs
-toolChoice: &#39;none&#39;  // AI cannot use tools
+toolChoice: 'none'  // AI cannot use tools
 </code></pre>
-<p><strong>Best Practice:</strong> Use <code>&#39;auto&#39;</code> to let the AI make intelligent decisions.</p>
-<hr>
-<h3>3. Safety Mechanisms</h3>
-<pre><code class="language-typescript">stopWhen: stepCountIs(15)  // Prevent infinite tool-calling loops
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Best Practice:</strong> Use <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">'auto'</code> to let the AI make intelligent decisions.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">3. Safety Mechanisms</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">stopWhen: stepCountIs(15)  // Prevent infinite tool-calling loops
 </code></pre>
-<p>Without this, an agent might get stuck calling tools repeatedly. Always set a reasonable limit.</p>
-<hr>
-<h2>The Execution Flow</h2>
-<p>Here&#39;s what happens when a user asks: &quot;Write a post about AI agents&quot;</p>
-<pre><code>1. User: &quot;Write a post about AI agents&quot;
+<p style="margin: 12px 0; line-height: 1.6;">Without this, an agent might get stuck calling tools repeatedly. Always set a reasonable limit.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">The Execution Flow</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Here's what happens when a user asks: "Write a post about AI agents"</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">1. User: "Write a post about AI agents"
    ↓
 2. AI analyzes query → Decides to use generate_linkedin_post tool
    ↓
 3. Tool executes:
-   - Generates embedding for &quot;AI agents&quot;
+   - Generates embedding for "AI agents"
    - Searches LinkedIn posts collection
    - Searches articles collection
    - Re-ranks all results
@@ -414,56 +246,56 @@ toolChoice: &#39;none&#39;  // AI cannot use tools
    ↓
 6. Streams response to user
 </code></pre>
-<hr>
-<h2>Comparison: Workflow vs Tool-Calling</h2>
-<p>Let&#39;s see how each approach handles different queries:</p>
-<h3>Query 1: &quot;Write a post about microservices&quot;</h3>
-<p><strong>Workflow Approach:</strong></p>
-<pre><code>✅ Retrieves context (needed)
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Comparison: Workflow vs Tool-Calling</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Let's see how each approach handles different queries:</p>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Query 1: "Write a post about microservices"</h3>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Workflow Approach:</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">✅ Retrieves context (needed)
 ✅ Generates post with examples
 Cost: 1 embedding + 1 search + 1 rerank + 1 generation
 </code></pre>
-<p><strong>Tool-Calling Approach:</strong></p>
-<pre><code>✅ AI decides to call tool
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Tool-Calling Approach:</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">✅ AI decides to call tool
 ✅ Retrieves context (needed)
 ✅ Generates post with examples
 Cost: 1 decision + 1 embedding + 1 search + 1 rerank + 1 generation
 </code></pre>
-<p><strong>Winner:</strong> Workflow (slightly cheaper, same quality)</p>
-<hr>
-<h3>Query 2: &quot;What did I ask you before?&quot;</h3>
-<p><strong>Workflow Approach:</strong></p>
-<pre><code>❌ Retrieves context (NOT needed - wasted cost)
-❌ Searches for &quot;what did I ask&quot; in vector DB
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Winner:</strong> Workflow (slightly cheaper, same quality)</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Query 2: "What did I ask you before?"</h3>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Workflow Approach:</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">❌ Retrieves context (NOT needed - wasted cost)
+❌ Searches for "what did I ask" in vector DB
 ⚠️ Generates confusing response with irrelevant context
 Cost: 1 embedding + 1 search + 1 rerank + 1 generation
 </code></pre>
-<p><strong>Tool-Calling Approach:</strong></p>
-<pre><code>✅ AI decides NOT to call tool
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Tool-Calling Approach:</strong></p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">✅ AI decides NOT to call tool
 ✅ Answers directly from conversation history
 ✅ Faster, cheaper, more relevant
 Cost: 1 decision + 1 generation
 </code></pre>
-<p><strong>Winner:</strong> Tool-calling (smarter, cheaper, better UX)</p>
-<hr>
-<h2>Your Challenge</h2>
-<p>Modify your RAG agent to use tool-calling instead of a fixed workflow.</p>
-<h3>Requirements:</h3>
-<ol>
-<li><strong>Define a tool</strong> that performs your current RAG workflow (embedding → search → re-rank)</li>
-<li><strong>Configure tool choice</strong> to let the AI decide when to use it</li>
-<li><strong>Add safety limits</strong> to prevent infinite loops</li>
-<li><strong>Write a system prompt</strong> that instructs the AI when to use the tool</li>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Winner:</strong> Tool-calling (smarter, cheaper, better UX)</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Your Challenge</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Modify your RAG agent to use tool-calling instead of a fixed workflow.</p>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Requirements:</h3>
+<ol style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Define a tool</strong> that performs your current RAG workflow (embedding → search → re-rank)</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Configure tool choice</strong> to let the AI decide when to use it</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Add safety limits</strong> to prevent infinite loops</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Write a system prompt</strong> that instructs the AI when to use the tool</li>
 </ol>
-<h3>Starter Code Structure:</h3>
-<pre><code class="language-typescript">export async function ragAgent(request: AgentRequest): Promise&lt;AgentResponse&gt; {
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Starter Code Structure:</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">export async function ragAgent(request: AgentRequest): Promise&lt;AgentResponse&gt; {
     return streamText({
-        model: openai(&#39;gpt-4o&#39;),
-        toolChoice: &#39;auto&#39;,
+        model: openai('gpt-4o'),
+        toolChoice: 'auto',
         stopWhen: stepCountIs(10),
         tools: {
             search_documentation: tool({
-                description: &#39;Search documentation for relevant context&#39;,
+                description: 'Search documentation for relevant context',
                 inputSchema: z.object({
                     query: z.string(),
                 }),
@@ -478,103 +310,112 @@ Cost: 1 decision + 1 generation
         },
         messages: [
             {
-                role: &#39;system&#39;,
+                role: 'system',
                 content: `You are a helpful assistant.
 
 When the user asks about technical topics, use the search_documentation tool.
 For general conversation, answer directly without using tools.`,
             },
             {
-                role: &#39;user&#39;,
+                role: 'user',
                 content: request.query,
             },
         ],
     });
 }
 </code></pre>
-<hr>
-<h2>Testing Your Implementation</h2>
-<h3>Test Case 1: Should Use Tool</h3>
-<pre><code class="language-bash">curl -X POST http://localhost:3000/api/chat \
-  -H &quot;Content-Type: application/json&quot; \
-  -d &#39;{
-    &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;How do I use React hooks?&quot;}],
-    &quot;agent&quot;: &quot;rag&quot;,
-    &quot;query&quot;: &quot;React hooks documentation&quot;
-  }&#39;
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Testing Your Implementation</h2>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Test Case 1: Should Use Tool</h3>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Request:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Method: POST</li>
+<li style="margin: 5px 0;">URL: <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">http://localhost:3000/api/chat</code></li>
+<li style="margin: 5px 0;">Headers: <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">Content-Type: application/json</code></li>
+<li style="margin: 5px 0;">Body:</li>
+</ul>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-json" style="background-color: transparent; padding: 0;">{
+  "messages": [{"role": "user", "content": "How do I use React hooks?"}],
+  "agent": "rag",
+  "query": "React hooks documentation"
+}
 </code></pre>
-<p><strong>Expected:</strong> AI calls <code>search_documentation</code> tool, retrieves context, generates answer.</p>
-<hr>
-<h3>Test Case 2: Should NOT Use Tool</h3>
-<pre><code class="language-bash">curl -X POST http://localhost:3000/api/chat \
-  -H &quot;Content-Type: application/json&quot; \
-  -d &#39;{
-    &quot;messages&quot;: [{&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: &quot;Thanks!&quot;}],
-    &quot;agent&quot;: &quot;rag&quot;
-  }&#39;
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Expected:</strong> AI calls <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">search_documentation</code> tool, retrieves context, generates answer.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Test Case 2: Should NOT Use Tool</h3>
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Request:</strong></p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;">Method: POST</li>
+<li style="margin: 5px 0;">URL: <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">http://localhost:3000/api/chat</code></li>
+<li style="margin: 5px 0;">Headers: <code style="background-color: #f4f4f4; padding: 2px 6px; border-radius: 3px; font-family: &quot;Courier New&quot;, Courier, monospace; font-size: 0.9em;">Content-Type: application/json</code></li>
+<li style="margin: 5px 0;">Body:</li>
+</ul>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-json" style="background-color: transparent; padding: 0;">{
+  "messages": [{"role": "user", "content": "Thanks!"}],
+  "agent": "rag"
+}
 </code></pre>
-<p><strong>Expected:</strong> AI responds directly without calling any tools.</p>
-<hr>
-<h3>Debugging Tool Calls</h3>
-<p>Add logging to see when tools are called:</p>
-<pre><code class="language-typescript">execute: async ({ query }) =&gt; {
-    console.log(&#39;🔧 Tool called with query:&#39;, query);
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Expected:</strong> AI responds directly without calling any tools.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Debugging Tool Calls</h3>
+<p style="margin: 12px 0; line-height: 1.6;">Add logging to see when tools are called:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">execute: async ({ query }) =&gt; {
+    console.log('🔧 Tool called with query:', query);
 
     const results = await performRAG(query);
 
-    console.log(&#39;📊 Retrieved context:&#39;, results.length, &#39;documents&#39;);
+    console.log('📊 Retrieved context:', results.length, 'documents');
 
     return results;
 }
 </code></pre>
-<p>You should see tool calls logged only for queries that need context retrieval.</p>
-<hr>
-<h2>Cost Analysis</h2>
-<p>Let&#39;s compare costs for 100 queries (50 need context, 50 don&#39;t):</p>
-<h3>Workflow Approach (Always Retrieves)</h3>
-<pre><code>100 queries × (embedding + search + rerank + generation)
+<p style="margin: 12px 0; line-height: 1.6;">You should see tool calls logged only for queries that need context retrieval.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Cost Analysis</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Let's compare costs for 100 queries (50 need context, 50 don't):</p>
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Workflow Approach (Always Retrieves)</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">100 queries × (embedding + search + rerank + generation)
 = 100 × $0.025
 = $2.50
 </code></pre>
-<p><strong>Waste:</strong> 50 unnecessary retrievals ($1.25 wasted)</p>
-<hr>
-<h3>Tool-Calling Approach (Selective Retrieval)</h3>
-<pre><code>100 queries × decision = 100 × $0.002 = $0.20
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Waste:</strong> 50 unnecessary retrievals ($1.25 wasted)</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h3 style="margin-top: 24px; margin-bottom: 12px; font-size: 24px; font-weight: bold;">Tool-Calling Approach (Selective Retrieval)</h3>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code style="background-color: transparent; padding: 0;">100 queries × decision = 100 × $0.002 = $0.20
 50 queries × (embedding + search + rerank + generation) = 50 × $0.025 = $1.25
 Total = $1.45
 </code></pre>
-<p><strong>Savings:</strong> $1.05 per 100 queries (42% cheaper)</p>
-<hr>
-<h2>Advanced: Multiple Tools</h2>
-<p>You can give your agent multiple tools for different tasks:</p>
-<pre><code class="language-typescript">tools: {
+<p style="margin: 12px 0; line-height: 1.6;"><strong style="font-weight: bold;">Savings:</strong> $1.05 per 100 queries (42% cheaper)</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">Advanced: Multiple Tools</h2>
+<p style="margin: 12px 0; line-height: 1.6;">You can give your agent multiple tools for different tasks:</p>
+<pre style="background-color: #f4f4f4; padding: 15px; border-radius: 5px; overflow-x: auto; margin: 20px 0;"><code class="language-typescript" style="background-color: transparent; padding: 0;">tools: {
     search_documentation: tool({
-        description: &#39;Search technical documentation&#39;,
+        description: 'Search technical documentation',
         execute: async ({ query }) =&gt; { /* ... */ }
     }),
     search_examples: tool({
-        description: &#39;Search code examples&#39;,
+        description: 'Search code examples',
         execute: async ({ query }) =&gt; { /* ... */ }
     }),
     search_blog_posts: tool({
-        description: &#39;Search blog articles&#39;,
+        description: 'Search blog articles',
         execute: async ({ query }) =&gt; { /* ... */ }
     })
 }
 </code></pre>
-<p>The AI will choose the most appropriate tool (or combination of tools) based on the query.</p>
-<hr>
-<h2>What You Learned</h2>
-<p>✅ The difference between tools and workflows<br>✅ When to use tool-calling vs direct workflows<br>✅ How to implement tools with the AI SDK<br>✅ Tool choice strategies and safety mechanisms<br>✅ Cost implications of intelligent tool selection<br>✅ How to test and debug tool-calling agents</p>
-<hr>
-<h2>What&#39;s Next?</h2>
-<p>Consider exploring:</p>
-<ul>
-<li><strong>Multi-step tool use</strong>: Agent calls multiple tools in sequence</li>
-<li><strong>Tool chaining</strong>: Output of one tool feeds into another</li>
-<li><strong>Conditional tools</strong>: Different tools for different user types</li>
-<li><strong>Observability</strong>: Tracking tool usage and performance (next module!)</li>
+<p style="margin: 12px 0; line-height: 1.6;">The AI will choose the most appropriate tool (or combination of tools) based on the query.</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">What You Learned</h2>
+<p style="margin: 12px 0; line-height: 1.6;">✅ The difference between tools and workflows<br>✅ When to use tool-calling vs direct workflows<br>✅ How to implement tools with the AI SDK<br>✅ Tool choice strategies and safety mechanisms<br>✅ Cost implications of intelligent tool selection<br>✅ How to test and debug tool-calling agents</p>
+<hr style="border: none; border-top: 2px solid #eee; margin: 30px 0;">
+<h2 style="margin-top: 24px; margin-bottom: 12px; font-size: 28px; font-weight: bold;">What's Next?</h2>
+<p style="margin: 12px 0; line-height: 1.6;">Consider exploring:</p>
+<ul style="margin: 10px 0; padding-left: 30px;">
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Multi-step tool use</strong>: Agent calls multiple tools in sequence</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Tool chaining</strong>: Output of one tool feeds into another</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Conditional tools</strong>: Different tools for different user types</li>
+<li style="margin: 5px 0;"><strong style="font-weight: bold;">Observability</strong>: Tracking tool usage and performance (next module!)</li>
 </ul>
 
-</body>
-</html>
+

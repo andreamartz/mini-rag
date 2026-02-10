@@ -274,12 +274,19 @@ export async function POST(request: NextRequest) {
 
 ### Step 3: Test Your Route
 
-Once implemented, test it with curl:
+Once implemented, test it using Postman, Thunder Client, or any HTTP client:
 
-```bash
-curl -X POST http://localhost:3000/api/rag-test \
-  -H "Content-Type: application/json" \
-  -d '{"query": "How do React hooks work?", "topK": 3}'
+**Request:**
+- Method: POST
+- URL: `http://localhost:3000/api/rag-test`
+- Headers: `Content-Type: application/json`
+- Body (JSON):
+
+```json
+{
+  "query": "How do React hooks work?",
+  "topK": 3
+}
 ```
 
 **Expected response:**
@@ -373,34 +380,53 @@ export async function POST(request: NextRequest) {
 
 ## Testing Different Queries
 
-Try these queries to see how semantic search works:
+Try these queries to see how semantic search works using Postman or Thunder Client:
 
 ### Technical Queries
 
-```bash
-# Query about React hooks
-curl -X POST http://localhost:3000/api/rag-test \
-  -H "Content-Type: application/json" \
-  -d '{"query": "How do I use useState in React?"}'
+**Query about React hooks:**
+- Method: POST
+- URL: `http://localhost:3000/api/rag-test`
+- Body:
+```json
+{
+  "query": "How do I use useState in React?"
+}
+```
 
-# Query about TypeScript
-curl -X POST http://localhost:3000/api/rag-test \
-  -H "Content-Type: application/json" \
-  -d '{"query": "What are TypeScript generics?"}'
+**Query about TypeScript:**
+- Method: POST
+- URL: `http://localhost:3000/api/rag-test`
+- Body:
+```json
+{
+  "query": "What are TypeScript generics?"
+}
 ```
 
 ### Semantic Similarity
 
-```bash
-# These should return similar results:
-curl -X POST http://localhost:3000/api/rag-test \
-  -d '{"query": "React state management"}'
+These queries should return similar results (try them all):
 
-curl -X POST http://localhost:3000/api/rag-test \
-  -d '{"query": "How to manage state in React"}'
+**Query 1:**
+```json
+{
+  "query": "React state management"
+}
+```
 
-curl -X POST http://localhost:3000/api/rag-test \
-  -d '{"query": "useState hook tutorial"}'
+**Query 2:**
+```json
+{
+  "query": "How to manage state in React"
+}
+```
+
+**Query 3:**
+```json
+{
+  "query": "useState hook tutorial"
+}
 ```
 
 **Why similar results?**
