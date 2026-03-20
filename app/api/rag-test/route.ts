@@ -10,7 +10,8 @@ export async function POST(request: NextRequest) {
 	const formattedResults = results.map((doc) => ({
 		id: doc.id,
 		score: doc.score,
-		content: doc.metadata?.text || '',
+		// Check both field names - 'text' is standard, 'content' is legacy
+		content: doc.metadata?.text ?? doc.metadata?.content ?? '',
 		source: doc.metadata?.source || 'unknown',
 		chunkIndex: doc.metadata?.chunkIndex,
 		totalChunks: doc.metadata?.totalChunks,
