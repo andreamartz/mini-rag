@@ -31,7 +31,7 @@
 		"@ai-sdk/react": "^2.0.22",
 		"@langchain/core": "^0.3.29",
 		"@langchain/langgraph": "^0.2.41",
-		"@langchain/langgraph-checkpoint-sqlite": "^0.0.3",
+		"@langchain/langgraph-checkpoint-sqlite": "^0.2.1",
 		"@langchain/openai": "^0.3.17",
 		"@pinecone-database/pinecone": "6.1.0",
 		"@tailwindcss/postcss": "^4.1.10",
