@@ -65,26 +65,30 @@ export function findTopSimilarDocuments(
 	minSimilarity: number = 0.7,
 	topK: number = 3
 ): Array<{ document: Document; similarity: number }> {
-	// TODO: Implement this function!
-	//
 	// Steps:
 	// 1. Calculate cosine similarity between query and each document
 	//    - Use the cosineSimilarity() function provided above
 	//    - Map over documents array to create { document, similarity } objects
-	//
+	const docsWithSimilarityValues = documents.map((document) => {
+		const similarity = cosineSimilarity(queryVector, document.embedding);
+		return { document, similarity };
+	});
+
 	// 2. Filter documents that have similarity >= minSimilarity
 	//    - Use .filter() to keep only results meeting the threshold
-	//
+	const docsWithMinSimilarityValues = docsWithSimilarityValues.filter((doc) => {
+		return doc.similarity >= minSimilarity;
+	});		
+
 	// 3. Sort by similarity (highest first)
 	//    - Use .sort() with a comparison function
 	//    - Remember: higher similarity should come first
-	//
+	const docsWithMinSimilarityValuesHiToLo = docsWithMinSimilarityValues.sort((a, b) => b.similarity - a.similarity);
+
 	// 4. Return top K results
 	//    - Use .slice() to get the first topK items
-	//
-	// Your implementation here:
-
-	throw new Error('Function not implemented yet! Complete the exercise.');
+  const docsWithTopKSimilarities = docsWithMinSimilarityValuesHiToLo.slice(0, topK);
+	return docsWithTopKSimilarities;
 }
 
 // Example test data for reference
