@@ -328,11 +328,125 @@ async function demonstrateWordArithmetic() {
 	console.log('• Netflix - content + ads ≈ ?');
 	console.log('• startup - funding + desperation ≈ ?');
 	console.log('• influencer - talent + followers ≈ ?');
-
+}
 	//TODO: create your own examples and run them to gain some intuition on how vector math works
+async function myEquations() {
+	console.log('🧮 MY OWN VECTOR WORD ARITHMETIC EXAMPLES');
+	console.log('=========================================\n');
+
+	// Example 7: Plurals: dogs and cats
+	console.log('PLURALS EXAMPLE: Dogs and cats');
+	console.log('Formula: dog - dogs + cat ≈ ?');
+
+	const [dogVec, dogsVec, catVec] = await Promise.all([
+		getEmbedding('dog'),
+		getEmbedding('dogs'),
+		getEmbedding('cat'),
+	]);
+
+	const result7 = addVectors(
+		subtractVectors(dogVec, dogsVec),
+		catVec
+	);
+	const candidates7 = [
+	 'feline',
+		'kitten',
+		'pet',
+		'puppy',
+		'animal',
+		'wild',
+		'house', // obviously wrong - should have low similarity
+	];
+	const matches7 = await findClosestWord(result7, candidates7);
+
+	console.log('Top matches:');
+	matches7.forEach((match, i) => {
+		const emoji = i === matches7.length - 1 ? '❌' : '✅';
+		console.log(
+			`${emoji} ${i + 1}. ${match.word} (similarity: ${match.similarity.toFixed(
+				3
+			)})`
+		);
+	});
+	console.log('');
+
+	// Example 8: Opposites: Temp and Volume
+	console.log('OPPOSITES EXAMPLE: Temp and Volume');
+	console.log('Formula: hot - cold + loud ≈ ?');
+
+	const [hotVec, coldVec, loudVec] = await Promise.all([
+		getEmbedding('hot'),
+		getEmbedding('cold'),
+		getEmbedding('loud'),
+	]);
+
+	const result8 = addVectors(
+		subtractVectors(hotVec, coldVec),
+		loudVec
+	);
+	const candidates8 = [
+		'noise',
+		'sound',
+		'explosion',
+		'boom',
+		'volume',
+		'activity',
+		'prairie', // obviously wrong - should have low similarity
+	];
+	const matches8 = await findClosestWord(result8, candidates8);
+
+	console.log('Top matches:');
+	matches8.forEach((match, i) => {
+		const emoji = i === matches8.length - 1 ? '❌' : '✅';
+		console.log(
+			`${emoji} ${i + 1}. ${match.word} (similarity: ${match.similarity.toFixed(
+				3
+			)})`
+		);
+	});
+	console.log('');
+
+		// Example 9: Professions: doctors and teachers
+	console.log('PROFESSIONS: Doctors and Teachers');
+	console.log('Formula: doctor - hospital + school ≈ ?');
+
+	const [doctorVec, hospitalVec, schoolVec] = await Promise.all([
+		getEmbedding('doctor'),
+		getEmbedding('hospital'),
+		getEmbedding('school'),
+	]);
+
+	const result9 = addVectors(
+		subtractVectors(doctorVec, hospitalVec),
+		schoolVec
+	);
+	const candidates9 = [
+		'professor',
+		'educator',
+		'teacher',
+		'principal',
+		'profession',
+		'worker',
+		'cactus', // obviously wrong - should have low similarity
+	];
+	const matches9 = await findClosestWord(result9, candidates9);
+
+	console.log('Top matches:');
+	matches9.forEach((match, i) => {
+		const emoji = i === matches9.length - 1 ? '❌' : '✅';
+		console.log(
+			`${emoji} ${i + 1}. ${match.word} (similarity: ${match.similarity.toFixed(
+				3
+			)})`
+		);
+	});
+	console.log('');
 }
 
 // Run the demonstration
-demonstrateWordArithmetic().catch(console.error);
+// demonstrateWordArithmetic().catch(console.error);
+
+// Run my examples:
+myEquations().catch(console.error);
 
 // generateEmbeddingsCache().catch(console.error);
