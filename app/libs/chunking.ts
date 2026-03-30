@@ -120,19 +120,17 @@ export function chunkText(
  * 8. Return the result
  */
 function getLastWords(text: string, maxLength: number): string {
-	// TODO: Implement this function!
-	// YOUR CODE HERE
 	if (text.length <= maxLength) {
 		return text;
 	}
-	// const lastChars = text.slice(-1 * maxLength);
-  const lastWords = text.split(" ");
+
+	const lastWords = text.split(" ");
 	let overlapWords = "";
 
   for (let i = lastWords.length - 1; i >= 0; i--) {
 		const word = lastWords[i];
 		const lastIdx = lastWords.length - 1;
-		const lengthAllowed = (i === lastIdx) ? maxLength : (maxLength - overlapWords.length - 1);
+		const lengthAllowed = (i === lastIdx) ? maxLength : (maxLength - overlapWords.length - 1);  // subtract 1 to account for the space to be added
 
 		if (word.length > lengthAllowed) {
 			return overlapWords;
