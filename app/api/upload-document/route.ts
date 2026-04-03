@@ -111,12 +111,14 @@ export async function POST(req: NextRequest) {
 		// - chunksProcessed: chunks.length
 		// - vectorsUploaded: successCount
 		// - status: 200
-		return NextResponse.json({
-			success: true,
-			vectorsUploaded: successCount,
-			chunksProcessed: chunks.length,
-			status: 200
-		});
+		return NextResponse.json(
+			{
+				success: true,
+				vectorsUploaded: successCount,
+				chunksProcessed: chunks.length,
+			}, 
+			{ status: 200 }
+		);
 		// throw new Error('Upload document not fully implemented yet!');
 	} catch (error) {
 		console.error('Error uploading documents:', error);
