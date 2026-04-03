@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
 		const processor = new DataProcessor();
 		// Use processor.processUrls() to scrape and chunk the URLs
 		// This returns an array of text chunks with metadata
-		const chunks = await processor.processUrls(urls);
+		const chunks = await processor.processUrls(urls);  // calls the scraping method under the hood with cheerio
 		// console.log({ chunks });
 
 		// TODO: Step 3 - Check if we got any content
@@ -32,7 +32,7 @@ export async function POST(req: NextRequest) {
 		// Status should be 400 with appropriate error message
 		if (chunks.length === 0) {
 			return NextResponse.json(
-				{ error: 'No chunks created from text' },
+				{ error: 'No content found to process' },
 				{ status: 400 }
 			);
 		}
