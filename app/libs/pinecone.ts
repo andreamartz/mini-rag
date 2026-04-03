@@ -44,8 +44,8 @@ export const searchDocuments = async (
 
 	// Convert the search query into a vector embedding using OpenAI
 	const queryEmbedding = await openaiClient.embeddings.create({
-		model: 'text-embedding-3-small',
-		dimensions: 512,
+		model: 'text-embedding-3-small',   // MUST match upload model
+		dimensions: 512,  // MUST match index dimensions
 		input: query,
 	});
 
@@ -54,8 +54,8 @@ export const searchDocuments = async (
 
 	// Search the vector database for similar embeddings
 	const docs = await index.query({
-		vector: embedding,
-		topK, // How many results to return
+		vector: embedding,     // the query vector
+		topK,                  // How many results to return - defaults to 3 (or current number specified for topK parameter)
 		includeMetadata: true, // Include the original text content with results
 	});
 
