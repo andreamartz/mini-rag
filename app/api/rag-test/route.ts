@@ -10,7 +10,6 @@ const ragTestSchema = z.object({
 export async function POST(request: NextRequest) {
 	try {
 		const body = await request.json();
-		// Handle validation failures inline so safeParse remains non-throwing control flow.
 		const validationResult = ragTestSchema.safeParse(body);
 		if (!validationResult.success) {
 			const flattened = validationResult.error.flatten();
@@ -43,7 +42,7 @@ export async function POST(request: NextRequest) {
 			{ 
 				error: 'Failed to find search documents',
 				details: error instanceof Error ? error.message : 'Unknown error',
-			 },
+			},
 			{ status: 500 }
 		);
 	}
