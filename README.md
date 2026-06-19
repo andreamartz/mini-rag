@@ -2,6 +2,10 @@
 
 A full-stack TypeScript application demonstrating modern AI techniques including RAG (Retrieval Augmented Generation), fine-tuning, agents, and LLM observability with automated web scraping capabilities.
 
+## Upstream repo
+
+[mini-rag](https://github.com/projectshft/mini-rag)
+
 ## Prerequisites
 
 Before getting started, you'll need to set up the following services:
