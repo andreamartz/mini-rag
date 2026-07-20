@@ -35,6 +35,9 @@ export async function POST(request: NextRequest) {
 			query,
 			resultsCount: formattedResults.length,
 			results: formattedResults,
+		},
+		{ 
+			status: 200 
 		});
 	} catch (error) {
 		console.error('Search error: ', error);
